@@ -5,7 +5,7 @@
 API接口定义如下：
 
 ### 1. 注册（Sign up）
-`http://123.207.6.234:8080/TL/sign_up`
+`http POST http://123.207.6.234:8080/TL/sign_up`
 
 in： 
 
@@ -15,12 +15,12 @@ in：
 
 return:
 
-* {status: boolean, info: String}反馈状态，若schoolID通过验证，account唯一，则返回一个注册成功的反馈状态，否则，返回注册失败信息；
+* {status: boolean, info: String} 反馈状态，若schoolID通过验证，account唯一，则返回一个注册成功的反馈状态，否则，返回注册失败信息；
 
 ---
 
 ### 2. 登陆（Sign in）
-`http://123.207.6.234:8080/apis/sign_in`
+`http POST http://123.207.6.234:8080/TL/sign_in`
 
 in：
 
@@ -29,7 +29,7 @@ in：
 
 return：
 
-* usertoken：服务器对应该账号的token，用于验证身份，与用户一一对应
+* {userToken: String, status: boolean, info: String} userToken：服务器对应该账号的token，用于验证身份，与用户一一对应
 
 ---
 
