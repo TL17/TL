@@ -7,13 +7,16 @@
 <body>
     <p>看到此页面，说明TL项目后端已部署</p>
     <p><a href="ng_test.html">Angular Js HelloWorld测试</a></p>
-    <p>/HelloWorld/{name} （参数 date:String） - http GET - 测试用接口</p>
-    <p>/HelloWorld/{name} （参数 date:String） - http POST - 测试用接口</p>
+    <p>http GET /HelloWorld/{name} （参数 date:String） - 测试用接口</p>
+    <p>http POST /HelloWorld/{name} （参数 date:String） - 测试用接口</p>
     <p></p>
-    <p>1. /sign_up （参数 schoolID, account, password: String） - http POST - 注册</p>
-    <p>2. /sign_in （参数 account, password:String） - http POST - 登录</p>
-    <p>3. /account/{account} （参数 userToken, name, info, contact: String） - http POST - 设置个人信息</p>
-    <p>4. /account/{account} （参数 userToken: String） - http GET - 获取个人信息</p>
-    <p>5. /add_course （参数 userToken, courseName, courseInfo, coursePlan: String） - http POST - 教师开课</p>
+    <p>1. http POST /sign_up （参数 schoolID, account, password: String） - 注册</p>
+    <p>2. http POST /sign_in （参数 account, password:String） - 登录</p>
+    <p>3. http POST /account/{account} （参数 userToken, name, info, contact: String） - 设置个人信息</p>
+    <p>4. http GET /account/{account} （参数 userToken: String） - 获取个人信息</p>
+    <p>5. http POST /course/add （参数 userToken, courseName, courseInfo, coursePlan: String） - 教师开课</p>
+    <p>6. http GET /course/manage （参数 userToken: String） - 管理课程（列出课程）</p>
+    <p>7. http GET </p>
+    <p>8. http GET </p>
 </body>
 </html>
