@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angulat Js 测试</title>
+</head>
+<script src="jquery.min.js"></script>
+<script src="angular.min.js"></script>
+<body>
+    <div ng-app="ng_test" ng-controller="ng_test_ctrl">
+        <p>/HelloWorld/{name} （参数 date:String） - http GET - 测试用接口</p>
+        <textarea placeholder="name" ng-model="name_get"></textarea>
+        <textarea placeholder="date" ng-model="date_get"></textarea>
+        <button ng-click="doGet(name_get,date_get)">测试GET</button>
+        <div>返回：{{ret_get}}</div>
+
+        <p>/HelloWorld/{name} （参数 date:String） - http POST - 测试用接口</p>
+        <textarea placeholder="name" ng-model="name_post"></textarea>
+        <textarea placeholder="date" ng-model="date_post"></textarea>
+        <button ng-click="doPost(name_post,date_post)">测试POST</button>
+        <div>返回：{{ret_post}}</div>
+
+    </div>
+    <script>
+        var app = angular.module('ng_test', []);
+        app.controller('ng_test_ctrl', function($scope, $http) {
+            serverUrl = "http://123.207.6.234:8080/TL";
+            $scope.doGet = function(name,date) {
+                $http.get(serverUrl+"/HelloWorld/"+name,{params:{date:date}})
+                    .success(function(ret){
+                        $scope.ret_get=ret;
+                        alert("httpGet成功");
+                    });
+            };
+            postCfg = {
+                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
+                transformRequest: function (data) {
+                    return $.param(data);
+                }
+            };
+            $scope.doPost = function(name,date) {
+                $http.post(serverUrl+"/HelloWorld/"+name,{date:date},postCfg)
+                    .success(function(ret){
+                        $scope.ret_post=ret;
+                        alert("httpPost成功");
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
