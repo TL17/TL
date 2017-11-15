@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="acc41b81-5bb1-45cd-950b-3240f939f3c3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/TL_war_exploded/index.html" afterPath="$PROJECT_DIR$/out/artifacts/TL_war_exploded/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.html" afterPath="$PROJECT_DIR$/web/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -47,7 +46,7 @@
       <file leaf-file-name="HelloWorld.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/HelloWorld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="396">
               <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -355,7 +354,7 @@
       <workItem from="1510299139860" duration="619000" />
       <workItem from="1510638755168" duration="4534000" />
       <workItem from="1510648607553" duration="1889000" />
-      <workItem from="1510714790840" duration="5402000" />
+      <workItem from="1510714790840" duration="5779000" />
     </task>
     <task id="LOCAL-00001" summary="HelloWorld-POST确认，Angular测试页面">
       <created>1510719680998</created>
@@ -371,11 +370,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510719992725</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="适配路由">
+      <created>1510720359348</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1510720359348</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16086000" />
+    <option name="totallyTimeSpent" value="16463000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -430,7 +436,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="HelloWorld-POST确认，Angular测试页面" />
     <MESSAGE value="修改了一个错别字" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了一个错别字" />
+    <MESSAGE value="适配路由" />
+    <option name="LAST_COMMIT_MESSAGE" value="适配路由" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -617,16 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/HelloWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -640,6 +637,16 @@
         <state relative-caret-position="391">
           <caret line="17" column="19" lean-forward="false" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/HelloWorld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
