@@ -1,4 +1,4 @@
-package test;
+package hello;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
@@ -7,6 +7,13 @@ import java.net.URLDecoder;
 
 @WebServlet(name="HelloWorld", urlPatterns="/HelloWorld/*")
 public class HelloWorld extends javax.servlet.http.HttpServlet {
+
+//    假设当前url：http://localhost:8080/CarsiLogCenter_new/idpstat.jsp?action=idp.sptopn
+//    request.getRequestURL() http://localhost:8080/CarsiLogCenter_new/idpstat.jsp
+//    request.getRequestURI() /CarsiLogCenter_new/idpstat.jsp
+//    request.getContextPath()/CarsiLogCenter_new
+//    request.getServletPath() /idpstat.jsp
+//    request.getQueryString()action=idp.sptopn
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
