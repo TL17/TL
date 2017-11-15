@@ -27,7 +27,7 @@
             serverUrl = "http://123.207.6.234:8080/TL";
             $scope.doGet = function(name,date) {
                 $http.get(serverUrl+"/HelloWorld/"+name,{params:{date:date}})
-                    .success(function(ret){
+                    .success(function(entity.service){
                         $scope.ret_get=ret;
                         alert("httpGet成功");
                     });
@@ -40,7 +40,7 @@
             };
             $scope.doPost = function(name,date) {
                 $http.post(serverUrl+"/HelloWorld/"+name,{date:date},postCfg)
-                    .success(function(ret){
+                    .success(function(entity.service){
                         $scope.ret_post=ret;
                         alert("httpPost成功");
                     });

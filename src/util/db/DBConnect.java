@@ -1,4 +1,4 @@
-package service.util.db;
+package util.db;
 
 import java.sql.*;
 

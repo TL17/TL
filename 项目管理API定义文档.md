@@ -34,31 +34,38 @@ return：
 ---
 
 ### 3. 设置个人信息（Set personal information）
-`http://123.207.6.234:8080/apis/set_per_info`
+`http POST http://123.207.6.234:8080/TL/account/{account}`
 
 in：
 
-* usertoken：用于验证用户登录状态；
-* per-info：个人信息，包括：name（姓名），info（简介），contact-way（联系方式）
+* url参数 account: 账号
+* 参数userToken：用于验证用户登录状态；
+* 参数name（姓名）， info（简介），contact（联系方式）
 
 return:
 
-* status: 反馈状态；
+* {status: boolean, info: String}: 反馈状态；
 
 ---
 
 ### 4. 获取个人信息（Get personal information）
-`http://123.207.6.234:8080/apis/get_per_info`
+`http GET http://123.207.6.234:8080/TL/account/{account}`
 
 in：
 
-* usertoken：用于验证用户登录状态；
-* account：个人信息的拥有者账号
+* url参数 account: 账号
+* 参数userToken：用于验证用户登录状态；
 
 return:
-
-* per-info：个人信息，包括：name（姓名），info（个人简介），contact-way（联系方式）
-
+```
+{status: boolean,
+ info: String,
+ perInfo:{name: String,
+          info: String,
+          contact: String
+         }
+}
+```
 ---
 
 ### 5. 开课（Add course - For teacher）

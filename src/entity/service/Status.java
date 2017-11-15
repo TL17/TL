@@ -1,4 +1,4 @@
-package service.entity.ret;
+package entity.service;
 
 public class Status {
     private boolean status;

@@ -1,7 +1,7 @@
-package service.rest;
+package service;
 
 import net.sf.json.JSONObject;
-import service.entity.ret.Status;
+import entity.service.Status;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
