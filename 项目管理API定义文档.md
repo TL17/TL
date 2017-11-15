@@ -69,16 +69,16 @@ return:
 ---
 
 ### 5. 开课（Add course - For teacher）
-`http://123.207.6.234:8080/apis/add_course`
+`http POST http://123.207.6.234:8080/TL/add_course`
 
 in：
 
-* usertoken：用于验证用户登录状态，获取用户account；
-* course：课程，包括：course-name（课程名称），course-info（课程简介），course-plan（课程大纲）；
+* userToken：用于验证用户登录状态，获取用户account；
+* courseName（课程名称），courseInfo（课程简介），coursePlan（课程大纲）；
 
 return：
 
-* status：反馈状态，开课是否成功；
+* {status: boolean, info: String}反馈状态，开课是否成功；
 
 ---
 

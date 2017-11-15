@@ -1,4 +1,4 @@
-package service.rest;
+package service;
 
 import entity.service.Person;
 import entity.service.Status;
