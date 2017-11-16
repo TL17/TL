@@ -135,15 +135,26 @@ return：
 ---
 
 ### 8. 获取课程信息（Get course details）
-`http GET http://123.207.6.234:8080/TL/course/detail`
+`http GET http://123.207.6.234:8080/TL/course/detail/{courseID}`
 
 in：
 
-* courseID：课程ID，这是在开课时应为每个课程生成的一个唯一的ID号；
+* url参数 - courseID：课程ID，这是在开课时应为每个课程生成的一个唯一的ID号；
 
 return：
 
 * course：对应课程
+* 返回数据规范：
+```
+{"info": String,
+ "status": boolean,
+ "course":{"coursePlan":"课程大纲1",
+           "courseName":"课程名称1",
+           "courseInfo":"课程介绍1",
+           "courseID":1
+           }
+}
+```
 
 ---
 

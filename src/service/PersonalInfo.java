@@ -28,7 +28,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         }
 
         JSONObject jsonRet;
-        if (account.equals("")||userToken.equals("")) {
+        if (account.equals("")||account.equals("account")||userToken.equals("")) {
             Status status = new Status();
             status.setStatus(false);
             status.setInfo("空参数");
@@ -83,7 +83,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         Status retStatus = new Status();
         retStatus.setStatus(true);
         retStatus.setInfo("更改成功");
-        if (account.equals("")||userToken.equals("")||name.equals("")||info.equals("")||contact.equals("")) {
+        if (account.equals("")||account.equals("account")||userToken.equals("")||name.equals("")||info.equals("")||contact.equals("")) {
             retStatus.setStatus(false);
             retStatus.setInfo("空参数");
         }
