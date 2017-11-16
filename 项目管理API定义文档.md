@@ -221,30 +221,46 @@ return：
 ---
 
 ### 12. 评教（Evaluate course）
-`http://123.207.6.234:8080/apis/evaluate_course`
+`http POST http://123.207.6.234:8080/TL/course/evaluation/{courseID}`
 
 in：
 
-* usertoken：识别account；
-* courseID：课程ID；
-* evaluation：评教内容，包括：score评教分数，comment评论
+* url参数 - courseID：课程ID；
+* userToken：识别account；
+* (evaluation)score评教分数+comment评论
 
 return：
 
 * status：反馈状态，e.g. 评教成功
+```
+{"info": String,
+ "status": boolean
+}
+```
 
 ---
 
 ### 13. 获取课程评教信息（Get evaluation of course）
-`http://123.207.6.234:8080/apis/get_evaluate`
+`http GET http://123.207.6.234:8080/TL/course/evaluation/{courseID}`
 
 in：
 
-* courseID：课程ID；
+* url参数 - courseID：课程ID；
+* userToken：识别account；
 
 return：
 
 * evaluations：对应课程的评教列表
-
+```
+{"info":"获取评教成功",
+ "status":true,
+ "evaluations":[
+    {"score":"1.0","comment":"1课的评论1"},
+    {"score":"1.0","comment":"1课的评论2"},
+    {"score":"1.0","comment":"1课的评论3"},
+    {"score":"1.0","comment":"1课的评论4"},
+    {"score":"1.0","comment":"1课的评论5"}
+  ]
+}
+```
 ---
-
