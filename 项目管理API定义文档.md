@@ -173,29 +173,38 @@ return：
 {"info": String,
  "status": boolean
 }
+```
+
 ---
 
 ### 10. 上传资源（Upload materials）
-`http://123.207.6.234:8080/apis/upload_material`
+`http POST http://123.207.6.234:8080/TL/upload_material`
 
 in：
 
-* usertoken：识别account；
+* userToken：识别account；
 * courseID：课程ID；
 * material：上传的资源，（可能具有类型、资源地址等，目前暂定为PPT的形式）
 
 return：
 
 * status：上传状态
+* 返回数据规范：
+```
+{"info": String,
+ "status": boolean
+ "materialID": int
+}
+```
 
 ---
 
 ### 11. 获取资源（Get materials）
-`http://123.207.6.234:8080/apis/get_material`
+`http GET http://123.207.6.234:8080/apis/get_material`
 
 in：
 
-* usertoken：识别account；
+* userToken：识别account；
 * courseID：课程ID；
 * materialID：资源唯一的ID
 
