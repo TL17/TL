@@ -159,16 +159,20 @@ return：
 ---
 
 ### 9. 选课（Select course）
-`http://123.207.6.234:8080/apis/select_course`
+`http POST http://123.207.6.234:8080/TL/course/select/{courseID}`
 in：
 
-* usertoken：识别account；
-* courseID：课程ID，这是在开课时应为每个课程生成的一个唯一的ID号；
+* url参数 - courseID：课程ID，这是在开课时应为每个课程生成的一个唯一的ID号；
+* userToken：识别account；
 
 return：
 
 * status：选课状态；
-
+* 返回数据规范：
+```
+{"info": String,
+ "status": boolean
+}
 ---
 
 ### 10. 上传资源（Upload materials）
