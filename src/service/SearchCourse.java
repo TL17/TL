@@ -8,21 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="ManageCourse", urlPatterns="/course/manage")
-public class ManageCourse extends javax.servlet.http.HttpServlet {
+@WebServlet(name="SearchCourse", urlPatterns="/course/search")
+public class SearchCourse extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 //        doPost(request,response);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
-        String userToken = request.getParameter("userToken");
-        if (userToken == null) {
-            userToken = "";
+        String keyword = request.getParameter("keyword");
+        if (keyword == null) {
+            keyword = "";
         }
 
         JSONObject jsonRet;
-        if (userToken.equals("")) {
+        if (keyword.equals("")) {
             Status status = new Status();
             status.setStatus(false);
             status.setInfo("空参数");
@@ -32,7 +32,7 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
         } else {
             Status status = new Status();
             status.setStatus(true);
-            status.setInfo("获取信息成功");
+            status.setInfo("课程搜索成功");
             jsonRet = JSONObject.fromObject(status);
             Course[] courses = new Course[5];
             for (int i=0;i<courses.length;i++) {

@@ -119,7 +119,19 @@ in：
 return：
 
 * courses：搜索到的课程列表
-
+* 返回数据规范：
+```
+{"info": String,
+ "status": boolean,
+ "courses":[
+    {"coursePlan":"课程大纲1","courseName":"课程名称1","courseInfo":"课程介绍1","courseID":1},
+    {"coursePlan":"课程大纲2","courseName":"课程名称2","courseInfo":"课程介绍2","courseID":2},
+    {"coursePlan":"课程大纲3","courseName":"课程名称3","courseInfo":"课程介绍3","courseID":3},
+    {"coursePlan":"课程大纲4","courseName":"课程名称4","courseInfo":"课程介绍4","courseID":4},
+    {"coursePlan":"课程大纲5","courseName":"课程名称5","courseInfo":"课程介绍5","courseID":5}
+ ]
+}
+```
 ---
 
 ### 8. 获取课程信息（Get course details）
