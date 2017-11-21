@@ -31,7 +31,7 @@
 		</div>
 		<!--下半部分-->
 		<div class="content">
-			<ul>
+			<ul ng-init="init_selected_list()">
 				<!--course1内容-->
 				<li>
 					<!--课程名-->
@@ -42,36 +42,9 @@
 						<!--100%文字-->
 						<p class="per100">100%</p>
 						<!--evalute按钮-->
-						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="set_course_id(...)">
 							evalute
 						</button>
-						<!--evalute 按钮联动的弹出框-->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										            <input type="text" class="form-control" value="9.5">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div  contenteditable="true" class="modal-body">
-										In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:alert('提交')">submit</button>
-									</div>
-								</div>
-							</div>
 					</div>
 				</li>
 				<!--course2内容-->
@@ -83,33 +56,7 @@
 						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 							evalute
 						</button>
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										             <input type="text" class="form-control" value="9.5">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div  contenteditable="true"  class="modal-body">
-										In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
-									</div>
-								</div>
-							</div>
-					</div>
+
 					</div>
 				</li>
 			</ul>
@@ -118,42 +65,33 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-    /*动态添加课程*/
-    function addCourse(){
-        var str = '<li><p class="pcourse">Course</p>'+
-            '<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>'+
-            '<div class="nei_bottom">'+
-            '<p class="per100">100%</p>'+
-            '<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">evalute</button>'+
-            '<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
-            '<div class="modal-dialog">'+
-            '<div class="modal-content">'+
-            '<div class="modal-header">'+
-            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
-            '<h4 class="modal-title" id="myModalLabel">'+
-            '<div style="width: 150px;">'+
-            '<div class="input-group">'+
-            '<span class="input-group-addon">Score</span>'+
-            ' <input type="text" class="form-control" value="9.5">'+
-            '</div>'+
-            '</div>'+
-            '</h4></br/>'+
-            'comment:'+
-            '</div>'+
-            '<div  contenteditable="true" class="modal-body">In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.</div>'+
-            '<div class="modal-footer">'+
-            '<button type="button" class="btn btn-default" data-dismiss="modal">submit'+
-            '</button>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-            '</div>'+
-            '</li>';
-        $(".content ul").append(str);
-    };
-
-
-</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					<div style="width: 150px;">
+						<div class="input-group">
+							<span class="input-group-addon">Score</span>
+							<input type="text" class="form-control">
+						</div>
+					</div>
+				</h4>
+				<br />
+				comment:
+			</div>
+			<div  contenteditable="true"  class="modal-body">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="../js/Common.js"></script>
+<script src="../js/Student.js"></script>
 </body>
 </html>
