@@ -29,8 +29,9 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
         // $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
         //     .success(function(ret) {
         //         if (ret.status) {
-        //             AuthService.setValue("hxy");
+        //             window.localStorage['userToken'] = "hxy";
         //             window.location.href = "Courses.html";
+        //             window.event.returnValue=false;
         //         } else
         //             alert(ret.info);
         //     });
