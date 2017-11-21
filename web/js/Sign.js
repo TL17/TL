@@ -1,5 +1,4 @@
-var app = angular.module('sign', []);
-app.controller('sign_ctrl', ['$scope', '$rootScope', function($scope, $rootScope, $http) {
+app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
     serverUrl = "http://123.207.6.234:8080/TL";
     postCfg = {
         headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
@@ -23,17 +22,17 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', function($scope, $rootScope
     }
 
     $scope.sign_in = function(acc,pwd) {
-        $rootScope.userToken = "hxy";
-        window.location.href = "Student.html";
-        // alert(acc+" "+pwd+" "+$rootScope.userToken);
+        window.localStorage['userToken'] = "hxy";
+        window.location.href = "Courses.html";
         window.event.returnValue=false;
-        $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
-            .success(function(ret) {
-                if (ret.status) {
-                    $rootScope.userToken = ret.userToken;
-                    window.location.href = "Student.html";
-                } else
-                    alert(ret.info);
-            });
+
+        // $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
+        //     .success(function(ret) {
+        //         if (ret.status) {
+        //             AuthService.setValue("hxy");
+        //             window.location.href = "Courses.html";
+        //         } else
+        //             alert(ret.info);
+        //     });
     }
 }]);
