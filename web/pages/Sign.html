@@ -7,9 +7,11 @@
 		<link rel="stylesheet" href="../css/Sign.css">  
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../angular.min.js"></script>
 	</head>
 </head>
 <body>
+<div ng-app="sign" ng-controller="sign_ctrl">
 	<div class="header">
 		<div id="messageBox" class="alert alert-error hide">
 			<button data-dismiss="alert" class="close">×</button>
@@ -33,36 +35,79 @@
 			    <div id="home" class="tab-pane fade in active">
 			        <div class="input-group">
 			            <span class="input-group-addon">&nbsp;&nbsp;Account&nbsp;</span>
-			            <input type="text" class="form-control" placeholder="Account">
+			            <input ng-model="sign_in_acc" type="text" class="form-control" placeholder="Account">
 			        </div>
 			        <br />
 			        <div class="input-group">
 			            <span class="input-group-addon">Password</span>
-			            <input type="text" class="form-control" placeholder="Password">
+			            <input ng-model="sign_in_pwd" type="text" class="form-control" placeholder="Password">
 			        </div> <br />
-			        <input style="float: right;" class="btn btn-primary" type="submit" value="Sign in">
+			        <input
+							ng-click="sign_in(sign_in_acc, sign_in_pwd)"
+							style="float: right;" class="btn btn-primary" type="submit" value="Sign in">
 			    </div>
 			    <!--sign up 联动页-->
 			    <div id="menu1" class="tab-pane fade">
 			        <div class="input-group">
 			            <span class="input-group-addon">School ID</span>
-			            <input type="text" class="form-control" placeholder="School ID">
+			            <input ng-model="sign_up_id" type="text" class="form-control" placeholder="School ID">
 			        </div>
 			        <br />
 			        <div class="input-group">
 			            <span class="input-group-addon">&nbsp;&nbsp;Account&nbsp;</span>
-			            <input type="text" class="form-control" placeholder="Account">
+			            <input ng-model="sign_up_acc" type="text" class="form-control" placeholder="Account">
 			        </div>
 			        <br />
 			        <div class="input-group">
 			            <span class="input-group-addon">Password</span>
-			            <input type="text" class="form-control" placeholder="Password">
+			            <input ng-model="sign_up_pwd" type="text" class="form-control" placeholder="Password">
 			        </div> <br />
-			        <input style="float: right;" class="btn btn-primary" type="submit" value="Sign up">
+			        <input
+							ng-click="sign_up(sign_up_id, sign_up_acc, sign_up_pwd)"
+							style="float: right;" class="btn btn-primary" type="submit" value="Sign up">
 			    </div>
 		    </div>
 	       
 		</form>
 	</div>
+</div>
+<script>
+    var app = angular.module('sign', []);
+    app.controller('sign_ctrl', ['$scope', '$rootScope', function($scope, $rootScope, $http) {
+        serverUrl = "http://123.207.6.234:8080/TL";
+        postCfg = {
+            headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
+            transformRequest: function (data) {
+                return $.param(data);
+            }
+        };
+        /*
+        TODO:
+        check school ID and password format
+         */
+        $scope.sign_up = function(id,acc,pwd) {
+            // alert(id+" "+acc+" "+pwd);
+            $http.post(serverUrl+"/sign_up",{schoolID: id, account:acc, password: pwd},postCfg)
+                .success(function(ret){
+                    if (ret.status)
+                        alert("Sign up succeed~");
+					else
+					    alert(ret.info);
+                });
+        }
+
+        $scope.sign_in = function(acc,pwd) {
+            // $rootScope.userToken = "hxy";
+            // alert(acc+" "+pwd+" "+$rootScope.userToken);
+            $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
+				.success(function(ret) {
+				    if (ret.status)
+						$rootScope.userToken = ret.userToken;
+				    else
+				        alert(ret.info);
+				});
+		}
+    }]);
+</script>
 </body>
 </html>
