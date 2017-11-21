@@ -113,7 +113,7 @@
 					</div>
 				</li>
 			</ul>
-			<p class="addcourse" ng-click="addCourse()">+</p>
+			<p class="addcourse" onclick="addCourse()">+</p>
 
 		</div>
 	</div>
@@ -153,7 +153,10 @@
         $(".content ul").append(str);
     };
 
+    var app = angular.module("student", []);
+    app.controller("student_ctrl", [$scope, $rootScope, function($scope, $rootScope, $http) {
 
+	}])
 </script>
 </body>
 </html>
