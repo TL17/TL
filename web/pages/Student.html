@@ -13,7 +13,66 @@
 	</head>
 </head>
 <body>
-<div ng-app="student" ng-controller="student_ctrl">
+<div ng-app="myApp" ng-controller="student_ctrl">
+	<script type="text/ng-template" id="evaluateModal.html">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				&times;
+			</button>
+			<h4 class="modal-title">
+				<div style="width: 150px;">
+					<div class="input-group">
+						<span class="input-group-addon">Score</span>
+						<input ng-model="student_evaluate_score" type="text" class="form-control">
+					</div>
+				</div>
+			</h4>
+			<br />
+			comment:
+		</div>
+		<div id="student_evaluate_comment" contenteditable="true" class="modal-body">
+		</div>
+		<div class="modal-footer">
+			<button ng-click="submit_evaluation(student_evaluate_score)" type="button" class="btn btn-default">submit</button>
+		</div>
+	</script>
+	<script type="text/ng-template" id="infoModal.html">
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							<div style="width: 150px;">
+								<div class="input-group">
+									<span class="input-group-addon">Edit information</span>
+								</div>
+							</div>
+						</h4>
+						<div class="modal-body">
+							<div class="input-group">
+								<span class="input-group-addon">Name&nbsp;&nbsp;</span>
+								<input ng-model="student_modify_name" type="text" class="form-control" value="">
+							</div><br />
+							<div class="input-group">
+								<span class="input-group-addon">contact</span>
+								<input ng-model="student_modify_contact" type="text" class="form-control" value="">
+							</div><br />
+							<label  for="info2">brief introduction</label>
+							<div class="input-group" style="width: 100%;">
+								<p ng-model="student_modify_info" contenteditable="true" id="info2" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</script>
 	<nav class="navbar navbar-inverse">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
@@ -28,10 +87,10 @@
 			<!--图片-->
 			<img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
 			<!--信息-->
-			<div class="box_p" id="sinfo">
+			<div ng-init="load_personal_info()" class="box_p" id="sinfo">
 				<label  for="name">Name</label>
 		        <div class="input-group" style="width: 100%;">
-		            <p id="name" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">Terry</p>
+		            <p id="name" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
 		        </div>
 		        <label  for="tel">contact</label>
 		        <div class="input-group" style="width: 100%;">
@@ -44,183 +103,20 @@
 		        <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 							change
 						</button>
-						<!--evalute 按钮联动的弹出框-->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Edit information</span>
-										        </div>
-									        </div>
-										</h4>
-										<div class="modal-body">
-											<div class="input-group">
-								            <span class="input-group-addon">Name&nbsp;&nbsp;</span>
-									            <input id="name2" type="text" class="form-control" value="">
-									        </div><br />
-									        <div class="input-group">
-									            <span class="input-group-addon">contact</span>
-									            <input id="tel2" type="text" class="form-control" value="">
-									        </div><br />
-									        <label  for="info2">brief introduction</label>
-									        <div class="input-group" style="width: 100%;">
-									            <p contenteditable="true" id="info2" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
-									        </div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal" onclick="edit()">submit</button>
-										</div>
-									</div>
-								</div>
-							</div>
-					</div>
+
 			</div>
 		</div>
 		<!--下半部分-->
-		<div class="content">
+		<div class="content" id="selected_list">
 			<ul ng-init="init_selected_list()">
-				<!--course1内容-->
-				<li>
-					<!--课程名-->
-					<p class="pcourse">Course1</p>
-					<!--内容-->
-					<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>
-					<div class="nei_bottom">
-						<!--100%文字-->
-						<p class="per100">100%</p>
-						<!--evalute按钮-->
-						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="set_course_id(...)">
-							evalute
-						</button>
-					</div>
-				</li>
-				<!--course2内容-->
-				<li>
-					<p class="pcourse">Course2</p>
-					<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>
-					<div class="nei_bottom">
-						<p class="per100">100%</p>
-						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							evalute
-						</button>
 
-					</div>
-				</li>
 			</ul>
 			<p class="addcourse" ng-click="addCourse()">+</p>
 
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
-					<div style="width: 150px;">
-						<div class="input-group">
-							<span class="input-group-addon">Score</span>
-							<input type="text" class="form-control">
-						</div>
-					</div>
-				</h4>
-				<br />
-				comment:
-			</div>
-			<div  contenteditable="true"  class="modal-body">
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
-			</div>
-		</div>
-	</div>
-</div>
 <script src="../js/Common.js"></script>
 <script src="../js/Student.js"></script>
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										             <input type="text" class="form-control" value="9.5">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div  contenteditable="true"  class="modal-body">
-										In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
-									</div>
-								</div>
-							</div>
-					</div>
-				</li>
-			</ul>
-			<p class="addcourse" onclick="addCourse()">+</p>
-			<script type="text/javascript">
-				function edit(){
-				if($("#name2").val().length<=0||$("#tel2").val().length<=0||$("#info2").html().length<=0){
-					alert("请补全信息");
-				}else{
-					$("#name").html($("#name2").val());
-					$("#tel").html($("#tel2").val());
-					$("#info").html($("#info2").html());
-				}
-			}
-				/*动态添加课程*/
-				function addCourse(){
-					var str = '<li><p class="pcourse">Course</p>'+
-							'<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>'+
-							'<div class="nei_bottom">'+
-								'<p class="per100">100%</p>'+
-								'<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">evalute</button>'+
-						'<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
-							'<div class="modal-dialog">'+
-								'<div class="modal-content">'+
-									'<div class="modal-header">'+
-										'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
-										'<h4 class="modal-title" id="myModalLabel">'+
-											'<div style="width: 150px;">'+
-												'<div class="input-group">'+
-										            '<span class="input-group-addon">Score</span>'+
-										            ' <input type="text" class="form-control" value="9.5">'+
-										        '</div>'+
-									        '</div>'+
-										'</h4></br/>'+
-										'comment:'+
-									'</div>'+
-									'<div  contenteditable="true" class="modal-body">In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.</div>'+
-									'<div class="modal-footer">'+
-										'<button type="button" class="btn btn-default" data-dismiss="modal">submit'+
-										'</button>'+
-									'</div>'+
-								'</div>'+
-							'</div>'+
-							'</div>'+
-						'</li>';
-						$(".content ul").append(str);
-				};
-			</script>
-		</div>
-	</div>
 </body>
 </html>

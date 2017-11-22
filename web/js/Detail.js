@@ -30,7 +30,7 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     $scope.show_comment = function() {
         $http.get(serverUrl+"/course/evaluation/"+cid, {params: {courseID: cid, userToken: token}})
             .success(function(ret) {
-                ret = {info:"succeed", status:true, evaluations: [{score:9.0, comment:"1111"}, {score:9.1, comment:"2222"}, {score:9.2, comment:"33333"}, {score:9.3, comment:"4444"},]}
+                //ret = {info:"succeed", status:true, evaluations: [{score:9.0, comment:"1111"}, {score:9.1, comment:"2222"}, {score:9.2, comment:"33333"}, {score:9.3, comment:"4444"},]}
 
                 if (ret.status) {
                     var modal_ctrl = function($scope, $modalInstance, evaluations) {

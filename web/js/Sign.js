@@ -20,8 +20,8 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
 
     $scope.sign_in = function(acc,pwd) {
         window.localStorage['userToken'] = "hxy";
-        window.localStorage['type'] = 'Teacher';
-        window.location.href = "Courses.html";
+        window.localStorage['account'] = acc;
+        window.location.href = "Student.html";
         window.event.returnValue=false;
 
         // $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
@@ -29,6 +29,7 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
         //         if (ret.status) {
         //             window.localStorage['userToken'] = ret.userToken;
         //             window.localStorage['type'] = ret.type;
+        //             window.localStorage['account'] = acc;
         //             window.location.href = ret.type + ".html";
         //             window.event.returnValue = false;
         //         } else

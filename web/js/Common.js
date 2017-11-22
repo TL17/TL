@@ -6,6 +6,7 @@ var postCfg = {
         return $.param(data);
     }
 };
+
 function load_course_list(ret) {
     var ele = angular.element(document.querySelector("#coursesList>ul"));
     ele.empty();
