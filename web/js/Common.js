@@ -1,5 +1,11 @@
-var app = angular.module('myApp', []);
-
+var app = angular.module('myApp', ['ui.bootstrap']);
+var serverUrl = "http://123.207.6.234:8080/TL";
+var postCfg = {
+    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
+    transformRequest: function (data) {
+        return $.param(data);
+    }
+};
 function load_course_list(ret) {
     var ele = angular.element(document.querySelector("#coursesList>ul"));
     ele.empty();

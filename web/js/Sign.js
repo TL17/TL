@@ -1,12 +1,4 @@
 app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
-    serverUrl = "http://123.207.6.234:8080/TL";
-    postCfg = {
-        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
-        transformRequest: function (data) {
-            return $.param(data);
-        }
-    };
-
     /*
     TODO:
     check school ID and password format

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:number="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
 		<title>Course</title>
@@ -8,11 +8,62 @@
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="../js/angular.min.js"></script>
+		<script src="../js/ui-bootstrap-0.12.1.min.js"></script>
 		<script src="../js/jquery.min.js"></script>
 	</head>
 </head>
+	<body>
 
 <div ng-app="myApp" ng-controller="detail_ctrl">
+	<script type="text/ng-template" id="commentModal.html">
+		<div class="modal-header">
+			<h3 class="modal-title">Comment:</h3>
+		</div>
+		<div class="modal-body">
+			<h4 class="modal-title" id="myModalLabel">
+				<div style="width: 150px;">
+					<div class="input-group">
+						<span class="input-group-addon">Score</span>
+						<input id="model_comment_avg_score" type="text" class="form-control" readonly="readonly" />
+					</div>
+				</div>
+			</h4>
+			<div id="model_comment_body" ng-init="load_comment()">
+
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+		</div>
+		<!--div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							<div style="width: 150px;">
+								<div class="input-group">
+									<span class="input-group-addon">Score</span>
+									<input id="model_comment_avg_score" type="text" class="form-control" readonly="readonly">
+								</div>
+							</div>
+						</h4>
+						<br />
+						comment:
+					</div>
+					<div id="model_comment_body" class="modal-body">
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+					</div>
+				</div>
+			</div>
+		</div-->
+	</script>
+
 	<nav class="navbar navbar-inverse">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
@@ -21,56 +72,21 @@
 			<h2 class="navbar-brand">T&L </h2>
 		</div>
 	</nav>
-	<div class="box" ng-init="init_courses_detail()">
+	<div class="box" ng-init="init_course_detail()">
 		<div class="header">
 			<div class="li_box1">
 				 <input type="checkbox" class="li_box_che">
 				 <p class="li_box_p"></p>
-				 <button type="button" class="btn btn-primary li_box_b1"  data-toggle="button">Teacher</button>
-				 <button type="button" class="btn btn-primary li_box_b2"  data-toggle="button">Learn</button>
+				 <button ng-click="show_teacher_message()" type="button" class="btn btn-primary li_box_b1"  data-toggle="button">Teacher</button>
+				 <button ng-click="select_course()" type="button" class="btn btn-primary li_box_b2"  data-toggle="button">Learn</button>
 			</div>
 			<div class="li_box2">
-				<p style="float: left;margin-left: 8px;font-size: 20px;">Course</p>
+				<p id="courseName" style="float: left;margin-left: 8px;font-size: 20px;"></p>
 				<div class="input-group" style="float: right;width: 35%;"> 
-				    <input type="text" style="float: right;text-align: center;" class="form-control input-mini" value="Score:9.0" readonly="readonly"><span class="input-group-addon btn btn-primary" data-toggle="modal" data-target="#myModal">Comment</span>
-				    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										            <input type="text" class="form-control" readonly="readonly" value="9.0">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div class="modal-body">
-										1---Score:9.0
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										<hr/>
-										2---Score:9.3
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.<hr/>
-										3--Score:9.8
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-									</div>
-								</div>
-							</div>
-						</div>
+				    <!--input type="text" style="float: right;text-align: center;" class="form-control input-mini" readonly="readonly"-->
+					<span ng-click="show_comment()" class="input-group-addon btn btn-primary">Comment</span>
 				</div><br />
-				<p contenteditable="true" style="margin-top: 30px;margin-left:3px;height: 100px;padding: 10px;width: 100%;overflow-x:auto ;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;">Fusce egestas facilisis lorem, in egestas massa sollicitudin at. Fusce egestas facilisis lorem, in egestas massa sollicitudin at. Fusce egestas facilisis lorem, in egestas massa sollicitudin at. </p>
+				<p id="courseInfo" contenteditable="true" style="margin-top: 30px;margin-left:3px;height: 100px;padding: 10px;width: 100%;overflow-x:auto ;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;"> </p>
 			</div>
 		</div>
 		<div style="clear: both;"></div>
@@ -110,22 +126,7 @@
 					</ul>
 			    </div>
 			    <div id="menu3" class="tab-pane fade" style="height: 100%;width: 100%;">
-			    	<div style="padding: 3% 2%;word-wrap : break-word ;height:100%;width:100%;word-break:break-all;overflow-y: auto;overflow-x: auto;">
-			    		planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	planplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplanplan
-			    	</div>
+			    	<div id="coursePlan" style="padding: 3% 2%;word-wrap : break-word ;height:100%;width:100%;word-break:break-all;overflow-y: auto;overflow-x: auto;">plan</div>
 			    </div>
 			     <div id="menu2" class="tab-pane fade" style="height: 100%;">
 			     	<ul class="nav nav-pills nav-stacked" style="height: 100%;width: 30%;float: left;border-right: 2px solid #000;">

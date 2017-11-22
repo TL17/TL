@@ -1,11 +1,4 @@
 app.controller("courses_ctrl", ['$scope', '$rootScope', '$http', '$compile', function($scope, $rootScope, $http, $compile) {
-    serverUrl = "http://123.207.6.234:8080/TL";
-    // postCfg = {
-    //     headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
-    //     transformRequest: function (data) {
-    //         return $.param(data);
-    //     }
-    // };
 
     $scope.search = function(keyword) {
         $http.get(serverUrl+"/course/search",{params:{keyword: keyword}})
