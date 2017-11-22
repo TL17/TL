@@ -25,9 +25,59 @@
 			<!--图片-->
 			<img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
 			<!--信息-->
-			<p contenteditable="true" class="box_p"  id="sinfo">
-				Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna. Cras lacinia risus id purus malesuada, mattis posuere sapien aliquet. Praesent porttitor lobortis sollicitudin. Sed dolor nisi, tincidunt a nibh et, malesuada molestie sem. Maecenas elementum auctor est. Cras vitae consectetur eros. Aliquam sodales elementum pretium. Nulla non lacus a magna iaculis vulputate nec eu tortor. Nunc commodo lacinia posuere. Sed eu enim ut odio finibus efficitur. Ut sit amet commodo quam, id ullamcorper est. Maecenas aliquet ipsum tortor, sit amet facilisis nisi efficitur in. Integer congue rhoncus feugiat.
-			</p>
+			<div class="box_p" id="sinfo">
+				<label  for="name">Name</label>
+		        <div class="input-group" style="width: 100%;">
+		            <p id="name" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">Terry</p>
+		        </div>
+		        <label  for="tel">contact</label>
+		        <div class="input-group" style="width: 100%;">
+		            <p id="tel" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">18270432571</p>
+		        </div>
+		        <label  for="info">brief introduction</label>
+		        <div class="input-group" style="width: 100%;">
+		            <p id="info" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;height: 37px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">My name is Terry!</p>
+		        </div>
+		        <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+							change
+						</button>
+						<!--evalute 按钮联动的弹出框-->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+											&times;
+										</button>
+										<h4 class="modal-title" id="myModalLabel">
+											<div style="width: 150px;">
+												<div class="input-group">
+										            <span class="input-group-addon">Edit information</span>
+										        </div>
+									        </div>
+										</h4>
+										<div class="modal-body">
+											<div class="input-group">
+								            <span class="input-group-addon">Name&nbsp;&nbsp;</span>
+									            <input id="name2" type="text" class="form-control" value="">
+									        </div><br />
+									        <div class="input-group">
+									            <span class="input-group-addon">contact</span>
+									            <input id="tel2" type="text" class="form-control" value="">
+									        </div><br />
+									        <label  for="info2">brief introduction</label>
+									        <div class="input-group" style="width: 100%;">
+									            <p contenteditable="true" id="info2" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+									        </div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal" onclick="edit()">submit</button>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+			</div>
 		</div>
 		<!--下半部分-->
 		<div class="content">
@@ -93,5 +143,81 @@
 </div>
 <script src="../js/Common.js"></script>
 <script src="../js/Student.js"></script>
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+											&times;
+										</button>
+										<h4 class="modal-title" id="myModalLabel">
+											<div style="width: 150px;">
+												<div class="input-group">
+										            <span class="input-group-addon">Score</span>
+										             <input type="text" class="form-control" value="9.5">
+										        </div>
+									        </div>
+										</h4>
+										<br />
+										comment:
+									</div>
+									<div  contenteditable="true"  class="modal-body">
+										In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
+									</div>
+								</div>
+							</div>
+					</div>
+				</li>
+			</ul>
+			<p class="addcourse" onclick="addCourse()">+</p>
+			<script type="text/javascript">
+				function edit(){
+				if($("#name2").val().length<=0||$("#tel2").val().length<=0||$("#info2").html().length<=0){
+					alert("请补全信息");
+				}else{
+					$("#name").html($("#name2").val());
+					$("#tel").html($("#tel2").val());
+					$("#info").html($("#info2").html());
+				}
+			}
+				/*动态添加课程*/
+				function addCourse(){
+					var str = '<li><p class="pcourse">Course</p>'+
+							'<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>'+
+							'<div class="nei_bottom">'+
+								'<p class="per100">100%</p>'+
+								'<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">evalute</button>'+
+						'<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
+							'<div class="modal-dialog">'+
+								'<div class="modal-content">'+
+									'<div class="modal-header">'+
+										'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
+										'<h4 class="modal-title" id="myModalLabel">'+
+											'<div style="width: 150px;">'+
+												'<div class="input-group">'+
+										            '<span class="input-group-addon">Score</span>'+
+										            ' <input type="text" class="form-control" value="9.5">'+
+										        '</div>'+
+									        '</div>'+
+										'</h4></br/>'+
+										'comment:'+
+									'</div>'+
+									'<div  contenteditable="true" class="modal-body">In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.</div>'+
+									'<div class="modal-footer">'+
+										'<button type="button" class="btn btn-default" data-dismiss="modal">submit'+
+										'</button>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+							'</div>'+
+						'</li>';
+						$(".content ul").append(str);
+				};
+			</script>
+		</div>
+	</div>
 </body>
 </html>

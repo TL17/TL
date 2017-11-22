@@ -41,7 +41,7 @@
 			        <br />
 			        <div class="input-group">
 			            <span class="input-group-addon">Password</span>
-			            <input ng-model="sign_in_pwd" type="text" class="form-control" placeholder="Password">
+			            <input ng-model="sign_in_pwd" type="password" class="form-control" placeholder="Password">
 			        </div> <br />
 			        <input
 							ng-click="sign_in(sign_in_acc, sign_in_pwd)"
@@ -62,6 +62,12 @@
 			        <div class="input-group">
 			            <span class="input-group-addon">Password</span>
 			            <input ng-model="sign_up_pwd" type="text" class="form-control" placeholder="Password">
+			            <span class="input-group-addon">&nbsp;&nbsp;Password&nbsp;&nbsp;</span>
+			            <input type="password" class="form-control" placeholder="Password">
+			        </div> <br />
+			        <div class="input-group">
+			            <span class="input-group-addon">RePassword</span>
+			            <input type="password" class="form-control" placeholder="Confirm password again">
 			        </div> <br />
 			        <input
 							ng-click="sign_up(sign_up_id, sign_up_acc, sign_up_pwd)"

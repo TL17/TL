@@ -1,9 +1,9 @@
 html,body{width:100%;text-align:left;font-family: "微软雅黑";height: 100%; background:#8dadce; }
  html{min-width: 1000px;}
  .box{height: auto;width: 80%;margin-top:30px;margin-left:10%;}
- .header{height: 280px;width: 100%;line-height: 280px;position: relative;}
- .content{ margin-bottom:20px;height: 350px;width: 100%;overflow-x: auto;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;}
- .box_p{position:absolute;top:38px;right: 2%;line-height: 16px;width: 70%;padding: 6px 8px;height: 200px;overflow-x:auto;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;}
+ .header{height: 300px;width: 100%;line-height: 280px;position: relative;}
+ .content{margin-bottom:20px;height: 450px;width: 100%;overflow-x: auto;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;}
+ .box_p{position:absolute;top:20px;right: 2%;line-height: 16px;width: 70%;padding: 6px 8px;height: 235px;overflow-x:auto;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;}
  .content ul li{list-style: none; width:90%;height: 100px;background: #e6e2e2;margin-left:5%;margin-bottom: 20px;}
  ul{padding: 20px 0 0 0;}
  .nei{height: 100%;width: 70%;float: left;overflow-x:auto;padding: 3px 5px;}
