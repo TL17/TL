@@ -52,7 +52,7 @@
             <!--图片-->
             <img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
             <!--信息-->
-            <div ng-init="load_personal_info()" class="box_p" id="sinfo">
+            <div ng-init="load_info()" class="box_p" id="sinfo">
                 <label for="name">Name</label>
                 <div class="input-group" style="width: 100%;">
                     <p id="name"
@@ -92,24 +92,24 @@
                                 <div class="modal-body">
                                     <div class="input-group">
                                         <span class="input-group-addon">Name&nbsp;&nbsp;</span>
-                                        <input ng-model="student_info_name" type="text" class="form-control" value="">
+                                        <input ng-model="info_name" type="text" class="form-control" value="">
                                     </div>
                                     <br/>
                                     <div class="input-group">
                                         <span class="input-group-addon">contact</span>
-                                        <input ng-model="student_info_contact" id="tel2" type="text"
+                                        <input ng-model="info_contact" id="tel2" type="text"
                                                class="form-control" value="">
                                     </div>
                                     <br/>
-                                    <label for="student_modify_info">brief introduction</label>
+                                    <label for="modify_info">brief introduction</label>
                                     <div class="input-group" style="width: 100%;">
-                                        <p contenteditable="true" id="student_modify_info"
+                                        <p contenteditable="true" id="modify_info"
                                            style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal"
-                                            ng-click="submit_info(student_info_name, student_info_contact)">submit
+                                            ng-click="submit_info(info_name, info_contact)">submit
                                     </button>
                                 </div>
                             </div>

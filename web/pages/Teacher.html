@@ -1,160 +1,129 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Teacher</title>
-		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
-		<link rel="stylesheet" href="../css/Teacher.css"> 
-		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="../js/angular.min.js"></script>
-		<script src="../js/ui-bootstrap-0.12.1.min.js"></script>
-		<script src="../js/jquery.min.js"></script>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Teacher.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/ui-bootstrap-0.12.1.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+</head>
 </head>
 <body>
-<div ng-app="teacher" ng-controller="teacher_ctrl">
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
-				<i class="fa fa-bars"></i>
-			</button>
-			<h2 class="navbar-brand">T&L </h2>
-		</div>
-	</nav>
-	<div class="box">
-		<div class="header">
-			<img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
-			<div class="box_p" id="cinfo">
-				<label  for="name">Name</label>
-		        <div class="input-group" style="width: 100%;">
-		            <p id="name" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">Terry</p>
-		        </div>
-		        <label  for="tel">contact</label>
-		        <div class="input-group" style="width: 100%;">
-		            <p id="tel" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">18270432571</p>
-		        </div>
-		        <label  for="info">brief introduction</label>
-		        <div class="input-group" style="width: 100%;">
-		            <p id="info" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;height: 37px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">My name is Terry!</p>
-		        </div>
-		        <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							change
-						</button>
-						<!--evalute 按钮联动的弹出框-->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Edit information</span>
-										        </div>
-									        </div>
-										</h4>
-										<div class="modal-body">
-											<div class="input-group">
-								            <span class="input-group-addon">Name&nbsp;&nbsp;</span>
-									            <input id="name2" type="text" class="form-control" value="">
-									        </div><br />
-									        <div class="input-group">
-									            <span class="input-group-addon">contact</span>
-									            <input id="tel2" type="text" class="form-control" value="">
-									        </div><br />
-									        <label  for="info2">brief introduction</label>
-									        <div class="input-group" style="width: 100%;">
-									            <p contenteditable="true" id="info2" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
-									        </div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal" onclick="edit()">submit</button>
-										</div>
-									</div>
-								</div>
-							</div>
-					</div>
-			</div>
-		</div>
-		<div class="content">
-			<div id="c_b_b">
-				<p class="c_d_p">Course</p>
-			</div>
-			<p class="c_p" ng-click="add_course()">+</p>
-			<p class="c_p" data-toggle="modal" data-target="#myModal2">+</p>
-			<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-								&times;
-							</button>
-							<h4 class="modal-title" id="myModalLabel">
-								<div style="width: 150px;">
-									<div class="input-group">
-							            <span class="input-group-addon">Edit information</span>
-							        </div>
-						        </div>
-							</h4>
-							<div class="modal-body">
-								<div class="input-group">
-					            <span class="input-group-addon">courseName&nbsp;&nbsp;</span>
-						            <input id="courseName" type="text" class="form-control" value="">
-						        </div><br />
-						        <label  for="courseInfo">courseInfo</label>
-						        <div class="input-group" style="width: 100%;">
-						            <p contenteditable="true" id="courseInfo" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
-						        </div>
-						        <label  for="coursePlan">coursePlan</label>
-						        <div class="input-group" style="width: 100%;">
-						            <p contenteditable="true" id="coursePlan" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
-						        </div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal" onclick="edit2()">submit</button>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-		</div>
-	</div>
+<div ng-app="myApp" ng-controller="teacher_ctrl">
+<nav class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+            <i class="fa fa-bars"></i>
+        </button>
+        <h2 class="navbar-brand">T&L </h2>
+    </div>
+</nav>
+<div class="box">
+    <div class="header">
+        <img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
+        <div class="box_p" id="cinfo" ng-init="load_info()">
+            <label  for="name">Name</label>
+            <div class="input-group" style="width: 100%;">
+                <p id="name" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">Terry</p>
+            </div>
+            <label  for="tel">contact</label>
+            <div class="input-group" style="width: 100%;">
+                <p id="tel" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">18270432571</p>
+            </div>
+            <label  for="info">brief introduction</label>
+            <div class="input-group" style="width: 100%;">
+                <p id="info" style="border: 2px solid rgba(255,255,255,0.5);width: 100%;height: 37px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">My name is Terry!</p>
+            </div>
+            <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#infoModal">
+                change
+            </button>
+            <!--evalute 按钮联动的弹出框-->
+            <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title">
+                                <div style="width: 150px;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Edit information</span>
+                                    </div>
+                                </div>
+                            </h4>
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Name&nbsp;&nbsp;</span>
+                                    <input ng-model="info_name" id="name2" type="text" class="form-control" value="">
+                                </div><br />
+                                <div class="input-group">
+                                    <span class="input-group-addon">contact</span>
+                                    <input ng-model="info_contact" id="tel2" type="text" class="form-control" value="">
+                                </div><br />
+                                <label  for="modify_info">brief introduction</label>
+                                <div class="input-group" style="width: 100%;">
+                                    <p contenteditable="true" id="modify_info" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="submit_info(info_name,info_contact)">submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div id="c_b_b" ng-init="load_courses()">
+            
+        </div>
+        <p class="c_p" data-toggle="modal" data-target="#courseModal">+</p>
+        <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <div style="width: 150px;">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Edit information</span>
+                                </div>
+                            </div>
+                        </h4>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <span class="input-group-addon">courseName&nbsp;&nbsp;</span>
+                                <input ng-model="course_name" id="courseName" type="text" class="form-control" value="">
+                            </div><br />
+                            <label  for="courseInfo">courseInfo</label>
+                            <div class="input-group" style="width: 100%;">
+                                <p contenteditable="true" id="courseInfo" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+                            </div>
+                            <label  for="coursePlan">coursePlan</label>
+                            <div class="input-group" style="width: 100%;">
+                                <p contenteditable="true" id="coursePlan" style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="submit_course(course_name)">submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-	<script type="text/javascript">
-		function addCourse(text){
-			$(".content #c_b_b").append('<p class="c_d_p">'+text+'</p>');
-		}
-		function edit(){
-			if($("#name2").val().length<=0||$("#tel2").val().length<=0||$("#info2").html().length<=0){
-				alert("请补全信息");
-			}else{
-				$("#name").html($("#name2").val());
-				$("#tel").html($("#tel2").val());
-				$("#info").html($("#info2").html());
-			}
-		}
-		function edit2(){
-			if($("#courseName").val().length<=0||$("#courseInfo").html().length<=0||$("#coursePlan").html().length<=0){
-				alert("请补全信息");
-			}else{
-				addCourse($("#courseName").val());
-			}
-		}
-		var app = angular.module("teacher", []);
-		app.controller("teacher_ctrl", [$scope, $rootScope, function($scope, $rootScope, $http) {
-            serverUrl = "http://123.207.6.234:8080/TL";
-            postCfg = {
-                headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
-                transformRequest: function (data) {
-                    return $.param(data);
-                }
-            };
+</div>
 
-
-		}]);
-	</script>
+<script src="../js/Common.js"></script>
+<script src="../js/Teacher.js"></script>
 </body>
 </html>

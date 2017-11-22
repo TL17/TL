@@ -10,6 +10,7 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                     angular.element(document.querySelector("#coursePlan")).text(ret.course.coursePlan);
                     angular.element(document.querySelector("#courseName")).text(ret.course.courseName);
                     angular.element(document.querySelector("#is_selected")).attr("checked", ret.course.selected);
+                    angular.element(document.querySelector("#teacber_info_btn")).data("id", ret.course.teacherID);
                 } else
                     alert(ret.info);
             });
@@ -68,5 +69,10 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                 } else
                     alert(ret.info);
             })
+    };
+
+    $scope.show_teacher_message = function() {
+        window.localStorage['teacherID'] = angular.element(document.querySelector("#teacber_info_btn")).data("id");
+        window.location.href = "Teacher.html";
     }
 }]);

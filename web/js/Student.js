@@ -53,44 +53,13 @@ app.controller("student_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
             });
     };
 
-    $scope.load_personal_info = function () {
-        var acc = window.localStorage['account'];
-        $http.get(serverUrl + "/account/" + acc, {params: {account: acc, userToken: window.localStorage['userToken']}})
-            .success(function (ret) {
-                ret.status = true;
-                ret.perInfo = {
-                    name: "String",
-                    info: "String",
-                    contact: "String"
-                }
-                if (ret.status) {
-                    angular.element(document.querySelector("#name")).text(ret.perInfo.name);
-                    angular.element(document.querySelector("#tel")).text(ret.perInfo.contact);
-                    angular.element(document.querySelector("#info")).text(ret.perInfo.info);
-                } else
-                    alert(ret.info);
-            })
+    $scope.load_info = function () {
+        load_personal_info($http);
     };
 
 
     $scope.submit_info = function (name, contact) {
-        $http.post(serverUrl + "/account/" + window.localStorage['account'],
-            {
-                userToken: window.localStorage['userToken'], name: name, contact: contact,
-                info: angular.element(document.querySelector("#student_modify_info")).text(),
-                account: window.localStorage['account']
-            },
-            postCfg)
-            .success(function (ret) {
-                if (ret.status) {
-                    var info = angular.element(document.querySelector("#student_modify_info")).text();
-                    angular.element(document.querySelector("#name")).text(name);
-                    angular.element(document.querySelector("#tel")).text(contact);
-                    angular.element(document.querySelector("#info")).text(info);
-                    alert("Submit succeed~");
-                } else
-                    alert(ret.info);
-            });
+        set_personal_info($http, name, contact);
     };
 
     $scope.addCourse = function() {

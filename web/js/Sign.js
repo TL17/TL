@@ -21,8 +21,8 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
     $scope.sign_in = function(acc,pwd) {
         window.localStorage['userToken'] = "hxy";
         window.localStorage['account'] = acc;
-        window.location.href = "Student.html";
-        window.event.returnValue=false;
+        window.location.href = "Teacher.html";
+        window.event.returnValue = false;
 
         // $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
         //     .success(function(ret) {
