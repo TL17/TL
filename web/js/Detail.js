@@ -1,5 +1,6 @@
 app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', function($scope, $rootScope, $http, $modal) {
     var cid = window.localStorage['detailID'];
+    var token = window.localStorage['userToken'];
 
     $scope.init_course_detail = function() {
         $http.get(serverUrl+"/course/detail/"+cid,{params:{courseID: cid}})
@@ -8,13 +9,26 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                     angular.element(document.querySelector("#courseInfo")).text(ret.course.courseInfo);
                     angular.element(document.querySelector("#coursePlan")).text(ret.course.coursePlan);
                     angular.element(document.querySelector("#courseName")).text(ret.course.courseName);
+                    angular.element(document.querySelector("#is_selected")).attr("checked", ret.course.selected);
+                } else
+                    alert(ret.info);
+            });
+    };
+
+    $scope.select_course = function() {
+        $http.get(serverUrl+"/course/select/"+cid, {params: {courseID: cid, userToken: token}})
+            .success(function(ret) {
+                ret.status = true;
+                if (ret.status) {
+                    angular.element(document.querySelector("#is_selected")).attr("checked", true);
+                    alert("Course selected~");
                 } else
                     alert(ret.info);
             });
     }
 
     $scope.show_comment = function() {
-        $http.get(serverUrl+"/course/evaluation/"+cid, {params: {courseID: cid, userToken: window.localStorage['detailID']}})
+        $http.get(serverUrl+"/course/evaluation/"+cid, {params: {courseID: cid, userToken: token}})
             .success(function(ret) {
                 ret = {info:"succeed", status:true, evaluations: [{score:9.0, comment:"1111"}, {score:9.1, comment:"2222"}, {score:9.2, comment:"33333"}, {score:9.3, comment:"4444"},]}
 

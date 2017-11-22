@@ -18,8 +18,6 @@
 	<script type="text/ng-template" id="commentModal.html">
 		<div class="modal-header">
 			<h3 class="modal-title">Comment:</h3>
-		</div>
-		<div class="modal-body">
 			<h4 class="modal-title" id="myModalLabel">
 				<div style="width: 150px;">
 					<div class="input-group">
@@ -28,6 +26,9 @@
 					</div>
 				</div>
 			</h4>
+		</div>
+		<div class="modal-body">
+
 			<div id="model_comment_body" ng-init="load_comment()">
 
 			</div>
@@ -75,7 +76,7 @@
 	<div class="box" ng-init="init_course_detail()">
 		<div class="header">
 			<div class="li_box1">
-				 <input type="checkbox" class="li_box_che">
+				 <input id="is_selected" type="checkbox" class="li_box_che">
 				 <p class="li_box_p"></p>
 				 <button ng-click="show_teacher_message()" type="button" class="btn btn-primary li_box_b1"  data-toggle="button">Teacher</button>
 				 <button ng-click="select_course()" type="button" class="btn btn-primary li_box_b2"  data-toggle="button">Learn</button>
