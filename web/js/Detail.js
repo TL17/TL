@@ -37,11 +37,12 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                     var modal_ctrl = function ($scope, $modalInstance, evaluations) {
                         $scope.load_comment = function () {
                             var count = 1;
-                            var total = 0;
+                            var total = 0.0;
                             var ele = angular.element(document.querySelector("#model_comment_body"));
                             angular.forEach(evaluations, function (e) {
-                                ele.append(count + "---Score:" + e.score.toFixed(1) + "<br/>" + e.comment + "<hr/>");
-                                total += e.score;
+                                var score = parseFloat(e.score)
+                                ele.append(count + "---Score:" + score.toFixed(1) + "<br/>" + e.comment + "<hr/>");
+                                total += parseFloat(e.score);
                                 count++;
                             });
                             count--;
