@@ -4,10 +4,18 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
     };
 
     $scope.load_info = function () {
+        if (window.localStorage['type'] == 'TEACHER') {
+            $("#change_info_btn").show();
+            $("#add_course_btn").show();
+        }else{
+            $("#change_info_btn").hide();
+            $("#add_course_btn").hide();
+        }
+
         load_personal_info($http);
     };
 
-    $scope.submit_course = function(name){
+    $scope.submit_course = function(){
         if($("#courseName").val().length<=0||$("#courseInfo").html().length<=0||$("#coursePlan").html().length<=0){
             alert("请补全信息");
         }else{

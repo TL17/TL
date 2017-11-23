@@ -30,7 +30,10 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
         //             window.localStorage['userToken'] = ret.userToken;
         //             window.localStorage['type'] = ret.type;
         //             window.localStorage['account'] = acc;
-        //             window.location.href = ret.type + ".html";
+        //             if (ret.type == 'TEACHER')
+        //                 window.location.href = "Teacher.html";
+        //             else
+        //                 window.location.href = "Student.html";
         //             window.event.returnValue = false;
         //         } else
         //             alert(ret.info);
