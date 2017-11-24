@@ -17,14 +17,15 @@ public class DBConnect {
     private PreparedStatement pst;
     private ResultSet rs;
 
-    public DBConnect(String url,String user,String password) {
-        this.url=url;
-        this.user=user;
-        this.password=password;
+    public DBConnect(String url, String user, String password) {
+        this.url = url;
+        this.user = user;
+        this.password = password;
         try {
             Class.forName(name);//指定连接类型
-            conn =  DriverManager.getConnection(url, user, password);//获取连接
-            stmt =  conn.createStatement();
+            conn = DriverManager.getConnection(url, user, password);//获取连接
+            stmt = conn.createStatement();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,18 +41,16 @@ public class DBConnect {
         return null;
     }
 
-    public void executeUpdate(String sql) {
-        try{
-            stmt.executeUpdate(sql);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
+    public void executeUpdate(String sql) throws SQLException {
+
+        stmt.executeUpdate(sql);
+
     }
 
     public void executeUpdate(PreparedStatement pst) {
-        try{
+        try {
             pst.executeUpdate();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -98,5 +97,6 @@ public class DBConnect {
             e.printStackTrace();
         }
     }
+
 
 }

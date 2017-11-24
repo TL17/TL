@@ -1,0 +1,10 @@
+ html,body{width:100%;text-align:left;font-family: "微软雅黑";height: 100%; background:#8dadce;; }
+ html{min-width: 1000px;}
+ .box{height: auto;width: 80%;margin-top:30px;margin-left:10%;}
+ .header{height: 280px;width: 100%;line-height: 280px;position: relative;}
+ .content{ margin-bottom:20px;height: 350px;width: 100%;overflow-x: auto;padding: 10px;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;}
+ .content{ margin-bottom:20px;height: 350px;width: 100%;overflow-x: auto;padding: 10px;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;}
+ .box_p{background: rgba(255,255,255,0.5);position:absolute;top:38px;right: 2%;line-height: 16px;width: 70%;padding: 6px 8px;border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;height: 200px;overflow-x:auto;}
+ .c_d_p{background: lightsteelblue;height:100px;width:100px;color: #fff;font-size:16px;line-height: 100px;text-align: center;float: left;margin-left: 10px;}
+ .c_p{background: lightsteelblue;height:100px;width:100px;color: #fff;font-size:50px;line-height: 100px;text-align: center;font-weight:bold;float: left;margin-left: 10px;}
+   

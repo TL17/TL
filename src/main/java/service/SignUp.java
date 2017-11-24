@@ -2,12 +2,17 @@ package service;
 
 import net.sf.json.JSONObject;
 import entity.service.Status;
+import util.db.DBConnect;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.text.MessageFormat;
 
-@WebServlet(name="SignUp", urlPatterns="/sign_up")
+@WebServlet(name = "SignUp", urlPatterns = "/sign_up")
 public class SignUp extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -31,12 +36,32 @@ public class SignUp extends javax.servlet.http.HttpServlet {
             password = "";
         }
 
+        //TODO: 2017/11/23 create the table in DB to look up the (type,name,info,contact) via schoolID
+        // temp values
+        String type = "STUDENT";
+        String name = "zhoujunying";
+        String info = "I am Junying chou";
+        String contact = "qq511392148";
+        String id = "14302010057";
+        // how to get the  data access info?
+        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
+        String user = "root";
+        String dbPwd = "root";
+
+        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+        String stringFormat = "INSERT INTO user (id, password, account, name,info,contact) VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')";
+        String sql = String.format(stringFormat, id, password, account,name,info,contact);
+
         Status retStatus = new Status();
-        retStatus.setStatus(true);
-        retStatus.setInfo("注册成功");
-        if (schoolID.equals("")||account.equals("")||password.equals("")) {
+
+        try {
+            dbConnect.executeUpdate(sql);
+            retStatus.setStatus(true);
+            retStatus.setInfo("注册成功");
+        }catch (SQLException e) {
             retStatus.setStatus(false);
-            retStatus.setInfo("空参数");
+            retStatus.setInfo(e.getMessage());
+            e.printStackTrace();
         }
 
         JSONObject jsonRetStatus = JSONObject.fromObject(retStatus);

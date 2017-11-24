@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TL项目部署</title>
+</head>
+<body>
+    <p>看到此页面，说明TL项目后端已部署</p>
+    <p><a href="ng_test.html">Angular Js HelloWorld测试</a></p>
+    <p>http GET /HelloWorld/{name} （参数 date:String） - 测试用接口</p>
+    <p>http POST /HelloWorld/{name} （参数 date:String） - 测试用接口</p>
+    <p></p>
+    <p>1. http POST /sign_up （参数 schoolID, account, password） - 注册</p>
+    <p>2. http POST /sign_in （参数 account, password） - 登录</p>
+    <p>3. http POST /account/{account} （参数 userToken, name, info, contact） - 设置个人信息</p>
+    <p>4. http GET /account/{account} （参数 userToken） - 获取个人信息</p>
+    <p>5. http POST /course/add （参数 userToken, courseName, courseInfo, coursePlan） - 教师开课</p>
+    <p>6. http GET /course/manage （参数 userToken） - 管理课程（列出课程）</p>
+    <p>7. http GET /course/search （参数 keyword） - 搜索课程（列出课程）</p>
+    <p>8. http GET /course/detail/{courseID} - 课程细节</p>
+    <p>9. http POST /course/select/{courseID} （参数 userToken） - 选课</p>
+    <p>10. http POST /upload_material （参数 userToken, courseID, material） - 上传资源（接受的参数是假的，需要技术调研并重做）</p>
+    <p>11. http GET /material/{materialID} （参数 userToken） - 获取资源</p>
+    <p>12. http POST /course/evaluation/{courseID} （参数 userToken, score, comment） - 评教</p>
+    <p>13. http GET /course/evaluation/{courseID} （参数 userToken） - 获取评教信息</p>
+</body>
+</html>
