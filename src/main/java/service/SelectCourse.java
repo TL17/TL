@@ -1,12 +1,17 @@
 package service;
 
+import entity.service.Course;
 import entity.service.Status;
 import net.sf.json.JSONObject;
+import util.db.DBConnect;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @WebServlet(name="SelectCourse", urlPatterns="/course/select/*")
 public class SelectCourse extends javax.servlet.http.HttpServlet {
@@ -31,7 +36,7 @@ public class SelectCourse extends javax.servlet.http.HttpServlet {
             nan = true;
         }
 
-        String userToken = request.getParameter("userToken");
+        String userToken = request.getParameter("");/////
         if (userToken == null) {
             userToken = "";
         }
@@ -43,12 +48,17 @@ public class SelectCourse extends javax.servlet.http.HttpServlet {
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
         } else {
-            int courseID = Integer.parseInt(courseIDStr);
-            Status status = new Status();
-            status.setStatus(true);
-            status.setInfo("选课成功");
-            jsonRet = JSONObject.fromObject(status);
-        }
+
+            int courseID = Integer.parseInt(courseIDStr);//////
+            // course : id name info plan teacherid
+            DBConnect dbConnect = new DBConnect();
+            String sql = "INSERT INTO selection (courseid, studentid,score) VALUES (?, ?, '');";
+            PreparedStatement pstm  = dbConnect.prepareStatement(sql);
+            pstm.setInt(1,courseID);
+            pstm.setString(2,userToken);//如何得到usertoken
+
+
+
 
         PrintWriter out = response.getWriter();
         out.print(jsonRet.toString());

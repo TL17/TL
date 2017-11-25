@@ -43,24 +43,23 @@ public class SignUp extends javax.servlet.http.HttpServlet {
         String info = "I am Junying chou";
         String contact = "qq511392148";
         String id = "14302010057";
-        // how to get the  data access info?
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
 
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+
+        DBConnect dbConnect = new DBConnect();
         String stringFormat = "INSERT INTO user (id, password, account, name,info,contact) VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')";
         String sql = String.format(stringFormat, id, password, account,name,info,contact);
 
         Status retStatus = new Status();
 
+        /*
+        * 若schoolID通过验证，account唯一，则返回一个注册成功的反馈状态，否则，返回注册失败信息；*/
         try {
             dbConnect.executeUpdate(sql);
             retStatus.setStatus(true);
             retStatus.setInfo("注册成功");
         }catch (SQLException e) {
             retStatus.setStatus(false);
-            retStatus.setInfo(e.getMessage());
+            retStatus.setInfo("注册失败");
             e.printStackTrace();
         }
 

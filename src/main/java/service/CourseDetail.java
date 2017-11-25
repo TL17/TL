@@ -35,7 +35,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
             Course course = new Course();
-            course.setCourseID(-1);
+            course.setCourseID("sdfghjk");
             course.setCourseName("");
             course.setCourseInfo("");
             course.setCoursePlan("");
@@ -47,7 +47,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
             status.setInfo("课程搜索成功");
             jsonRet = JSONObject.fromObject(status);
             Course course = new Course();
-            course.setCourseID(courseID);
+            course.setCourseID("asdfghjkl");
             course.setCourseName("课程名称"+courseID);
             course.setCourseInfo("课程介绍"+courseID);
             course.setCoursePlan("课程大纲"+courseID);
