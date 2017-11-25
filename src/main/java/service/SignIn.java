@@ -32,16 +32,13 @@ public class SignIn extends javax.servlet.http.HttpServlet {
         if (password == null) {
             password = "";
         }
-        //TODO: how to get the url+user+dbpwd ?
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
 
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+
+        DBConnect dbConnect = new DBConnect();
         String stringFormat  = "SELECT password FROM user WHERE account=\'%s\'";
         String sql = String.format(stringFormat, account);
         ResultSet rs = dbConnect.executeQuery(sql);
-
+        /*return : {userToken: String, status: boolean, info: String} userToken：服务器对应该账号的token，用于验证身份，与用户一一对应*/
         try {
             String rs_pwd = "";
             while (rs.next()) {
@@ -57,7 +54,7 @@ public class SignIn extends javax.servlet.http.HttpServlet {
             }
         } catch (SQLException e) {
             status.setStatus(false);
-            status.setInfo(e.getMessage());
+            status.setInfo("操作失败");
             e.printStackTrace();
         }
 
