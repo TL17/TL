@@ -2,6 +2,12 @@
 
 后端提供Restful形式API（服务部署在http://123.207.6.234:8080/TL/ 下），前端调用后端提供的API
 
+### 更改日志：
+
+```
+20171126 - 5,6,9,10,11,12,13口，更新说明，增加account参数
+```
+
 API接口定义如下：
 
 ### 1. 注册（Sign up）
@@ -73,7 +79,8 @@ return:
 
 in：
 
-* userToken：用于验证用户登录状态，获取用户account；
+* userToken：用于验证用户登录状态，验证account；
+* account：验证身份。
 * courseName（课程名称），courseInfo（课程简介），coursePlan（课程大纲）；
 
 return：
@@ -88,7 +95,8 @@ return：
 
 in：
 
-* usertoken：用于验证用户登录状态，获取用户account；
+* usertoken：用于验证用户登录状态，验证account；
+* account：验证身份。
 
 return：
 
@@ -163,7 +171,8 @@ return：
 in：
 
 * url参数 - courseID：课程ID，这是在开课时应为每个课程生成的一个唯一的ID号；
-* userToken：识别account；
+* userToken：验证account；
+* account：验证身份。
 
 return：
 
@@ -182,7 +191,8 @@ return：
 
 in：
 
-* userToken：识别account；
+* userToken：验证account；
+* account：验证身份。
 * courseID：课程ID；
 * [TODO]material：上传的资源，（可能具有类型、资源地址等，目前暂定为PPT的形式）
 
@@ -205,7 +215,8 @@ return：
 in：
 
 * url参数 - materialID：资源唯一的ID
-* userToken：识别account；
+* userToken：验证account；
+* account：验证身份。
 
 return：
 
@@ -226,7 +237,8 @@ return：
 in：
 
 * url参数 - courseID：课程ID；
-* userToken：识别account；
+* userToken：验证account；
+* account：验证身份。
 * (evaluation)score评教分数+comment评论
 
 return：
@@ -246,7 +258,8 @@ return：
 in：
 
 * url参数 - courseID：课程ID；
-* userToken：识别account；
+* userToken：验证account；
+* account：验证身份。
 
 return：
 
