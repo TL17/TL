@@ -1,0 +1,11 @@
+html,body,table{background-color:rgb(37, 40, 57);width:100%;text-align:center;}
+ html{min-width: 1000px;}
+ .form-signin{position:absolute;top:0%;right:18%;text-align:left;width:35%;padding:25px 29px 29px;background: rgba(255,255,255,0.9);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;float: right;}
+ .form-signin .checkbox{margin-bottom:10px;color:#0663a2;} .form-signin .input-label{font-size:16px;line-height:23px;color:#999;}
+ .form-signin .input-block-level{font-size:16px;height:auto;margin-bottom:15px;padding:7px;*width:283px;*padding-bottom:0;_padding:7px 7px 9px 7px;}
+ .form-signin .btn.btn-large{font-size:16px;} .form-signin #themeSwitch{position:absolute;right:15px;bottom:10px;}
+ .form-signin div.validateCode {padding-bottom:15px;} .mid{vertical-align:middle;}
+ .header{height:80px;padding-top:20px;} .alert{position:relative;width:300px;margin:0 auto;*padding-bottom:0px;}
+ .bigbox{margin:10% auto 20px;position: relative;}
+ .font{float: left;position: absolute;top: 0%;left: 15%;padding: 90px 0 0 0;}
+ .nav_button{width: 50%;text-align: center;}
