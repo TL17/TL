@@ -22,6 +22,7 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
             $http.post(serverUrl+"/course/add",
                 {
                     userToken:window.localStorage['userToken'],
+                    account:window.localStorage['account'],
                     courseName:$("#courseName").val(),
                     courseInfo:$("#courseInfo").html(),
                     coursePlan:$("#coursePlan").html()
@@ -37,7 +38,7 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
     };
 
     $scope.load_courses = function() {
-        $http.post(serverUrl+"/course/manage", {userToken:window.localStorage['userToken']}, postCfg)
+        $http.post(serverUrl+"/course/manage", {userToken:window.localStorage['userToken'], account:window.localStorage['account']}, postCfg)
             .success(function(ret) {
                 if (ret.status)
                     addCourse(ret.courses.courseName, ret.courses.courseName);

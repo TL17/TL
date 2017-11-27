@@ -2,7 +2,7 @@ app.controller("student_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
     var cid = "";
 
     $scope.init_selected_list = function () {
-        $http.get(serverUrl + "/course/manage", {params: {userToken: window.localStorage['userToken']}})
+        $http.get(serverUrl + "/course/manage", {params: {userToken: window.localStorage['userToken'], account:window.localStorage['account']}})
             .success(function (ret) {
                 var ele = angular.element(document.querySelector("#selected_list > ul"));
                 ele.empty();
@@ -26,7 +26,8 @@ app.controller("student_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
                             $scope.submit_evaluation = function (score) {
                                 $http.post(serverUrl + "/course/evaluation/" + cid,
                                     {
-                                        courseID: cid, userToken: window.localStorage['userToken'], score: score,
+                                        courseID: cid, userToken: window.localStorage['userToken'],
+                                        score: score, account:window.localStorage['account'],
                                         comment: angular.element(document.querySelector("#student_evaluate_comment")).text()
                                     },
                                     postCfg)

@@ -17,7 +17,7 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     };
 
     $scope.select_course = function () {
-        $http.get(serverUrl + "/course/select/" + cid, {params: {courseID: cid, userToken: token}})
+        $http.get(serverUrl + "/course/select/" + cid, {params: {courseID: cid, userToken: token, account:window.localStorage['account']}})
             .success(function (ret) {
                 ret.status = true;
                 if (ret.status) {
@@ -29,7 +29,7 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     }
 
     $scope.show_comment = function () {
-        $http.get(serverUrl + "/course/evaluation/" + cid, {params: {courseID: cid, userToken: token}})
+        $http.get(serverUrl + "/course/evaluation/" + cid, {params: {courseID: cid, userToken: token, account:window.localStorage['account']}})
             .success(function (ret) {
                 //ret = {info:"succeed", status:true, evaluations: [{score:9.0, comment:"1111"}, {score:9.1, comment:"2222"}, {score:9.2, comment:"33333"}, {score:9.3, comment:"4444"},]}
 

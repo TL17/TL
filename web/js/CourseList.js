@@ -17,7 +17,7 @@ app.controller("courses_ctrl", ['$scope', '$rootScope', '$http', '$compile', fun
     };
 
     $scope.init_courses_list = function() {
-        $http.get(serverUrl+"/course/manage",{params:{userToken: window.localStorage['userToken']}})
+        $http.get(serverUrl+"/course/manage",{params:{userToken: window.localStorage['userToken'], account:window.localStorage['account']}})
         .success(function(ret) {
             window.localStorage['detailID'] = "";
             load_course_list(ret);
