@@ -1,153 +1,135 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Student</title>
-		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
-		<link rel="stylesheet" href="../css/Student.css">  
-		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Student.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/ui-bootstrap-0.12.1.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+</head>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
-				<i class="fa fa-bars"></i>
-			</button>
-			<h2 class="navbar-brand">T&L </h2>
-		</div>
-	</nav>
-	<div class="box">
-		<!--上半部分-->
-		<div class="header">
-			<!--图片-->
-			<img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
-			<!--信息-->
-			<p contenteditable="true" class="box_p"  id="sinfo">
-				Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna. Cras lacinia risus id purus malesuada, mattis posuere sapien aliquet. Praesent porttitor lobortis sollicitudin. Sed dolor nisi, tincidunt a nibh et, malesuada molestie sem. Maecenas elementum auctor est. Cras vitae consectetur eros. Aliquam sodales elementum pretium. Nulla non lacus a magna iaculis vulputate nec eu tortor. Nunc commodo lacinia posuere. Sed eu enim ut odio finibus efficitur. Ut sit amet commodo quam, id ullamcorper est. Maecenas aliquet ipsum tortor, sit amet facilisis nisi efficitur in. Integer congue rhoncus feugiat.
-			</p>
-		</div>
-		<!--下半部分-->
-		<div class="content">
-			<ul>
-				<!--course1内容-->
-				<li>
-					<!--课程名-->
-					<p class="pcourse">Course1</p>
-					<!--内容-->
-					<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>
-					<div class="nei_bottom">
-						<!--100%文字-->
-						<p class="per100">100%</p>
-						<!--evalute按钮-->
-						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							evalute
-						</button>
-						<!--evalute 按钮联动的弹出框-->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										            <input type="text" class="form-control" value="9.5">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div  contenteditable="true" class="modal-body">
-										In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:alert('提交')">submit</button>
-									</div>
-								</div>
-							</div>
-					</div>
-				</li>
-				<!--course2内容-->
-				<li>
-					<p class="pcourse">Course2</p>
-					<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>
-					<div class="nei_bottom">
-						<p class="per100">100%</p>
-						<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							evalute
-						</button>
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										             <input type="text" class="form-control" value="9.5">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div  contenteditable="true"  class="modal-body">
-										In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">submit</button>
-									</div>
-								</div>
-							</div>
-					</div>
-				</li>
-			</ul>
-			<p class="addcourse" onclick="addCourse()">+</p>
-			<script type="text/javascript">
-				/*动态添加课程*/
-				function addCourse(){
-					var str = '<li><p class="pcourse">Course</p>'+
-							'<div class="nei">Vestibulum sed lacus nec justo porta rhoncus non quis dui. Suspendisse id iaculis dui.  sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>'+
-							'<div class="nei_bottom">'+
-								'<p class="per100">100%</p>'+
-								'<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">evalute</button>'+
-						'<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
-							'<div class="modal-dialog">'+
-								'<div class="modal-content">'+
-									'<div class="modal-header">'+
-										'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
-										'<h4 class="modal-title" id="myModalLabel">'+
-											'<div style="width: 150px;">'+
-												'<div class="input-group">'+
-										            '<span class="input-group-addon">Score</span>'+
-										            ' <input type="text" class="form-control" value="9.5">'+
-										        '</div>'+
-									        '</div>'+
-										'</h4></br/>'+
-										'comment:'+
-									'</div>'+
-									'<div  contenteditable="true" class="modal-body">In sit amet condimentum felis, quis finibus sapien. Nunc felis nisi, pellentesque accumsan diam ut, accumsan porta turpis. Pellentesque maximus nec ipsum id condimentum. Integer consequat, massa eget laoreet scelerisque, sapien turpis varius urna, et tempor justo nisl eu lectus. Mauris vestibulum nibh id tortor varius, vitae dictum tortor maximus. Fusce vel dignissim turpis, a pulvinar enim. Sed imperdiet tellus ac ornare semper.</div>'+
-									'<div class="modal-footer">'+
-										'<button type="button" class="btn btn-default" data-dismiss="modal">submit'+
-										'</button>'+
-									'</div>'+
-								'</div>'+
-							'</div>'+
-							'</div>'+
-						'</li>';
-						$(".content ul").append(str);
-				};
-			</script>
-		</div>
-	</div>
+<div ng-app="myApp" ng-controller="student_ctrl">
+    <script type="text/ng-template" id="evaluateModal.html">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+            </button>
+            <h4 class="modal-title">
+                <div style="width: 150px;">
+                    <div class="input-group">
+                        <span class="input-group-addon">Score</span>
+                        <input ng-model="student_evaluate_score" type="text" class="form-control">
+                    </div>
+                </div>
+            </h4>
+            <br/>
+            Comment:
+        </div>
+        <div id="student_evaluate_comment" contenteditable="true" class="modal-body">
+        </div>
+        <div class="modal-footer">
+            <button ng-click="submit_evaluation(student_evaluate_score)" type="button" class="btn btn-default">submit
+            </button>
+        </div>
+    </script>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu"
+                    aria-expanded="false">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h2 class="navbar-brand">T&L </h2>
+        </div>
+    </nav>
+    <div class="box">
+        <!--上半部分-->
+        <div class="header">
+            <!--图片-->
+            <img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
+            <!--信息-->
+            <div ng-init="load_info()" class="box_p" id="sinfo">
+                <label for="name">Name</label>
+                <div class="input-group" style="width: 100%;">
+                    <p id="name"
+                       style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+                </div>
+                <label for="tel">contact</label>
+                <div class="input-group" style="width: 100%;">
+                    <p id="tel"
+                       style="border: 2px solid rgba(255,255,255,0.5);width: 100%;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">
+                        18270432571</p>
+                </div>
+                <label for="info">brief introduction</label>
+                <div class="input-group" style="width: 100%;">
+                    <p id="info"
+                       style="border: 2px solid rgba(255,255,255,0.5);width: 100%;height: 37px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;">
+                        My name is Terry!</p>
+                </div>
+                <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#infoModal">
+                    change
+                </button>
+                <!--change按钮联动的弹出框-->
+                <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    <div style="width: 150px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">Edit information</span>
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Name&nbsp;&nbsp;</span>
+                                        <input ng-model="info_name" type="text" class="form-control" value="">
+                                    </div>
+                                    <br/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">contact</span>
+                                        <input ng-model="info_contact" id="tel2" type="text"
+                                               class="form-control" value="">
+                                    </div>
+                                    <br/>
+                                    <label for="modify_info">brief introduction</label>
+                                    <div class="input-group" style="width: 100%;">
+                                        <p contenteditable="true" id="modify_info"
+                                           style="border: 2px solid rgba(0,0,0,0.3);width: 100%;height: 50px;padding: 2px 3px;word-wrap : break-word ;word-break:break-all;overflow-y: auto;"></p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                                            ng-click="submit_info(info_name, info_contact)">submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--下半部分-->
+        <div class="content" id="selected_list">
+            <ul ng-init="init_selected_list()">
+
+            </ul>
+            <p class="addcourse" ng-click="addCourse()">+</p>
+
+        </div>
+    </div>
+</div>
+<script src="../js/Common.js"></script>
+<script src="../js/Student.js"></script>
 </body>
 </html>
