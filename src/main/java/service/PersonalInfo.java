@@ -3,11 +3,15 @@ package service;
 import entity.service.Person;
 import entity.service.Status;
 import net.sf.json.JSONObject;
+import util.db.DBConnect;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @WebServlet(name="PersonalInfo", urlPatterns="/account/*")
 public class PersonalInfo extends javax.servlet.http.HttpServlet {
@@ -17,6 +21,14 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
+        Status status = new Status();
+        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
+        String user = "root";
+        String dbPwd = "root";
+
+        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+
+        Person person = new Person();
         String URI = request.getRequestURI();
         int index = URI.lastIndexOf('/');
         String account = URI.substring(index + 1);
@@ -28,26 +40,44 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         }
 
         JSONObject jsonRet;
+        //here is the sql statement
+        String querySting = "SELECT * FROM user where account=?";
+        PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
+
         if (account.equals("")||account.equals("account")||userToken.equals("")) {
-            Status status = new Status();
+//            Status status = new Status();
             status.setStatus(false);
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
-            Person person = new Person();
+//            Person person = new Person();
             person.setName("");
             person.setInfo("");
             person.setContact("");
             jsonRet.put("perInfo",person);
         } else {
-            Status status = new Status();
-            status.setStatus(true);
-            status.setInfo("获取信息成功");
-            jsonRet = JSONObject.fromObject(status);
-            Person person = new Person();
-            person.setName("测试者1");
-            person.setInfo("自我介绍1");
-            person.setContact("110");
-            jsonRet.put("perInfo",person);
+            try {
+                preparedStatement.setString(1,account);
+                ResultSet rs = preparedStatement.executeQuery();
+//            Status status = new Status();
+                status.setStatus(true);
+                status.setInfo("获取信息成功");
+                jsonRet = JSONObject.fromObject(status);
+    //            Person person = new Person();
+                person.setName("测试者1 "+ rs.getString("name"));
+                person.setInfo("自我介绍1 "+ rs.getString("info"));
+                person.setContact(rs.getString("contact"));
+                jsonRet.put("perInfo",person);
+            } catch (SQLException e){
+                status.setStatus(false);
+                status.setInfo("空参数");
+                jsonRet = JSONObject.fromObject(status);
+                person.setName("");
+                person.setInfo(e.getMessage());
+                person.setContact("");
+                jsonRet.put("perInfo",person);
+                e.printStackTrace();
+
+            }
         }
 
         PrintWriter out = response.getWriter();
