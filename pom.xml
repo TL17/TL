@@ -24,6 +24,14 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!--json-lib-->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -31,15 +39,13 @@
             <version>2.4</version>
             <classifier>jdk15</classifier>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
         </dependency>
-
     </dependencies>
 
-
-    
 </project>
