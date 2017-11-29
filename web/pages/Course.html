@@ -1,127 +1,144 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Course</title>
-		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
-		<link rel="stylesheet" href="../css/Course.css">  
-		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
+<html xmlns:number="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Course</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/Course.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/ui-bootstrap-0.12.1.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+</head>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
-				<i class="fa fa-bars"></i>
-			</button>
-			<h2 class="navbar-brand">T&L </h2>
-		</div>
-	</nav>
-	<div class="box">
-		<div class="header">
-			<div class="li_box1">
-				 <input type="checkbox" class="li_box_che">
-				 <p class="li_box_p"></p>
-				 <button type="button" class="btn btn-primary li_box_b1"  data-toggle="button">Teacher</button>
-				 <button type="button" class="btn btn-primary li_box_b2"  data-toggle="button">Learn</button>
-			</div>
-			<div class="li_box2">
-				<p style="float: left;margin-left: 8px;font-size: 20px;">Course</p>
-				<div class="input-group" style="float: right;width: 35%;"> 
-				    <input type="text" style="float: right;text-align: center;" class="form-control input-mini" value="Score:9.0" readonly="readonly"><span class="input-group-addon btn btn-primary" data-toggle="modal" data-target="#myModal">Comment</span>
-				    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											&times;
-										</button>
-										<h4 class="modal-title" id="myModalLabel">
-											<div style="width: 150px;">
-												<div class="input-group">
-										            <span class="input-group-addon">Score</span>
-										            <input type="text" class="form-control" readonly="readonly" value="9.0">
-										        </div>
-									        </div>
-										</h4>
-										<br />
-										comment:
-									</div>
-									<div class="modal-body">
-										1---Score:9.0
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										<hr/>
-										2---Score:9.3
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.<hr/>
-										3--Score:9.8
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-										Maecenas eu elit fringilla, sollicitudin magna eget, convallis tellus. Morbi eget elementum magna.
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div><br />
-				<p contenteditable="true" style="margin-top: 30px;margin-left:3px;height: 100px;padding: 10px;width: 100%;overflow-x:auto ;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;">Fusce egestas facilisis lorem, in egestas massa sollicitudin at. Fusce egestas facilisis lorem, in egestas massa sollicitudin at. Fusce egestas facilisis lorem, in egestas massa sollicitudin at. </p>
-			</div>
-		</div>
-		<div style="clear: both;"></div>
-		<div class="content">
-			<ul class="nav nav-pills nav-stacked box_ul">
-			    <li class="active" style="text-align: center;"><a data-toggle="tab" href="#home">Homeworks</a></li>
-			    <li style="text-align: center;"><a data-toggle="tab" href="#menu1">Materials</a></li>
-			    <li style="text-align: center;"><a data-toggle="tab" href="#menu2">Videos</a></li>
-			</ul>
-		    <br />
-		    <div class="tab-content box_div">
-			    <div id="home" class="tab-pane fade in active" style="height: 100%;">
-			        <ul class="nav nav-pills nav-stacked" style="height: 100%;width: 30%;float: left;border-right: 2px solid #000;">
-					    <li class="active" style="text-align: center;"><a data-toggle="tab" href="#fuhome">Homework-1</a></li>
-					    <li style="text-align: center;"><a data-toggle="tab" href="#fumenu1">Homework-2</a></li>
-					    <li style="text-align: center;"><a data-toggle="tab" href="#fumenu2">Project-1</a></li>
-					</ul>
-				    <br />
-				    <div class="tab-content" style="height: 100%;width: 70%;float: right;">
-					    <div id="fuhome" class="tab-pane fade in active" style="padding: 3% 2%;">
-					        1 Praesent accumsan ligula eget elit porta, sed efficitur est varius. Sed quam tellus, iaculis vel ante nec, tincidunt tempus ipsum. 	    
-					    </div>
-					    <div id="fumenu1" class="tab-pane fade" style="padding: 3% 2%;">
-					    	2 Praesent accumsan ligula eget elit porta, sed efficitur est varius. Sed quam tellus, iaculis vel ante nec, tincidunt tempus ipsum. 	    
-					    </div>
-					     <div id="fumenu2" class="tab-pane fade" style="padding: 3% 2%;overflow: hidden;">
-					     	3 Praesent accumsan ligula eget elit porta, sed efficitur est varius. Sed quam tellus, iaculis vel ante nec, tincidunt tempus ipsum. 	
-					    </div>
-				    </div>
-			    </div>
-			    <div id="menu1" class="tab-pane fade">
-			       <ul class="nav nav-pills nav-stackedl">
-					    <li class="active" style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-1</a></li>
-					    <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-2</a></li>
-					    <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-3</a></li>
-					</ul>
-			    </div>
-			     <div id="menu2" class="tab-pane fade" style="height: 100%;">
-			     	<ul class="nav nav-pills nav-stacked" style="height: 100%;width: 30%;float: left;border-right: 2px solid #000;"">
-					    <li class="active" style="text-align: center;"><a data-toggle="tab" href="#fu2home">Video-1</a></li>
-					    <li style="text-align: center;"><a data-toggle="tab" href="#fu2menu1">Video-2</a></li>
-					</ul>
-				    <br />
-				    <div class="tab-content" style="height: 100%;width: 70%;float: right;text-align: center;">
-					    <div id="fu2home" class="tab-pane fade in active" style="padding: 3% 2%;">
-					    	video1
-					    </div>
-					    <div id="fu2menu1" class="tab-pane fade" style="padding: 3% 2%;">
-					    	video2
-					    </div>
-				    </div>
-			    </div>
-		    </div>
-		</div>
-	</div>
+
+<div ng-app="myApp" ng-controller="detail_ctrl">
+    <script type="text/ng-template" id="commentModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Comment:</h3>
+            <h4 class="modal-title" id="myModalLabel">
+                <div style="width: 150px;">
+                    <div class="input-group">
+                        <span class="input-group-addon">Score</span>
+                        <input id="model_comment_avg_score" type="text" class="form-control" readonly="readonly"/>
+                    </div>
+                </div>
+            </h4>
+        </div>
+        <div class="modal-body">
+
+            <div id="model_comment_body" ng-init="load_comment()">
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu"
+                    aria-expanded="false">
+                <i class="fa fa-bars"></i>
+            </button>
+            <h2 class="navbar-brand">T&L </h2>
+        </div>
+    </nav>
+    <div class="box" ng-init="init_course_detail()">
+        <div class="header">
+            <div class="li_box1">
+                <input id="is_selected" type="checkbox" class="li_box_che">
+                <p class="li_box_p"></p>
+                <button id="teacber_info_btn" ng-click="show_teacher_message()" type="button" class="btn btn-primary li_box_b1"
+                        data-toggle="button">Teacher
+                </button>
+                <button ng-click="select_course()" type="button" class="btn btn-primary li_box_b2" data-toggle="button">
+                    Learn
+                </button>
+            </div>
+            <div class="li_box2">
+                <p id="courseName" style="float: left;margin-left: 8px;font-size: 20px;"></p>
+                <div class="input-group" style="float: right;width: 35%;">
+                    <!--input type="text" style="float: right;text-align: center;" class="form-control input-mini" readonly="readonly"-->
+                    <span ng-click="show_comment()" class="input-group-addon btn btn-primary">Comment</span>
+                </div>
+                <br/>
+                <p id="courseInfo" contenteditable="true"
+                   style="margin-top: 30px;margin-left:3px;height: 100px;padding: 10px;width: 100%;overflow-x:auto ;background: rgba(255,255,255,0.5);border:2px solid #fff;border-radius: 10px;box-shadow: 10px 10px 5px #888888;"></p>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div class="content">
+            <ul class="nav nav-pills nav-stacked box_ul">
+                <li style="text-align: center;"><a data-toggle="tab" href="#menu3">Plan</a></li>
+                <li class="active" style="text-align: center;"><a data-toggle="tab" href="#home">Homeworks</a></li>
+                <li style="text-align: center;"><a data-toggle="tab" href="#menu1">Materials</a></li>
+                <li style="text-align: center;"><a data-toggle="tab" href="#menu2">Videos</a></li>
+            </ul>
+            <br/>
+            <div class="tab-content box_div">
+                <div id="home" class="tab-pane fade in active" style="height: 100%;">
+                    <ul class="nav nav-pills nav-stacked"
+                        style="height: 100%;width: 30%;float: left;border-right: 2px solid #000;">
+                        <li class="active" style="text-align: center;"><a data-toggle="tab"
+                                                                          href="#fuhome">Homework-1</a></li>
+                        <li style="text-align: center;"><a data-toggle="tab" href="#fumenu1">Homework-2</a></li>
+                        <li style="text-align: center;"><a data-toggle="tab" href="#fumenu2">Project-1</a></li>
+                    </ul>
+                    <br/>
+                    <div class="tab-content" style="height: 100%;width: 70%;float: right;">
+                        <div id="fuhome" class="tab-pane fade in active" style="padding: 3% 2%;">
+                            1 Praesent accumsan ligula eget elit porta, sed efficitur est varius. Sed quam tellus,
+                            iaculis vel ante nec, tincidunt tempus ipsum.
+                        </div>
+                        <div id="fumenu1" class="tab-pane fade" style="padding: 3% 2%;">
+                            2 Praesent accumsan ligula eget elit porta, sed efficitur est varius. Sed quam tellus,
+                            iaculis vel ante nec, tincidunt tempus ipsum.
+                        </div>
+                        <div id="fumenu2" class="tab-pane fade" style="padding: 3% 2%;overflow: hidden;">
+                            3 Praesent accumsan ligula eget elit porta, sed efficitur est varius. Sed quam tellus,
+                            iaculis vel ante nec, tincidunt tempus ipsum.
+                        </div>
+                    </div>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <ul class="nav nav-pills nav-stackedl">
+                        <li class="active" style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-1</a></li>
+                        <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-2</a></li>
+                        <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-3</a></li>
+                    </ul>
+                </div>
+                <div id="menu3" class="tab-pane fade" style="height: 100%;width: 100%;">
+                    <div id="coursePlan"
+                         style="padding: 3% 2%;word-wrap : break-word ;height:100%;width:100%;word-break:break-all;overflow-y: auto;overflow-x: auto;">
+                        plan
+                    </div>
+                </div>
+                <div id="menu2" class="tab-pane fade" style="height: 100%;">
+                    <ul class="nav nav-pills nav-stacked"
+                        style="height: 100%;width: 30%;float: left;border-right: 2px solid #000;">
+                        <li class="active" style="text-align: center;"><a data-toggle="tab" href="#fu2home">Video-1</a>
+                        </li>
+                        <li style="text-align: center;"><a data-toggle="tab" href="#fu2menu1">Video-2</a></li>
+                    </ul>
+                    <br/>
+                    <div class="tab-content" style="height: 100%;width: 70%;float: right;text-align: center;">
+                        <div id="fu2home" class="tab-pane fade in active" style="padding: 3% 2%;">
+                            video1
+                        </div>
+                        <div id="fu2menu1" class="tab-pane fade" style="padding: 3% 2%;">
+                            video2
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/Common.js"></script>
+<script src="../js/Detail.js"></script>
 </body>
 </html>
