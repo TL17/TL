@@ -88,7 +88,6 @@ public class CourseEvaluation extends javax.servlet.http.HttpServlet {
             try {
                 String studentId = Widgets.getStudentIdByAccount(dbConnect, account);
                 String sql = "UPDATE selection SET score = ?, comment = ? WHERE courseid = ? and studentid = ?;";
-                String sqlw = "INSERT INTO selection (courseid, studentid,score,comment) VALUES (?, ?, ?,?);";
                 PreparedStatement pstm = dbConnect.prepareStatement(sql);
 
                 pstm.setInt(3, Integer.parseInt(courseIDStr));

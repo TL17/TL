@@ -9,3 +9,5 @@ out
 gen
 *.class
 *.war
+web/WEB-INF/classes
+web/WEB-INF/lib
