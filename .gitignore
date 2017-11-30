@@ -9,3 +9,6 @@ out
 gen
 target/
 classes/
+*.class
+*.war
+web/WEB-INF/

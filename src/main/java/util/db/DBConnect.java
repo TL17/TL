@@ -1,5 +1,9 @@
 package util.db;
 
+import entity.service.Course;
+import entity.service.Status;
+import net.sf.json.JSONObject;
+
 import java.sql.*;
 
 /**
@@ -8,7 +12,7 @@ import java.sql.*;
 public class DBConnect {
     private final String name = "com.mysql.cj.jdbc.Driver";
 
-    private String url = "jdbc:mysql://localhost:3306/tl?useSSL=false&serverTimezone=UTC";
+    private String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
     private String user = "root";
     private String password = "root";
 
@@ -16,6 +20,17 @@ public class DBConnect {
     private Statement stmt;
     private PreparedStatement pst;
     private ResultSet rs;
+
+    public DBConnect() {
+        try {
+            Class.forName(name);//指定连接类型
+            conn = DriverManager.getConnection(url, user, password);//获取连接
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public DBConnect(String url, String user, String password) {
         this.url = url;
@@ -97,6 +112,7 @@ public class DBConnect {
             e.printStackTrace();
         }
     }
+    
 
 
 }

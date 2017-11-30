@@ -37,7 +37,7 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
             Course[] courses = new Course[5];
             for (int i=0;i<courses.length;i++) {
                 courses[i] = new Course();
-                courses[i].setCourseID(i+1);
+                courses[i].setCourseID("sdfghjk");
                 courses[i].setCourseName("课程名称"+(i+1));
                 courses[i].setCourseInfo("课程介绍"+(i+1));
                 courses[i].setCoursePlan("课程大纲"+(i+1));
