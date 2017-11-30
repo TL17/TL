@@ -12,10 +12,11 @@
 * 说明3：http POST 传参不通过url后加“?”完成，而是通过body，body形如：“name=shijian&date=today&userToken=233”
 
 ## 服务器后端代码
+* 20171129更新： 项目转化为纯Maven项目
 * TL后端项目源代码（Maven项目）：
 * https://github.com/TruthABC/TL
 * https://github.com/TL17/TL
-* lib目录，其中含有以下项目依赖
+* ~~lib目录，其中含有以下项目依赖~~
 ```
 1. javaEE的Dynamic Web库（servlet）；
 2. JSONObject库（net.sf.json）；

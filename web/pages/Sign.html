@@ -7,9 +7,13 @@
 		<link rel="stylesheet" href="../css/Sign.css">  
 		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="../js/angular.min.js"></script>
+		<script src="../js/ui-bootstrap-0.12.1.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
 	</head>
 </head>
 <body>
+<div ng-app="myApp" ng-controller="sign_ctrl">
 	<div class="header">
 		<div id="messageBox" class="alert alert-error hide">
 			<button data-dismiss="alert" class="close">×</button>
@@ -33,36 +37,47 @@
 			    <div id="home" class="tab-pane fade in active">
 			        <div class="input-group">
 			            <span class="input-group-addon">&nbsp;&nbsp;Account&nbsp;</span>
-			            <input type="text" class="form-control" placeholder="Account">
+			            <input ng-model="sign_in_acc" type="text" class="form-control" placeholder="Account">
 			        </div>
 			        <br />
 			        <div class="input-group">
 			            <span class="input-group-addon">Password</span>
-			            <input type="text" class="form-control" placeholder="Password">
+			            <input ng-model="sign_in_pwd" type="password" class="form-control" placeholder="Password">
 			        </div> <br />
-			        <input style="float: right;" class="btn btn-primary" type="submit" value="Sign in">
+			        <input
+							ng-click="sign_in(sign_in_acc, sign_in_pwd)"
+							style="float: right;" class="btn btn-primary" type="submit" value="Sign in">
 			    </div>
 			    <!--sign up 联动页-->
 			    <div id="menu1" class="tab-pane fade">
 			        <div class="input-group">
 			            <span class="input-group-addon">School ID</span>
-			            <input type="text" class="form-control" placeholder="School ID">
+			            <input ng-model="sign_up_id" type="text" class="form-control" placeholder="School ID">
 			        </div>
 			        <br />
 			        <div class="input-group">
 			            <span class="input-group-addon">&nbsp;&nbsp;Account&nbsp;</span>
-			            <input type="text" class="form-control" placeholder="Account">
+			            <input ng-model="sign_up_acc" type="text" class="form-control" placeholder="Account">
 			        </div>
 			        <br />
 			        <div class="input-group">
-			            <span class="input-group-addon">Password</span>
-			            <input type="text" class="form-control" placeholder="Password">
+			            <span class="input-group-addon">&nbsp;&nbsp;Password&nbsp;&nbsp;</span>
+			            <input ng-model="sign_up_pwd" type="password" class="form-control" placeholder="Password">
 			        </div> <br />
-			        <input style="float: right;" class="btn btn-primary" type="submit" value="Sign up">
+			        <div class="input-group">
+			            <span class="input-group-addon">RePassword</span>
+			            <input ng-model="sign_up_repwd" type="password" class="form-control" placeholder="Confirm password again">
+			        </div> <br />
+			        <input
+							ng-click="sign_up(sign_up_id, sign_up_acc, sign_up_pwd, sign_up_repwd)"
+							style="float: right;" class="btn btn-primary" type="submit" value="Sign up">
 			    </div>
 		    </div>
 	       
 		</form>
 	</div>
+</div>
+<script src="../js/Common.js"></script>
+<script src="../js/Sign.js"></script>
 </body>
 </html>
