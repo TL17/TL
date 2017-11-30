@@ -34,7 +34,7 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
         }
 
         //here is the sql statement
-        String querySting = "SElect * from course where account=?";
+        String querySting = "select * from course where account=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
 
         JSONObject jsonRet;

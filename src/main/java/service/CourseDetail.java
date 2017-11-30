@@ -39,8 +39,9 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
         } catch (Exception e) {
             nan = true;
         }
+
         //here is the sql statement
-        String querySting = "SELECT * FROM course where id=?";
+        String querySting = "select * from course where id=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
         JSONObject jsonRet;
         if (nan||courseIDStr.equals("")||courseIDStr.equals("detail")) {
@@ -59,7 +60,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
                 int courseID = Integer.parseInt(courseIDStr);
                 preparedStatement.setInt(1, courseID);
                 ResultSet rs = preparedStatement.executeQuery();
-                //            Status status = new Status();
+                //Status status = new Status();
                 status.setStatus(true);
                 status.setInfo("课程搜索成功");
                 jsonRet = JSONObject.fromObject(status);

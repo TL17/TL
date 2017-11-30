@@ -23,25 +23,14 @@ public class SignIn extends javax.servlet.http.HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         Status status = new Status();
 
+        String account = (request.getParameter("account") == null) ? "" : request.getParameter("account");
+        String password = (request.getParameter("password") == null) ? "" : request.getParameter("password");
 
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
-        if (account == null) {
-            account = "";
-        }
-        if (password == null) {
-            password = "";
-        }
-        //TODO: how to get the url+user+dbpwd ?
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
-
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+        DBConnect dbConnect = new DBConnect();
         String stringFormat  = "SELECT password FROM user WHERE account=\'%s\'";
         String sql = String.format(stringFormat, account);
         ResultSet rs = dbConnect.executeQuery(sql);
-
+        /*return : {userToken: String, status: boolean, info: String} userToken：服务器对应该账号的token，用于验证身份，与用户一一对应*/
         try {
             String rs_pwd = "";
             while (rs.next()) {
@@ -57,15 +46,13 @@ public class SignIn extends javax.servlet.http.HttpServlet {
             }
         } catch (SQLException e) {
             status.setStatus(false);
-            status.setInfo(e.getMessage());
+            status.setInfo("操作失败");
             e.printStackTrace();
         }
 
         JSONObject jsonRet;
         jsonRet = JSONObject.fromObject(status);
         jsonRet.put("userToken", account + password);
-
-
         PrintWriter out = response.getWriter();
         out.print(jsonRet.toString());
     }
