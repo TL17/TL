@@ -23,32 +23,13 @@ public class SignUp extends javax.servlet.http.HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
-        String schoolID = request.getParameter("schoolID");
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
-        if (schoolID == null) {
-            schoolID = "";
-        }
-        if (account == null) {
-            account = "";
-        }
-        if (password == null) {
-            password = "";
-        }
-
-        //TODO: 2017/11/23 create the table in DB to look up the (type,name,info,contact) via schoolID
-        // temp values
-        String type = "STUDENT";
-        String name = "zhoujunying";
-        String info = "I am Junying chou";
-        String contact = "qq511392148";
-        String id = "14302010057";
-
+        String schoolID = (request.getParameter("schoolID") == null) ? "" : request.getParameter("schoolID");
+        String account = (request.getParameter("account") == null) ? "" : request.getParameter("account");
+        String password = (request.getParameter("password") == null) ? "" : request.getParameter("password");
 
         DBConnect dbConnect = new DBConnect();
         String stringFormat = "INSERT INTO user (id, password, account, name,info,contact) VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')";
-        String sql = String.format(stringFormat, id, password, account,name,info,contact);
-
+        String sql = String.format(stringFormat, schoolID, password, account,"Junying","","");
         Status retStatus = new Status();
 
         /*

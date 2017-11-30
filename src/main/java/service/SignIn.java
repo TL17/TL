@@ -23,16 +23,8 @@ public class SignIn extends javax.servlet.http.HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         Status status = new Status();
 
-
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
-        if (account == null) {
-            account = "";
-        }
-        if (password == null) {
-            password = "";
-        }
-
+        String account = (request.getParameter("account") == null) ? "" : request.getParameter("account");
+        String password = (request.getParameter("password") == null) ? "" : request.getParameter("password");
 
         DBConnect dbConnect = new DBConnect();
         String stringFormat  = "SELECT password FROM user WHERE account=\'%s\'";
@@ -61,8 +53,6 @@ public class SignIn extends javax.servlet.http.HttpServlet {
         JSONObject jsonRet;
         jsonRet = JSONObject.fromObject(status);
         jsonRet.put("userToken", account + password);
-
-
         PrintWriter out = response.getWriter();
         out.print(jsonRet.toString());
     }

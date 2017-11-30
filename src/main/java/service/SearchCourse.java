@@ -20,10 +20,8 @@ public class SearchCourse extends javax.servlet.http.HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
-        String keyword = request.getParameter("keyword");
-        if (keyword == null) {
-            keyword = "";
-        }
+        String keyword = (request.getParameter("keyword") == null) ? "" : request.getParameter("keyword");
+
         JSONObject jsonRet = null;
         Status status = new Status();
         if (keyword.equals("")) {
@@ -36,7 +34,6 @@ public class SearchCourse extends javax.servlet.http.HttpServlet {
             out.print(jsonRet.toString());
             return;
         }
-
 
         // course : id name info plan teacherid
         DBConnect dbConnect = new DBConnect();
@@ -53,18 +50,13 @@ public class SearchCourse extends javax.servlet.http.HttpServlet {
 
             int start= 0;
             do {
-
                 String c_id = rs.getString(1);
                 String c_name = rs.getString(2);
                 String c_info = rs.getString(3);
                 String c_plan = rs.getString(4);
 
                 courses[start] = new Course();
-                try{
-                    Integer.parseInt(c_id);
-                }catch (Exception e){
-                    return;//什么样的操作？
-                }
+
                 courses[start].setCourseID(Integer.parseInt(c_id));
                 courses[start].setCourseName(c_name);
                 courses[start].setCourseInfo(c_info);

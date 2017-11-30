@@ -112,55 +112,7 @@ public class DBConnect {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        DBConnect dbConnect = new DBConnect();
-        String sql = "SELECT * FROM course WHERE name LIKE ? ;";
-        PreparedStatement pstm = dbConnect.prepareStatement(sql);
-
-        JSONObject jsonRet = null;
-        Status status = new Status();
-        try {
-            pstm.setString(1, "%net%");
-            ResultSet rs = pstm.executeQuery();
-            rs.last();
-            int rowCount = rs.getRow();
-            Course[] courses = new Course[rowCount];;
-
-            rs.first();
-            int start= 0;
-
-            do {
-
-                String c_id = rs.getString(1);
-                String c_name = rs.getString(2);
-                String c_info = rs.getString(3);
-                String c_plan = rs.getString(4);
-                System.out.println("asdf");
-
-                courses[start] = new Course();
-                System.out.println(c_name);
-                courses[start].setCourseID(c_id);
-                courses[start].setCourseName(c_name);
-                courses[start].setCourseInfo(c_info);
-                courses[start].setCoursePlan(c_plan);
-                start++;
-            }while (rs.next());
-
-            status.setStatus(true);
-            status.setInfo("课程搜索成功");
-            jsonRet = JSONObject.fromObject(status);
-            jsonRet.put("courses", courses);
-
-        } catch (SQLException e) {
-            status.setStatus(false);
-            status.setInfo("操作失败");
-            e.printStackTrace();
-        }
-
-        System.out.print(jsonRet.toString());
-
-    }
+    
 
 
 }
