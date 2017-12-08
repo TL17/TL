@@ -1,5 +1,13 @@
 package entity.service;
-
+/**
+ * <h1>Course Class</h1>
+ * This class has the information about the courses.
+ * The getters and setters can be called for necessary information.
+ *
+ * @version 1.0
+ * @since 2017/12/06
+ *
+ * */
 public class Course {
     private int courseID;
     private String courseName;
