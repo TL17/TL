@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口调用测试</title>
+</head>
+<script src="../js/angular.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<body>
+<div ng-app="localtest" ng-controller="localtest_ctrl">
+
+    <p>
+        <button ng-click="doAll()">测试全部</button>
+        测试全部
+    </p>
+
+
+    <p>
+        <button ng-click="doGet()">测试GET</button>
+        /HelloWorld/{name} （参数 date:String） - http GET - 测试用接口
+    </p>
+    <div>测试结果：{{ret_get}}</div>
+
+    <p>
+        <button ng-click="doPost()">测试POST</button>
+        /HelloWorld/{name} （参数 date:String） - http POST - 测试用接口
+    </p>
+    <div>测试结果：{{ret_post}}</div>
+
+    <p>
+        <button ng-click="doSignUp()">测试</button>
+        ### 1. 注册（Sign up）
+        `http POST /sign_up`
+    </p>
+    <div>测试结果：{{ret_doSignUp}}</div>
+
+    <p>
+        <button ng-click="doSignIn()">测试</button>
+        ### 2. 登陆（Sign in）
+        `http POST /sign_in`
+    </p>
+    <div>测试结果：{{ret_doSignIn}}</div>
+
+    <p>
+        <button ng-click="doSetPerson()">测试</button>
+        ### 3. 设置个人信息（Set personal information）
+        `http POST account/{account}`
+    </p>
+    <div>测试结果：{{ret_doSetPerson}}</div>
+
+
+    <script src="localtest.js"></script>
+
+</div>
+</body>
+</html>
