@@ -15,25 +15,22 @@ import java.sql.SQLException;
 public class AddCourse extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        doPost(request,response);
+        //doPost(request,response);
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
-        Status status = new Status();
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
-
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
-
-
+        String account = request.getParameter("account");
         String userToken = request.getParameter("userToken");
         String courseName = request.getParameter("courseName");
         String courseInfo = request.getParameter("courseInfo");
         String coursePlan = request.getParameter("coursePlan");
+        if (account == null) {
+            account = "";
+        }
         if (userToken == null) {
             userToken = "";
         }
@@ -48,8 +45,7 @@ public class AddCourse extends javax.servlet.http.HttpServlet {
         }
 
         //here is the sql statement
-        String querySting = "INSERT INTO course (name, info, plan, teacherid) VALUES (?,?,?,?) ";
-        PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
+        Status status = new Status();
         JSONObject jsonRet;
         if (userToken.equals("")||courseName.equals("")||courseInfo.equals("")||coursePlan.equals("")) {
 //            Status status = new Status();
@@ -59,16 +55,40 @@ public class AddCourse extends javax.servlet.http.HttpServlet {
             jsonRet.put("courseID", -1);
         } else {
             try {
+                DBConnect dbConnect = new DBConnect();
+                String querySting;
+                PreparedStatement preparedStatement;
+                ResultSet rs;
+
+                querySting = "SELECT * FROM user WHERE account = ?";
+                preparedStatement = dbConnect.prepareStatement(querySting);
+                preparedStatement.setString(1,account);
+                rs = preparedStatement.executeQuery();
+                rs.next();
+                String teacherId = rs.getString("id");
+                rs.close();
+
+                querySting = "INSERT INTO course (name, info, plan, teacherid) VALUES (?,?,?,?) ";
+                preparedStatement = dbConnect.prepareStatement(querySting);
                 preparedStatement.setString(1,courseName);
                 preparedStatement.setString(2,courseInfo);
                 preparedStatement.setString(3,coursePlan);
-                preparedStatement.setString(4,userToken);
-                ResultSet rs = preparedStatement.executeQuery(querySting);
-//            Status status = new Status();
+                preparedStatement.setString(4,teacherId);
+                preparedStatement.executeUpdate();
+
+                querySting = "SELECT MAX(id) AS max_id FROM course WHERE name = ?";
+                preparedStatement = dbConnect.prepareStatement(querySting);
+                preparedStatement.setString(1,courseName);
+                rs = preparedStatement.executeQuery();
+                rs.next();
+                String courseId = rs.getString("max_id");
+                rs.close();
+
                 status.setStatus(true);
                 status.setInfo("新建课程成功");
+
                 jsonRet = JSONObject.fromObject(status);
-                jsonRet.put("courseID", rs.getString("id"));
+                jsonRet.put("courseID", courseId);
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("空参数 "+e.getMessage());
