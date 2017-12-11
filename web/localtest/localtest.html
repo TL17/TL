@@ -55,6 +55,13 @@
     </p>
     <div>测试结果：{{ret_doGetPerson}}</div>
 
+    <p>
+        <button ng-click="doAddCourse()">测试</button>
+        ### 5. 开课（Add course - For teacher）
+        `http POST course/add`
+    </p>
+    <div>测试结果：{{ret_doAddCourse}}</div>
+
     <script>
         var app = angular.module('localtest', []);
         app.controller('localtest_ctrl', function($scope, $http) {
@@ -66,6 +73,52 @@
                 transformRequest: function (data) {
                     return $.param(data);
                 }
+            };
+
+            /**
+             ### 5. 开课（Add course - For teacher）
+             `http POST http://123.207.6.234:8080/TL/course/add`
+
+             in：
+
+             * userToken：用于验证用户登录状态，验证account；
+             * account：验证身份。
+             * courseName（课程名称），courseInfo（课程简介），coursePlan（课程大纲）；
+
+             return：
+
+             * {status: boolean, info: String, courseID: int}反馈状态，开课是否成功；
+             * 如果开课成功有自动分配的courseID返回
+             */
+            $scope.doAddCourse = function() {
+                var account = new Date().getTime().toString();
+                var password = "123456";
+                var userToken;
+                var courseName = "电竞" + new Date().getTime().toString();
+                var courseInfo = "亡者农药";
+                var coursePlan = "今晚吃鸭";
+                $scope.ret_doAddCourse = "测试失败";
+                $http.post(serverUrl+"/sign_up",{schoolID:account,account:account,password:password},postCfg)
+                    .success(function(ret){
+                        $http.post(serverUrl+"/sign_in",{account:account,password:password},postCfg)
+                            .success(function(ret){
+                                if (ret.status && ret.userToken !== undefined) {
+                                    userToken = ret.userToken;
+                                    $http.post(serverUrl+"/course/add", {
+                                        userToken: userToken,
+                                        account: account,
+                                        courseName: courseName,
+                                        courseInfo: courseInfo,
+                                        coursePlan: coursePlan
+                                    },postCfg)
+                                        .success(function(ret){
+                                            if (ret.status && ret.courseID !== undefined) {
+                                                $scope.ret_doAddCourse = "测试成功";
+                                            }
+                                        });
+                                }
+                            });
+                    });
             };
 
             /**
@@ -252,9 +305,11 @@
             $scope.doAll = function() {
                 $scope.doPost();
                 $scope.doGet();
-                $scope.doSignUp();
+                $scope.doSignUp();//1
                 $scope.doSignIn();
                 $scope.doSetPerson();
+                $scope.doGetPerson();//4
+                $scope.doAddCourse();
             };
         });
     </script>
