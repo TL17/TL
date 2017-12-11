@@ -34,7 +34,6 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
 
         JSONObject jsonRet;
         if (userToken.equals("")) {
-
             status.setStatus(false);
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
@@ -57,15 +56,6 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
                     courses[count].setCoursePlan(rs.getString("plan"));
                     count++;
                 }
-
-//                for (int i = 0; i < courses.length; i++) {
-//                    courses[i] = new Course();
-//                    courses[i].setCourseID(i + 1);
-//                    courses[i].setCourseName("课程名称" + rs.getString("name"));
-//                    courses[i].setCourseInfo("课程介绍" + rs.getString("info"));
-//                    courses[i].setCoursePlan("课程大纲" + rs.getString("plan"));
-//                }
-
                 jsonRet.put("courses", courses);
             } catch (SQLException e){
                 status.setStatus(false);

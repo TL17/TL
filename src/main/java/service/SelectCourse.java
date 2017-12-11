@@ -21,7 +21,6 @@ public class SelectCourse extends javax.servlet.http.HttpServlet {
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        //doGet(request,response);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
         DBConnect dbConnect = new DBConnect();
