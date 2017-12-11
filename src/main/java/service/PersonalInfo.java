@@ -17,7 +17,6 @@ import java.sql.SQLException;
 public class PersonalInfo extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-//        doPost(request,response);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
@@ -41,7 +40,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
 
         JSONObject jsonRet;
         //here is the sql statement
-        String querySting = "SELECT * FROM user where account=?";
+        String querySting = "select * from user where account=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
 
         if (account.equals("")||account.equals("account")||userToken.equals("")) {
@@ -58,15 +57,15 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
             try {
                 preparedStatement.setString(1,account);
                 ResultSet rs = preparedStatement.executeQuery();
-//            Status status = new Status();
                 status.setStatus(true);
                 status.setInfo("获取信息成功");
                 jsonRet = JSONObject.fromObject(status);
-    //            Person person = new Person();
-                person.setName("测试者1 "+ rs.getString("name"));
-                person.setInfo("自我介绍1 "+ rs.getString("info"));
-                person.setContact(rs.getString("contact"));
-                jsonRet.put("perInfo",person);
+                while (rs.next()) {
+                    person.setName("测试者1 " + rs.getString("name"));
+                    person.setInfo("自我介绍1 " + rs.getString("info"));
+                    person.setContact(rs.getString("contact"));
+                }
+                jsonRet.put("perInfo", person);
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("空参数");
@@ -87,6 +86,15 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
+
+        Status status = new Status();
+        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
+        String user = "root";
+        String dbPwd = "root";
+
+        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+
+        Person person = new Person();
 
         String URI = request.getRequestURI();
         int index = URI.lastIndexOf('/');

@@ -34,6 +34,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
         courseIDStr = URLDecoder.decode(courseIDStr,"utf-8");
 
         boolean nan = false;
+
         try {
             Integer.parseInt(courseIDStr);
         } catch (Exception e) {
@@ -44,6 +45,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
         String querySting = "select * from course where id=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
         JSONObject jsonRet;
+
         if (nan||courseIDStr.equals("")||courseIDStr.equals("detail")) {
 //            Status status = new Status();
             status.setStatus(false);
@@ -56,9 +58,10 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
             course.setCoursePlan("");
             jsonRet.put("course",course);
         } else {
+
             try {
-                int courseID = Integer.parseInt(courseIDStr);
-                preparedStatement.setInt(1, courseID);
+
+                preparedStatement.setInt(1, Integer.parseInt(courseIDStr));
                 ResultSet rs = preparedStatement.executeQuery();
                 //Status status = new Status();
                 status.setStatus(true);
@@ -70,6 +73,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
                 course.setCourseInfo("课程介绍" + rs.getString(3));
                 course.setCoursePlan("课程大纲" + rs.getString(4));
                 jsonRet.put("course", course);
+
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("空参数");
