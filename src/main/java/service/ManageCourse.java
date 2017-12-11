@@ -16,17 +16,12 @@ import java.sql.SQLException;
 public class ManageCourse extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-//        doPost(request,response);
+
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
-
         Status status = new Status();
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
-
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+        DBConnect dbConnect = new DBConnect();
 
         String userToken = request.getParameter("userToken");
         if (userToken == null) {
@@ -34,19 +29,18 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
         }
 
         //here is the sql statement
-        String querySting = "select * from course where account=?";
+        String querySting = "SELECT * FROM course WHERE account=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
 
         JSONObject jsonRet;
         if (userToken.equals("")) {
-//            Status status = new Status();
+
             status.setStatus(false);
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
             Course[] courses = new Course[0];
             jsonRet.put("courses",courses);
         } else {
-//            Status status = new Status();
             try {
                 preparedStatement.setString(1,userToken);
                 ResultSet rs = preparedStatement.executeQuery(querySting);
@@ -54,14 +48,24 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
                 status.setStatus(true);
                 status.setInfo("获取信息成功");
                 jsonRet = JSONObject.fromObject(status);
-
-                for (int i = 0; i < courses.length; i++) {
-                    courses[i] = new Course();
-                    courses[i].setCourseID(i + 1);
-                    courses[i].setCourseName("课程名称" + rs.getString("name"));
-                    courses[i].setCourseInfo("课程介绍" + rs.getString("info"));
-                    courses[i].setCoursePlan("课程大纲" + rs.getString("plan"));
+                int count = 1;
+                while (rs.next()){
+                    courses[count] = new Course();
+                    courses[count].setCourseID(count);
+                    courses[count].setCourseName(rs.getString("name"));
+                    courses[count].setCourseInfo(rs.getString("info"));
+                    courses[count].setCoursePlan(rs.getString("plan"));
+                    count++;
                 }
+
+//                for (int i = 0; i < courses.length; i++) {
+//                    courses[i] = new Course();
+//                    courses[i].setCourseID(i + 1);
+//                    courses[i].setCourseName("课程名称" + rs.getString("name"));
+//                    courses[i].setCourseInfo("课程介绍" + rs.getString("info"));
+//                    courses[i].setCoursePlan("课程大纲" + rs.getString("plan"));
+//                }
+
                 jsonRet.put("courses", courses);
             } catch (SQLException e){
                 status.setStatus(false);
@@ -79,7 +83,7 @@ public class ManageCourse extends javax.servlet.http.HttpServlet {
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        //doGet(request,response);
+//        doGet(request,response);
     }
 
 }
