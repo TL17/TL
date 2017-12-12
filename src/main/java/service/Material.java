@@ -13,7 +13,7 @@ public class Material extends javax.servlet.http.HttpServlet {
 
     //TODO: 技术重点——寻找并参照获取文件的代码，需要完全重写
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        //doPost(request,response);
+
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
