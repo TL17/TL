@@ -24,7 +24,7 @@
 * pom.xml文件，规定以后添加新的依赖或库时，借助maven，而非向lib目录中添加。
 
 ## 数据库
-* URL：		jdbc:mysql://localhost:3306/tl?useSSL=false&serverTimezone=UTC
+* URL：		jdbc:mysql://localhost:3306/tl?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
 * 用户名：	root
 * 密码：		root
 * TL数据库结构与数据dump文件：
