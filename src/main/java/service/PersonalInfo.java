@@ -57,8 +57,8 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
                 status.setInfo("获取信息成功");
                 jsonRet = JSONObject.fromObject(status);
                 while (rs.next()) {
-                    person.setName("测试者1 " + rs.getString("name"));
-                    person.setInfo("自我介绍1 " + rs.getString("info"));
+                    person.setName(rs.getString("name"));
+                    person.setInfo(rs.getString("info"));
                     person.setContact(rs.getString("contact"));
                 }
                 jsonRet.put("personInfo", person);
@@ -134,18 +134,18 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
                 preparedStatement.setString(2,info);
                 preparedStatement.setString(3,contact);
                 preparedStatement.setString(4,account);
-                rs = preparedStatement.executeQuery();
+                preparedStatement.executeUpdate();
 
-                queryString = "SELECT * FROM user WHERE account = ?";
-                preparedStatement = dbConnect.prepareStatement(queryString);
-                preparedStatement.setString(1,account);
-                rs = preparedStatement.executeQuery();
-                while (rs.next()){
-                    person.setName(rs.getString("name"));
-                    person.setInfo(rs.getString("info"));
-                    person.setContact(rs.getString("contact"));
-                }
-                rs.close();
+//                queryString = "SELECT * FROM user WHERE account = ?";
+//                preparedStatement = dbConnect.prepareStatement(queryString);
+//                preparedStatement.setString(1,account);
+//                rs = preparedStatement.executeQuery();
+//                while (rs.next()){
+//                    person.setName(rs.getString("name"));
+//                    person.setInfo(rs.getString("info"));
+//                    person.setContact(rs.getString("contact"));
+//                }
+//                rs.close();
                 status.setStatus(true);
                 status.setInfo("updated info successfully");
 
@@ -154,12 +154,12 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
 
             } catch (SQLException e){
                 status.setStatus(false);
-                status.setInfo("空参数");
+                status.setInfo("用户信息更新失败");
                 jsonRet = JSONObject.fromObject(status);
-                person.setName("");
-                person.setInfo(e.getMessage());
-                person.setContact("");
-                jsonRet.put("personInfo",person);
+//                person.setName("");
+//                person.setInfo(e.getMessage());
+//                person.setContact("");
+//                jsonRet.put("personInfo",person);
                 e.printStackTrace();
             }
         }

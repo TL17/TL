@@ -61,6 +61,13 @@
     </p>
     <div>测试结果：{{ret_doAddCourse}}</div>
 
+    <p>
+        <button ng-click="doManageCourse()">测试</button>
+        ### 6. 管理课程（Manage courses - For all users）
+        `http GET course/manage`
+    </p>
+    <div>测试结果：{{ret_doManageCourse}}</div>
+
     <script>
         var app = angular.module('localtest', []);
         app.controller('localtest_ctrl', function($scope, $http) {
@@ -72,6 +79,70 @@
                 transformRequest: function (data) {
                     return $.param(data);
                 }
+            };
+
+            /**
+             ### 6. 管理课程（Manage courses - For all users）
+             `http GET http://123.207.6.234:8080/TL/course/manage`
+
+             in：
+
+             * usertoken：用于验证用户登录状态，验证account；
+             * account：验证身份。
+
+             return：
+
+             * courses：对于教师，返回对应开课列表；对于学生，返回对应选课列表；
+             * 返回数据规范：
+             ```
+             {"info": String,
+              "status": boolean,
+              "courses":[
+                 {"coursePlan":"课程大纲1","courseName":"课程名称1","courseInfo":"课程介绍1","courseID":1},
+                 {"coursePlan":"课程大纲2","courseName":"课程名称2","courseInfo":"课程介绍2","courseID":2},
+                 {"coursePlan":"课程大纲3","courseName":"课程名称3","courseInfo":"课程介绍3","courseID":3},
+                 {"coursePlan":"课程大纲4","courseName":"课程名称4","courseInfo":"课程介绍4","courseID":4},
+                 {"coursePlan":"课程大纲5","courseName":"课程名称5","courseInfo":"课程介绍5","courseID":5}
+              ]
+             }
+             ```
+             */
+            $scope.doManageCourse = function() {
+                var account = new Date().getTime().toString();
+                var password = "123456";
+                var userToken;
+                var courseName = "电竞" + new Date().getTime().toString();
+                var courseInfo = "亡者农药";
+                var coursePlan = "今晚吃鸭";
+                $scope.ret_doManageCourse = "测试失败";
+                $http.post(serverUrl+"/sign_up",{schoolID:account,account:account,password:password},postCfg)
+                    .success(function(ret){
+                        $http.post(serverUrl+"/sign_in",{account:account,password:password},postCfg)
+                            .success(function(ret){
+                                if (ret.status && ret.userToken !== undefined) {
+                                    userToken = ret.userToken;
+                                    $http.post(serverUrl+"/course/add", {
+                                        userToken: userToken,
+                                        account: account,
+                                        courseName: courseName,
+                                        courseInfo: courseInfo,
+                                        coursePlan: coursePlan},postCfg)
+                                        .success(function(ret){
+                                            if (ret.status && ret.courseID !== undefined) {
+                                                var courseID = ret.courseID;
+                                                $http.get(serverUrl+"/course/manage", {params:{
+                                                    userToken: userToken,
+                                                    account: account}})
+                                                    .success(function(ret){
+                                                        if (ret.status && ret.courses[0].courseID == courseID) {
+                                                            $scope.ret_doManageCourse = "测试成功";
+                                                        }
+                                                    });
+                                            }
+                                        });
+                                }
+                            });
+                    });
             };
 
             /**
@@ -309,6 +380,7 @@
                 $scope.doSetPerson();
                 $scope.doGetPerson();//4
                 $scope.doAddCourse();
+                $scope.doManageCourse();
             };
         });
     </script>
