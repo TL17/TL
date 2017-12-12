@@ -17,16 +17,12 @@ import java.sql.SQLException;
 public class PersonalInfo extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-//        doPost(request,response);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
         Status status = new Status();
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
 
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+        DBConnect dbConnect = new DBConnect();
 
         Person person = new Person();
         String URI = request.getRequestURI();
@@ -40,16 +36,15 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         }
 
         JSONObject jsonRet;
+
         //here is the sql statement
-        String querySting = "SELECT * FROM user where account=?";
+        String querySting = "SELECT * FROM user WHERE account=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
 
         if (account.equals("")||account.equals("account")||userToken.equals("")) {
-//            Status status = new Status();
             status.setStatus(false);
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
-//            Person person = new Person();
             person.setName("");
             person.setInfo("");
             person.setContact("");
@@ -58,15 +53,16 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
             try {
                 preparedStatement.setString(1,account);
                 ResultSet rs = preparedStatement.executeQuery();
-//            Status status = new Status();
                 status.setStatus(true);
                 status.setInfo("获取信息成功");
                 jsonRet = JSONObject.fromObject(status);
-    //            Person person = new Person();
-                person.setName("测试者1 "+ rs.getString("name"));
-                person.setInfo("自我介绍1 "+ rs.getString("info"));
-                person.setContact(rs.getString("contact"));
-                jsonRet.put("perInfo",person);
+                while (rs.next()) {
+                    person.setName("测试者1 " + rs.getString("name"));
+                    person.setInfo("自我介绍1 " + rs.getString("info"));
+                    person.setContact(rs.getString("contact"));
+                }
+                jsonRet.put("personInfo", person);
+
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("空参数");
@@ -74,7 +70,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
                 person.setName("");
                 person.setInfo(e.getMessage());
                 person.setContact("");
-                jsonRet.put("perInfo",person);
+                jsonRet.put("personInfo",person);
                 e.printStackTrace();
 
             }
@@ -88,6 +84,12 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
+        Status status = new Status();
+
+        DBConnect dbConnect = new DBConnect();
+
+        Person person = new Person();
+
         String URI = request.getRequestURI();
         int index = URI.lastIndexOf('/');
         String account = URI.substring(index + 1);
@@ -97,6 +99,9 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
         String name = request.getParameter("name");
         String info = request.getParameter("info");
         String contact = request.getParameter("contact");
+
+        JSONObject jsonRet;
+
         if (userToken == null) {
             userToken = "";
         }
@@ -110,15 +115,56 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
             contact = "";
         }
 
-        Status retStatus = new Status();
-        retStatus.setStatus(true);
-        retStatus.setInfo("更改成功");
+        status.setStatus(true);
+        status.setInfo("更改成功");
         if (account.equals("")||account.equals("account")||userToken.equals("")||name.equals("")||info.equals("")||contact.equals("")) {
-            retStatus.setStatus(false);
-            retStatus.setInfo("空参数");
+            status.setStatus(false);
+            status.setInfo("空参数");
+        } else {
+
+            try{
+                String queryString;
+                PreparedStatement preparedStatement;
+                ResultSet rs;
+
+                //here is the sql statement
+                queryString = "UPDATE user SET name=? ,info=?, contact=?  WHERE account = ?";
+                preparedStatement = dbConnect.prepareStatement(queryString);
+                preparedStatement.setString(1,name);
+                preparedStatement.setString(2,info);
+                preparedStatement.setString(3,contact);
+                preparedStatement.setString(4,account);
+                rs = preparedStatement.executeQuery();
+
+                queryString = "SELECT * FROM user WHERE account = ?";
+                preparedStatement = dbConnect.prepareStatement(queryString);
+                preparedStatement.setString(1,account);
+                rs = preparedStatement.executeQuery();
+                while (rs.next()){
+                    person.setName(rs.getString("name"));
+                    person.setInfo(rs.getString("info"));
+                    person.setContact(rs.getString("contact"));
+                }
+                rs.close();
+                status.setStatus(true);
+                status.setInfo("updated info successfully");
+
+                jsonRet = JSONObject.fromObject(status);
+                jsonRet.put("personInfo", person);
+
+            } catch (SQLException e){
+                status.setStatus(false);
+                status.setInfo("空参数");
+                jsonRet = JSONObject.fromObject(status);
+                person.setName("");
+                person.setInfo(e.getMessage());
+                person.setContact("");
+                jsonRet.put("personInfo",person);
+                e.printStackTrace();
+            }
         }
 
-        JSONObject jsonRetStatus = JSONObject.fromObject(retStatus);
+        JSONObject jsonRetStatus = JSONObject.fromObject(status);
         PrintWriter out = response.getWriter();
         out.print(jsonRetStatus.toString());
     }

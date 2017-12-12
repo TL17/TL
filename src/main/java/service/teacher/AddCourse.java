@@ -23,11 +23,15 @@ public class AddCourse extends javax.servlet.http.HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
+        Status status = new Status();
+        DBConnect dbConnect = new DBConnect();
+
         String account = request.getParameter("account");
         String userToken = request.getParameter("userToken");
         String courseName = request.getParameter("courseName");
         String courseInfo = request.getParameter("courseInfo");
         String coursePlan = request.getParameter("coursePlan");
+
         if (account == null) {
             account = "";
         }
@@ -44,22 +48,19 @@ public class AddCourse extends javax.servlet.http.HttpServlet {
             coursePlan = "";
         }
 
-        //here is the sql statement
-        Status status = new Status();
         JSONObject jsonRet;
         if (userToken.equals("")||courseName.equals("")||courseInfo.equals("")||coursePlan.equals("")) {
-//            Status status = new Status();
             status.setStatus(false);
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
             jsonRet.put("courseID", -1);
         } else {
             try {
-                DBConnect dbConnect = new DBConnect();
                 String querySting;
                 PreparedStatement preparedStatement;
                 ResultSet rs;
 
+                //here is the sql statement
                 querySting = "SELECT * FROM user WHERE account = ?";
                 preparedStatement = dbConnect.prepareStatement(querySting);
                 preparedStatement.setString(1,account);
@@ -89,6 +90,7 @@ public class AddCourse extends javax.servlet.http.HttpServlet {
 
                 jsonRet = JSONObject.fromObject(status);
                 jsonRet.put("courseID", courseId);
+
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("空参数 "+e.getMessage());

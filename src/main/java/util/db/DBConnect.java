@@ -7,8 +7,15 @@ import net.sf.json.JSONObject;
 import java.sql.*;
 
 /**
- * Data Base connector 第二代
- */
+ * <h1>DBConnect Class</h1>
+ * This class has the information about the database.
+ * All the sensitive info including the username and password are saved in this class.
+ * This class helps to connect the database.
+ *
+ * @ version 2.0
+ * @ since 2017/12/06
+ *
+ * */
 public class DBConnect {
     private final String name = "com.mysql.jdbc.Driver";
 
@@ -112,7 +119,7 @@ public class DBConnect {
             e.printStackTrace();
         }
     }
-    
+
 
 
 }

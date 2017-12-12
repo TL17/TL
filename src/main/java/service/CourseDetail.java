@@ -22,11 +22,8 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 
         Status status = new Status();
-        String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String dbPwd = "root";
 
-        DBConnect dbConnect = new DBConnect(url, user, dbPwd);
+        DBConnect dbConnect = new DBConnect();
 
         String URI = request.getRequestURI();
         int index = URI.lastIndexOf('/');
@@ -34,17 +31,19 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
         courseIDStr = URLDecoder.decode(courseIDStr,"utf-8");
 
         boolean nan = false;
+
         try {
             Integer.parseInt(courseIDStr);
         } catch (Exception e) {
             nan = true;
         }
+
         //here is the sql statement
-        String querySting = "SELECT * FROM course where id=?";
+        String querySting = "SELECT * FROM course WHERE id=?";
         PreparedStatement preparedStatement = dbConnect.prepareStatement(querySting);
         JSONObject jsonRet;
+
         if (nan||courseIDStr.equals("")||courseIDStr.equals("detail")) {
-//            Status status = new Status();
             status.setStatus(false);
             status.setInfo("空参数");
             jsonRet = JSONObject.fromObject(status);
@@ -55,20 +54,26 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
             course.setCoursePlan("");
             jsonRet.put("course",course);
         } else {
+
             try {
                 int courseID = Integer.parseInt(courseIDStr);
                 preparedStatement.setInt(1, courseID);
                 ResultSet rs = preparedStatement.executeQuery();
-                //            Status status = new Status();
+
                 status.setStatus(true);
                 status.setInfo("课程搜索成功");
                 jsonRet = JSONObject.fromObject(status);
                 Course course = new Course();
-                course.setCourseID(rs.getInt(1));
-                course.setCourseName("课程名称" + rs.getString(2));
-                course.setCourseInfo("课程介绍" + rs.getString(3));
-                course.setCoursePlan("课程大纲" + rs.getString(4));
+                while (rs.next()) {
+                    course.setCourseID(rs.getInt("id"));
+                    course.setCourseName(rs.getString("name"));
+                    course.setCourseInfo(rs.getString("info"));
+                    course.setCoursePlan(rs.getString("plan"));
+                    break;//should return only 1 result.Just making sure
+                }
+                rs.close();
                 jsonRet.put("course", course);
+
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("空参数");

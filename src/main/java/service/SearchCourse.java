@@ -16,7 +16,6 @@ import java.sql.SQLException;
 public class SearchCourse extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-//        doPost(request,response);
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
@@ -62,7 +61,7 @@ public class SearchCourse extends javax.servlet.http.HttpServlet {
                 courses[start].setCourseInfo(c_info);
                 courses[start].setCoursePlan(c_plan);
                 start++;
-            }while (rs.next());
+            } while (rs.next());
 
             status.setStatus(true);
             status.setInfo("课程搜索成功");
