@@ -48,20 +48,22 @@ public class SearchCourse extends javax.servlet.http.HttpServlet {
             rs.first();
 
             int start= 0;
-            do {
-                String c_id = rs.getString(1);
-                String c_name = rs.getString(2);
-                String c_info = rs.getString(3);
-                String c_plan = rs.getString(4);
+            if (rowCount != 0) {
+                do {
+                    String c_id = rs.getString(1);
+                    String c_name = rs.getString(2);
+                    String c_info = rs.getString(3);
+                    String c_plan = rs.getString(4);
 
-                courses[start] = new Course();
+                    courses[start] = new Course();
 
-                courses[start].setCourseID(Integer.parseInt(c_id));
-                courses[start].setCourseName(c_name);
-                courses[start].setCourseInfo(c_info);
-                courses[start].setCoursePlan(c_plan);
-                start++;
-            } while (rs.next());
+                    courses[start].setCourseID(Integer.parseInt(c_id));
+                    courses[start].setCourseName(c_name);
+                    courses[start].setCourseInfo(c_info);
+                    courses[start].setCoursePlan(c_plan);
+                    start++;
+                } while (rs.next());
+            }
 
             status.setStatus(true);
             status.setInfo("课程搜索成功");

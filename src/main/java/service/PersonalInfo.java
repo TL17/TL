@@ -48,7 +48,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
             person.setName("");
             person.setInfo("");
             person.setContact("");
-            jsonRet.put("perInfo",person);
+            jsonRet.put("personInfo",person);
         } else {
             try {
                 preparedStatement.setString(1,account);

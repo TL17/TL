@@ -9,11 +9,6 @@
 <body>
 <div ng-app="localtest" ng-controller="localtest_ctrl">
 
-    <!--<p>-->
-        <!--<button ng-click="doAll()">测试全部</button>-->
-        <!--测试全部-->
-    <!--</p>-->
-
     <p>
         <button ng-click="doGet()">测试GET</button>
         /HelloWorld/{name} （参数 date:String） - http GET - 测试用接口
@@ -68,6 +63,15 @@
     </p>
     <div>测试结果：{{ret_doManageCourse}}</div>
 
+    <p>
+        <button ng-click="doSearchCourse()">测试</button>
+        ### 7. 搜索课程（Search course）
+        `http GET course/search`
+    </p>
+    <div>测试结果：{{ret_doSearchCourse}}</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------->
+
     <script>
         var app = angular.module('localtest', []);
         app.controller('localtest_ctrl', function($scope, $http) {
@@ -79,6 +83,43 @@
                 transformRequest: function (data) {
                     return $.param(data);
                 }
+            };
+
+            /**
+             ### 7. 搜索课程（Search course）
+             `http GET http://123.207.6.234:8080/TL/course/search`
+
+             in：
+
+             * keyword：关键词
+
+             return：
+
+             * courses：搜索到的课程列表
+             * 返回数据规范：
+             ```
+             {"info": String,
+              "status": boolean,
+              "courses":[
+                 {"coursePlan":"课程大纲1","courseName":"课程名称1","courseInfo":"课程介绍1","courseID":1},
+                 {"coursePlan":"课程大纲2","courseName":"课程名称2","courseInfo":"课程介绍2","courseID":2},
+                 {"coursePlan":"课程大纲3","courseName":"课程名称3","courseInfo":"课程介绍3","courseID":3},
+                 {"coursePlan":"课程大纲4","courseName":"课程名称4","courseInfo":"课程介绍4","courseID":4},
+                 {"coursePlan":"课程大纲5","courseName":"课程名称5","courseInfo":"课程介绍5","courseID":5}
+              ]
+             }
+             ```
+             */
+            $scope.doSearchCourse = function() {
+                var keyword = "电竞";
+                $scope.ret_doSearchCourse = "测试失败";
+                $http.get(serverUrl+"/course/search", {params:{
+                    keyword: keyword}})
+                    .success(function(ret){
+                        if (ret.status && ret.courses !== undefined ) {
+                            $scope.ret_doSearchCourse = "测试成功";
+                        }
+                    });
             };
 
             /**
@@ -379,8 +420,9 @@
                 $scope.doSignIn();
                 $scope.doSetPerson();
                 $scope.doGetPerson();//4
-                $scope.doAddCourse();
-                $scope.doManageCourse();
+                $scope.doAddCourse();//5
+                $scope.doManageCourse();//6
+                $scope.doSearchCourse();//7
             };
         });
     </script>

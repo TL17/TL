@@ -19,7 +19,7 @@ import java.sql.*;
 public class DBConnect {
     private final String name = "com.mysql.jdbc.Driver";
 
-    private String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC";
+    private String url = "jdbc:mysql://123.207.6.234:3306/tl?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8";
     private String user = "root";
     private String password = "root";
 
