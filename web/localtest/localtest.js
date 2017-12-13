@@ -315,7 +315,7 @@ app.controller('localtest_ctrl', function($scope, $http) {
                             userToken = ret.userToken;
                             $http.get(serverUrl+"/account/"+account,{params:{userToken:userToken}})
                                 .success(function(ret){
-                                    if (ret.status && perInfo !== undefined) {
+                                    if (ret.status && ret.perInfo !== undefined) {
                                         $scope.ret_doGetPerson = "测试成功";
                                     }
                                 });
