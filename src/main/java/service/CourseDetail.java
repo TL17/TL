@@ -61,7 +61,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
                 ResultSet rs = preparedStatement.executeQuery();
 
                 status.setStatus(true);
-                status.setInfo("课程搜索成功");
+                status.setInfo("课程获取成功");
                 jsonRet = JSONObject.fromObject(status);
                 Course course = new Course();
                 while (rs.next()) {
@@ -76,7 +76,7 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
 
             } catch (SQLException e){
                 status.setStatus(false);
-                status.setInfo("空参数");
+                status.setInfo("课程获取失败");
                 jsonRet = JSONObject.fromObject(status);
                 Course course = new Course();
                 course.setCourseID(-1);
