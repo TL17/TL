@@ -1,6 +1,5 @@
 package service;
 
-import entity.service.Course;
 import entity.service.Status;
 import net.sf.json.JSONObject;
 import util.db.DBConnect;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @WebServlet(name = "SelectCourse", urlPatterns = "/course/select/*")
@@ -36,16 +34,16 @@ public class SelectCourse extends javax.servlet.http.HttpServlet {
         String account = (request.getParameter("account") == null) ? "" : request.getParameter("account");
 
         Status status = new Status();
-        if (!Widgets.isInteger(courseIDStr) || courseIDStr.equals("detail") || userToken.equals("")) {
+        if (!Widgets.isInteger(courseIDStr) || courseIDStr.equals("") || userToken.equals("") || account.equals("")) {
             status.setStatus(false);
             status.setInfo("选课参数出问题");
         } else {
             try {
-                String studentId = Widgets.getStudentIdByAccount(dbConnect,account);
+//                String studentId = Widgets.getStudentIdByAccount(dbConnect,account);
                 String sql = "INSERT INTO selection (courseid, studentid,score) VALUES (?, ?, '0');";
                 PreparedStatement pstm = dbConnect.prepareStatement(sql);
                 pstm.setInt(1, Integer.parseInt(courseIDStr));
-                pstm.setString(2, studentId);
+                pstm.setString(2, account);
                 pstm.executeUpdate();
                 status.setStatus(true);
                 status.setInfo("选课成功");

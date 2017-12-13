@@ -11,6 +11,72 @@ app.controller('localtest_ctrl', function($scope, $http) {
     };
 
     /**
+     ### 9. 选课（Select course）
+     `http POST http://123.207.6.234:8080/TL/course/select/{courseID}`
+     in：
+
+     * url参数 - courseID：课程ID，这是在开课时应为每个课程生成的一个唯一的ID号；
+     * userToken：验证account；
+     * account：验证身份。
+
+     return：
+
+     * status：选课状态；
+     * 返回数据规范：
+     ```
+     {"info": String,
+      "status": boolean
+     }
+     ```
+     */
+    $scope.doSelectCourse = function() {
+        var account = new Date().getTime().toString();
+        var password = "123456";
+        var userToken;
+        var courseID;
+        var courseName = "英美电竞文化" + new Date().getTime().toString();
+        var courseInfo = "打得不错";
+        var coursePlan = "很自然的错误";
+        $scope.ret_doSelectCourse = "测试失败";
+        $http.post(serverUrl+"/sign_up",{schoolID:account,account:account,password:password},postCfg)
+            .success(fun2);
+        function fun2(ret) {
+            $http.post(serverUrl + "/sign_in", {account: account, password: password}, postCfg)
+                .success(fun3);
+        }
+        function fun3(ret) {
+            userToken = ret.userToken;
+            $http.post(serverUrl+"/course/add", {
+                userToken: userToken,
+                account: account,
+                courseName: courseName,
+                courseInfo: courseInfo,
+                coursePlan: coursePlan
+            },postCfg)
+                .success(fun4);
+        }
+        function fun4(ret) {
+            courseID = ret.courseID;
+            $http.post(serverUrl+"/course/select/"+courseID, {
+                userToken: userToken,
+                account: account}, postCfg)
+                .success(func5);
+        }
+        function func5(ret) {
+            if (ret.status) {
+                $http.get(serverUrl+"/course/manage", {params:{
+                    userToken: userToken,
+                    account: account}})
+                    .success(function(ret){
+                        if (ret.status && ret.courses !== undefined) {
+                            $scope.ret_doSelectCourse = "测试成功";
+                        }
+                    });
+            }
+        }
+    };
+
+    /**
      ### 8. 获取课程信息（Get course details）
      `http GET http://123.207.6.234:8080/TL/course/detail/{courseID}`
 
@@ -249,7 +315,7 @@ app.controller('localtest_ctrl', function($scope, $http) {
                             userToken = ret.userToken;
                             $http.get(serverUrl+"/account/"+account,{params:{userToken:userToken}})
                                 .success(function(ret){
-                                    if (ret.status) {
+                                    if (ret.status && perInfo !== undefined) {
                                         $scope.ret_doGetPerson = "测试成功";
                                     }
                                 });
@@ -396,17 +462,4 @@ app.controller('localtest_ctrl', function($scope, $http) {
             });
     };
 
-    //测试全部
-    $scope.doAll = function() {
-        $scope.doPost();
-        $scope.doGet();
-        $scope.doSignUp();//1
-        $scope.doSignIn();
-        $scope.doSetPerson();
-        $scope.doGetPerson();//4
-        $scope.doAddCourse();//5
-        $scope.doManageCourse();//6
-        $scope.doSearchCourse();//7
-        $scope.doGetCourse();//8
-    };
 });
