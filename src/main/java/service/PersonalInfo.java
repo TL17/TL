@@ -48,7 +48,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
             person.setName("");
             person.setInfo("");
             person.setContact("");
-            jsonRet.put("perInfo",person);
+            jsonRet.put("personInfo",person);
         } else {
             try {
                 preparedStatement.setString(1,account);
@@ -61,7 +61,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
                     person.setInfo(rs.getString("info"));
                     person.setContact(rs.getString("contact"));
                 }
-                jsonRet.put("perInfo", person);
+                jsonRet.put("personInfo", person);
 
             } catch (SQLException e){
                 status.setStatus(false);
@@ -70,7 +70,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
                 person.setName("");
                 person.setInfo(e.getMessage());
                 person.setContact("");
-                jsonRet.put("perInfo",person);
+                jsonRet.put("personInfo",person);
                 e.printStackTrace();
 
             }
@@ -150,7 +150,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
                 status.setInfo("updated info successfully");
 
                 jsonRet = JSONObject.fromObject(status);
-                jsonRet.put("perInfo", person);
+                jsonRet.put("personInfo", person);
 
             } catch (SQLException e){
                 status.setStatus(false);
@@ -159,7 +159,7 @@ public class PersonalInfo extends javax.servlet.http.HttpServlet {
 //                person.setName("");
 //                person.setInfo(e.getMessage());
 //                person.setContact("");
-//                jsonRet.put("perInfo",person);
+//                jsonRet.put("personInfo",person);
                 e.printStackTrace();
             }
         }
