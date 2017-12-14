@@ -84,6 +84,16 @@
     </p>
     <div>测试结果：{{ret_doSelectCourse}}</div>
 
+    <p>
+        <button ng-click="doCourseEvaluation()">测试</button>
+        ### 12. 评教（Evaluate course）
+        `http POST course/evaluation/{courseID}`
+    </p><p>
+        ######## 13. 获取课程评教信息（Get evaluation of course）
+        `http GET course/evaluation/{courseID}`
+    </p>
+    <div>测试结果：{{ret_doCourseEvaluation}}</div>
+
 <!------------------------------------------------------------------------------------------------------------------------------->
 
     <script src="localtest.js"></script>

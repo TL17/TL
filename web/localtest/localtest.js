@@ -11,6 +11,106 @@ app.controller('localtest_ctrl', function($scope, $http) {
     };
 
     /**
+     ### 12. 评教（Evaluate course）
+     `http POST http://123.207.6.234:8080/TL/course/evaluation/{courseID}`
+
+     in：
+
+     * url参数 - courseID：课程ID；
+     * userToken：验证account；
+     * account：验证身份。
+     * (evaluation)score评教分数+comment评论
+
+     return：
+
+     * status：反馈状态，e.g. 评教成功
+     ```
+     {"info": String,
+      "status": boolean
+     }
+     ```
+
+     ### 13. 获取课程评教信息（Get evaluation of course）
+     `http GET http://123.207.6.234:8080/TL/course/evaluation/{courseID}`
+
+     in：
+
+     * url参数 - courseID：课程ID；
+     * userToken：验证account；
+     * account：验证身份。
+
+     return：
+
+     * evaluations：对应课程的评教列表
+     ```
+     {"info":"获取评教成功",
+      "status":true,
+      "evaluations":[
+         {"score":"1.0","comment":"1课的评论1"},
+         {"score":"1.0","comment":"1课的评论2"},
+         {"score":"1.0","comment":"1课的评论3"},
+         {"score":"1.0","comment":"1课的评论4"},
+         {"score":"1.0","comment":"1课的评论5"}
+       ]
+     }
+     ```
+     */
+    $scope.doCourseEvaluation = function() {
+        var account = new Date().getTime().toString();
+        var password = "123456";
+        var userToken;
+        var courseID;
+        var courseName = "项目管理" + new Date().getTime().toString();
+        var courseInfo = "要写文档";
+        var coursePlan = "不看代码";
+        var score = 5;
+        var comment = "没毛病";
+        $scope.ret_doCourseEvaluation = "测试失败";
+        $http.post(serverUrl+"/sign_up",{schoolID:account,account:account,password:password},postCfg)
+            .success(fun2);
+        function fun2(ret) {
+            $http.post(serverUrl + "/sign_in", {account: account, password: password}, postCfg)
+                .success(fun3);
+        }
+        function fun3(ret) {
+            userToken = ret.userToken;
+            $http.post(serverUrl+"/course/add", {
+                userToken: userToken,
+                account: account,
+                courseName: courseName,
+                courseInfo: courseInfo,
+                coursePlan: coursePlan
+            },postCfg)
+                .success(fun4);
+        }
+        function fun4(ret) {
+            courseID = ret.courseID;
+            $http.post(serverUrl+"/course/select/"+courseID, {
+                userToken: userToken,
+                account: account}, postCfg)
+                .success(func5);
+        }
+        function func5(ret) {
+            $http.post(serverUrl+"/course/evaluation/"+courseID, {
+                userToken: userToken,
+                account: account,
+                score: score,
+                comment: comment}, postCfg)
+                .success(func6);
+        }
+        function func6(ret) {
+            $http.get(serverUrl+"/course/evaluation/"+courseID, {params:{
+                userToken: userToken,
+                account: account}})
+                .success(function(ret) {
+                    if (ret.evaluations !== undefined) {
+                        $scope.ret_doCourseEvaluation = "测试成功";
+                    }
+                });
+        }
+    };
+
+    /**
      ### 9. 选课（Select course）
      `http POST http://123.207.6.234:8080/TL/course/select/{courseID}`
      in：
