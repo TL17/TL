@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传测试</title>
+</head>
+<script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+<body>
+<div ng-app="file_test" ng-controller="file_test_ctrl">
+
+    <input id="fileToUpload" type ="file"/>
+    <button ng-click="doUploadFile()">Upload</button>
+
+    <div ng-repeat="i in materials" style="margin:0.5em">
+        <p>文件名(name):{{i.name}}</p>
+        <p>文件路径(path):{{i.path}};</p>
+        <p>文件类型(type):{{i.type}};</p>
+        <a href="{{serverUrl + '/' + i.path}}">{{i.name}}</a>
+    </div>
+
+</div>
+<script>
+    var app = angular.module('file_test', []);
+    app.controller('file_test_ctrl', function($scope, $http) {
+
+        //初始化
+        $scope.materials = [];
+        $scope.serverUrl = "http://123.207.6.234:8080/TL";
+        var serverUrl = $scope.serverUrl;
+        var uploadFilePostCfg = {
+            //1. 不能不加header，否则angular将其视为"application/JSON"
+            //2. 不能加header为"multipart/form-data"，因为该header需要自动加（可能是“浏览器”自动加），否则触发后台的“no multipart boundary”错误
+            //3. undefined不加引号
+            //4. function (value, key)回调函数中的value和key不能颠倒
+            headers: { "Content-Type": undefined},
+            transformRequest: function(data, headersGetter){
+                var formData = new FormData();
+                angular.forEach(data, function (value, key) {
+                    formData.append(key, value);
+                });
+                return formData;
+            }
+        };
+
+        //上传的onclick函数
+        $scope.doUploadFile = function() {
+            var files = document.getElementById('fileToUpload').files;
+            var account = 1;
+            var userToken = 1;
+            var courseID = 1;
+            var file = files[0];
+
+            if (files === undefined || files.length <= 0) {
+                alert("未选择文件");
+                return;
+            }
+
+            $http.post(serverUrl+"/upload_material",{
+                account: account,
+                userToken: userToken,
+                courseID: courseID,
+                file: file}, uploadFilePostCfg)
+                .success(funcSucc)
+                .error(funcFail);
+
+            function funcSucc(ret) {
+                $http.get(serverUrl+"/material",{params:{
+                    account: account,
+                    userToken: userToken,
+                    courseID: courseID}})
+                    .success(function(ret){
+                        if (ret.status) {
+                            $scope.materials = ret.materials;
+                            alert("上传且获取列表成功");
+                        } else {
+                            alert("上传成功但获取列表失败");
+                        }
+                    })
+                    .error(funcFail);
+            }
+
+            function funcFail(ret) {
+                alert("上传或获取列表出现服务器错误");
+            }
+        };//$scope.doUploadFile
+    });
+</script>
+</body>
+</html>
