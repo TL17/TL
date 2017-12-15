@@ -1,5 +1,5 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
-var serverUrl = "http://localhost:8080/TL"; //123.207.6.234
+var serverUrl = "http://123.207.6.234:8080/TL"; //123.207.6.234
 var postCfg = {
     headers: {"Content-Type": "application/x-www-form-urlencoded;charset=utf-8"},
     transformRequest: function (data) {
@@ -58,12 +58,6 @@ function load_personal_info($http) {
     var acc = window.localStorage['account'];
     $http.get(serverUrl + "/account/" + acc, {params: {account: acc, userToken: window.localStorage['userToken']}})
         .success(function (ret) {
-            // ret.status = true;
-            // ret.perInfo = {
-            //     name: "String",
-            //     info: "String",
-            //     contact: "String"
-            // }
             if (ret.status) {
                 angular.element(document.querySelector("#name")).text(ret.perInfo.name);
                 angular.element(document.querySelector("#tel")).text(ret.perInfo.contact);
@@ -72,3 +66,4 @@ function load_personal_info($http) {
                 alert(ret.info);
         })
 }
+

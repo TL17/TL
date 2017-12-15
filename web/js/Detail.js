@@ -1,7 +1,3 @@
-app.config(['$compileProvider', function ($compileProvider) {
-    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
-}]);
-
 app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', function ($scope, $rootScope, $http, $modal) {
     var cid = window.localStorage['detailID'];
     var token = window.localStorage['userToken'];
@@ -21,7 +17,13 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     };
 
     $scope.select_course = function () {
-        $http.get(serverUrl + "/course/select/" + cid, {params: {courseID: cid, userToken: token, account:window.localStorage['account']}})
+        $http.get(serverUrl + "/course/select/" + cid, {
+            params: {
+                courseID: cid,
+                userToken: token,
+                account: window.localStorage['account']
+            }
+        })
             .success(function (ret) {
                 ret.status = true;
                 if (ret.status) {
@@ -33,7 +35,13 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     }
 
     $scope.show_comment = function () {
-        $http.get(serverUrl + "/course/evaluation/" + cid, {params: {courseID: cid, userToken: token, account:window.localStorage['account']}})
+        $http.get(serverUrl + "/course/evaluation/" + cid, {
+            params: {
+                courseID: cid,
+                userToken: token,
+                account: window.localStorage['account']
+            }
+        })
             .success(function (ret) {
                 //ret = {info:"succeed", status:true, evaluations: [{score:9.0, comment:"1111"}, {score:9.1, comment:"2222"}, {score:9.2, comment:"33333"}, {score:9.3, comment:"4444"},]}
 
@@ -76,29 +84,37 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
             })
     };
 
-    $scope.load_course_material = function() {
-        $http.get(serverUrl + "/material/" + window.localStorage['materialID'],
-            {params: {
+    $scope.load_material_list = function () {
+        window.localStorage['courseID'] = 1;
+            $http.get(serverUrl+"/material",{params:{
                 userToken: window.localStorage['userToken'],
-                account:window.localStorage['account'],
-                materialID: window.localStorage['materialID']}})
-            .success(function (ret) {
-                if (ret.status) {
-                    var blob = new Blob("Downloading", {type: "octet/stream"}),
-                        url = window.URL.createObjectURL(blob);
-                    a.href = url;
-                    a.download = window.localStorage['materialName'];
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                } else
-                    alert(ret.info);
-            })
+                account: window.localStorage['account'],
+                courseID: window.localStorage['courseID']
+            }})
+                .success(function(ret){
+                            if (ret.status) {
+                                $scope.materials = ret.materials;
+                               // alert("上传且获取列表成功");
+                            } else {
+                               // alert("上传成功但获取列表失败");
+                            }
+                })
+                .error(funcFail);
 
+
+        function funcFail(ret) {
+            alert(ret.info);
+        }
     };
 
-    $scope.init_courses_list = function() {
-        $http.get(serverUrl+"/course/manage",{params:{userToken: window.localStorage['userToken'], account:window.localStorage['account']}})
-            .success(function(ret) {
+    $scope.init_courses_list = function () {
+        $http.get(serverUrl + "/course/manage", {
+            params: {
+                userToken: window.localStorage['userToken'],
+                account: window.localStorage['account']
+            }
+        })
+            .success(function (ret) {
                 window.localStorage['materialID'] = "";
                 window.localStorage['materialName'] = "";
                 var ele = angular.element(document.querySelector("#materialsList"));
@@ -114,17 +130,17 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                 } else
                     alert(ret.info);
 
-                angular.forEach(angular.element(document.querySelectorAll(".detail_btn")), function(item){
+                angular.forEach(angular.element(document.querySelectorAll(".detail_btn")), function (item) {
                     $compile(item)($scope);
-                    $scope.detail_btn_click = function(material_id, material_name) {
+                    $scope.detail_btn_click = function (material_id, material_name) {
                         window.localStorage['materialID'] = material_id;
                         window.localStorage['materialName'] = material_name;
                     };
                 });
             });
-    }
+    };
 
-    $scope.show_teacher_message = function() {
+    $scope.show_teacher_message = function () {
         window.localStorage['teacherID'] = angular.element(document.querySelector("#teacber_info_btn")).data("id");
         window.location.href = "Teacher.html";
     }
