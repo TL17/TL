@@ -1,3 +1,7 @@
+app.config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
+}]);
+
 app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', function ($scope, $rootScope, $http, $modal) {
     var cid = window.localStorage['detailID'];
     var token = window.localStorage['userToken'];
@@ -71,6 +75,54 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                     alert(ret.info);
             })
     };
+
+    $scope.load_course_material = function() {
+        $http.get(serverUrl + "/material/" + window.localStorage['materialID'],
+            {params: {
+                userToken: window.localStorage['userToken'],
+                account:window.localStorage['account'],
+                materialID: window.localStorage['materialID']}})
+            .success(function (ret) {
+                if (ret.status) {
+                    var blob = new Blob("Downloading", {type: "octet/stream"}),
+                        url = window.URL.createObjectURL(blob);
+                    a.href = url;
+                    a.download = window.localStorage['materialName'];
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                } else
+                    alert(ret.info);
+            })
+
+    };
+
+    $scope.init_courses_list = function() {
+        $http.get(serverUrl+"/course/manage",{params:{userToken: window.localStorage['userToken'], account:window.localStorage['account']}})
+            .success(function(ret) {
+                window.localStorage['materialID'] = "";
+                window.localStorage['materialName'] = "";
+                var ele = angular.element(document.querySelector("#materialsList"));
+                ele.empty();
+
+                if (ret.status) {
+                    angular.forEach(ret.materials, function (m) {
+                        ele.append("<li style=\"text-align: center;width: 100%;\" " +
+                            "ng-click=\"detail_btn_click(" + m.materialID + ", " + m.materialName + ")\">" +
+                            "<a data-toggle=\"tab\">" + m.materialName + "</a></li>");
+                    });
+                    angular.element(document.querySelector("#materialsList>li")).attr('class', 'active');
+                } else
+                    alert(ret.info);
+
+                angular.forEach(angular.element(document.querySelectorAll(".detail_btn")), function(item){
+                    $compile(item)($scope);
+                    $scope.detail_btn_click = function(material_id, material_name) {
+                        window.localStorage['materialID'] = material_id;
+                        window.localStorage['materialName'] = material_name;
+                    };
+                });
+            });
+    }
 
     $scope.show_teacher_message = function() {
         window.localStorage['teacherID'] = angular.element(document.querySelector("#teacber_info_btn")).data("id");
