@@ -192,9 +192,9 @@ return：
 in：
 
 * userToken：验证account；
-* account：验证身份。
-* courseID：课程ID；
-* [TODO]material：上传的资源，（可能具有类型、资源地址等，目前暂定为PPT的形式）
+* account：验证身份；
+* courseID：资源所属的课程ID；
+* file：上传的资源文件
 
 return：
 
@@ -203,29 +203,31 @@ return：
 ```
 {"info": String,
  "status": boolean
- "materialID": int
 }
 ```
 
 ---
 
 ### 11. 获取资源（Get materials）
-`http GET http://123.207.6.234:8080/TL/material/{materialID}`
+`http GET http://123.207.6.234:8080/TL/material`
 
 in：
 
-* url参数 - materialID：资源唯一的ID
+* courseID: 课程ID；
 * userToken：验证account；
 * account：验证身份。
 
 return：
 
-* material：资源
+* materials：资源
 * 返回数据规范：
 ```
 {"info": String,
  "status": boolean
- "material": ??? [TODO]
+ "materials": [
+    {name:"1.ppt",path:"asd/asd/1.ppt",type:"ppt"},
+    {name:"2.ppt",path:"asd/asd/2.ppt",type:"ppt"},
+ ]
 }
 ```
 
