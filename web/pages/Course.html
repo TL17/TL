@@ -105,12 +105,15 @@
                     </div>
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                    <!--div ng-repeat="i in materials" style="margin:0.5em">
-                        <a href="{{'http://123.207.6.234:8080/TL/' + i.path}}">{{i.name}}</a>
-                    </div-->
                     <ul class="nav nav-pills nav-stacked">
                         <li ng-repeat="i in materials" style="text-align: center;width: 100%;">
-                            <a href="{{'http://123.207.6.234:8080/TL/' + i.path}}" data-toggle="tab">{{i.name}}</a>
+                            <a href="{{'http://123.207.6.234:8080/TL/' + i.path}}">{{i.name}}</a>
+                        </li>
+                        <li style="text-align: center;width: 100%;">
+                            <input id="fileToUpload" type ="file"/>
+                            <button ng-click="doUploadFile()" type="button" class="btn btn-primary li_box_b2">
+                            Upload
+                            </button>
                         </li>
                     </ul>
                 </div>
