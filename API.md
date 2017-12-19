@@ -18,6 +18,7 @@ in：
 * schoolID：学号/工号，对每个用户来说是唯一的，用于注册。实际情况根据学校内部数据来定，而目前由于无法拿到学校的内部数据，模拟验证即可；
 * account: 用户自己定义的账号，用于登录，对每个用户来说是唯一的；
 * password：用户定义的密码，与账户对应；
+* (可选)type: 用户的身份，"teacher"或"student"，不传参数默认 "student"
 
 return:
 
@@ -35,7 +36,9 @@ in：
 
 return：
 
-* {userToken: String, status: boolean, info: String} userToken：服务器对应该账号的token，用于验证身份，与用户一一对应
+* {userToken: String, type: String, status: boolean, info: String}
+* userToken：服务器对应该账号的token，用于验证身份，与用户一一对应
+* type: 一个字符串 "teacher" 或 "student"
 
 ---
 

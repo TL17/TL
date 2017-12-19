@@ -23,29 +23,44 @@ public class SignUp extends javax.servlet.http.HttpServlet {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
 
+        PrintWriter out = response.getWriter();
+        JSONObject jsonRet;
+        Status status = new Status();
+
         String schoolID = (request.getParameter("schoolID") == null) ? "" : request.getParameter("schoolID");
         String account = (request.getParameter("account") == null) ? "" : request.getParameter("account");
         String password = (request.getParameter("password") == null) ? "" : request.getParameter("password");
+        String type = (request.getParameter("type") == null) ? "" : request.getParameter("type");
+
+        if (type.equals("")) {
+            type = "student";
+        }
+
+        if (account.equals("") || password.equals("") || schoolID.equals("") || type.equals("")) {
+            status.setStatus(false);
+            status.setInfo("空参数");
+            jsonRet = JSONObject.fromObject(status);
+            out.print(jsonRet.toString());
+            return;
+        }
 
         DBConnect dbConnect = new DBConnect();
-        String stringFormat = "INSERT INTO user (id, password, account, name,info,contact) VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')";
-        String sql = String.format(stringFormat, schoolID, password, account,"Junying","","");
-        Status retStatus = new Status();
+        String stringFormat = "INSERT INTO user (id, password, account, name, info, contact, type) VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')";
+        String sql = String.format(stringFormat, schoolID, password, account,"Junying", "", "", type);
 
         /*
         * 若schoolID通过验证，account唯一，则返回一个注册成功的反馈状态，否则，返回注册失败信息；*/
         try {
             dbConnect.executeUpdate(sql);
-            retStatus.setStatus(true);
-            retStatus.setInfo("注册成功");
+            status.setStatus(true);
+            status.setInfo("注册成功");
         }catch (SQLException e) {
-            retStatus.setStatus(false);
-            retStatus.setInfo("注册失败");
+            status.setStatus(false);
+            status.setInfo("注册失败");
             e.printStackTrace();
         }
 
-        JSONObject jsonRetStatus = JSONObject.fromObject(retStatus);
-        PrintWriter out = response.getWriter();
+        JSONObject jsonRetStatus = JSONObject.fromObject(status);
         out.print(jsonRetStatus.toString());
     }
 
