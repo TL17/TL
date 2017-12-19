@@ -16,27 +16,27 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
                         alert(ret.info);
                 });
         }
-    }
+    };
 
     $scope.sign_in = function(acc,pwd) {
-        window.localStorage['userToken'] = "hxy";
-        window.localStorage['account'] = acc;
-        window.location.href = "Student.html";
-        window.event.returnValue = false;
+        // window.localStorage['userToken'] = "hxy";
+        // window.localStorage['account'] = acc;
+        // window.location.href = "Student.html";
+        // window.event.returnValue = false;
 
-        // $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
-        //     .success(function(ret) {
-        //         if (ret.status) {
-        //             window.localStorage['userToken'] = ret.userToken;
-        //             window.localStorage['type'] = ret.type;
-        //             window.localStorage['account'] = acc;
-        //             if (ret.type == 'TEACHER')
-        //                 window.location.href = "Teacher.html";
-        //             else
-        //                 window.location.href = "Student.html";
-        //             window.event.returnValue = false;
-        //         } else
-        //             alert(ret.info);
-        //     });
-    }
+        $http.post(serverUrl+"/sign_in",{account:acc, password:pwd},postCfg)
+            .success(function(ret) {
+                if (ret.status) {
+                    window.localStorage['userToken'] = ret.userToken;
+                    window.localStorage['type'] = ret.type;
+                    window.localStorage['account'] = acc;
+                    if (ret.type === 'TEACHER')
+                        window.location.href = "Teacher.html";
+                    else
+                        window.location.href = "Student.html";
+                    window.event.returnValue = false;
+                } else
+                    alert(ret.info);
+            });
+    };
 }]);
