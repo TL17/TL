@@ -9,7 +9,7 @@
 		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="../js/angular.min.js"></script>
 		<script src="../js/ui-bootstrap-0.12.1.min.js"></script>
-		<script src="../js/jquery.min.js"></script>
+		<!--<script src="../js/jquery.min.js"></script>-->
 	</head>
 </head>
 <body>
@@ -25,7 +25,7 @@
 		<div class="font">
 			<img src="../images/bg.jpg" height="155px" width="300px" class="img-rounded">
 		</div>
-		<form id="loginForm" class="form-signin" action="#" method="post">
+		<div id="loginForm" class="form-signin" action="#" method="post">
 			<!--导航页-->
 		    <ul class="nav nav-tabs">
 			    <li class="active nav_button"><a data-toggle="tab" href="#home">Sign in</a></li>
@@ -46,7 +46,7 @@
 			        </div> <br />
 			        <input
 							ng-click="sign_in(sign_in_acc, sign_in_pwd)"
-							style="float: right;" class="btn btn-primary" type="submit" value="Sign in">
+							style="float: right;" class="btn btn-primary" type="button" value="Sign in">
 			    </div>
 			    <!--sign up 联动页-->
 			    <div id="menu1" class="tab-pane fade">
@@ -68,13 +68,31 @@
 			            <span class="input-group-addon">RePassword</span>
 			            <input ng-model="sign_up_repwd" type="password" class="form-control" placeholder="Confirm password again">
 			        </div> <br />
+					<div>
+						<label>
+						<input type="radio"
+							   ng-model="type_val"
+							   name="type_group"
+							   ng-value=false
+						/>
+							Teacher
+						</label>
+						<label>
+						<input type="radio"
+							   ng-model="type_val"
+							   name="type_group"
+							   ng-value=true
+						/>
+							Student
+						</label>
+					</div> <br />
 			        <input
 							ng-click="sign_up(sign_up_id, sign_up_acc, sign_up_pwd, sign_up_repwd)"
-							style="float: right;" class="btn btn-primary" type="submit" value="Sign up">
+							style="float: right;" class="btn btn-primary" type="button" value="Sign up">
 			    </div>
 		    </div>
 	       
-		</form>
+		</div>
 	</div>
 </div>
 <script src="../js/Common.js"></script>

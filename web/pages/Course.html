@@ -51,8 +51,7 @@
         <div class="header">
             <div class="li_box1">
                 <input id="is_selected" type="checkbox" class="li_box_che">
-                <img src="../images/course.jpg" height="100px" width="100px" class="img-rounded" style="margin-left:60px ;">
-
+                <p class="li_box_p"></p>
                 <button id="teacber_info_btn" ng-click="show_teacher_message()" type="button" class="btn btn-primary li_box_b1"
                         data-toggle="button">Teacher
                 </button>
@@ -76,11 +75,11 @@
             <ul class="nav nav-pills nav-stacked box_ul">
                 <li style="text-align: center;"><a data-toggle="tab" href="#menu3">Plan</a></li>
                 <li class="active" style="text-align: center;"><a data-toggle="tab" href="#home">Homeworks</a></li>
-                <li style="text-align: center;"><a data-toggle="tab" href="#menu1">Materials</a></li>
+                <li ng-click="load_material_list()" style="text-align: center;"><a data-toggle="tab" href="#menu1">Materials</a></li>
                 <li style="text-align: center;"><a data-toggle="tab" href="#menu2">Videos</a></li>
             </ul>
             <br/>
-            <div class="tab-content box_div" style=" overflow:auto;">
+            <div class="tab-content box_div">
                 <div id="home" class="tab-pane fade in active" style="height: 100%;">
                     <ul class="nav nav-pills nav-stacked"
                         style="height: 100%;width: 30%;float: left;border-right: 2px solid #000;">
@@ -88,11 +87,7 @@
                                                                           href="#fuhome">Homework-1</a></li>
                         <li style="text-align: center;"><a data-toggle="tab" href="#fumenu1">Homework-2</a></li>
                         <li style="text-align: center;"><a data-toggle="tab" href="#fumenu2">Project-1</a></li>
-                        <li style="text-align: center;width: 100%;"><button type="button" class="btn btn-primary li_box_b2" data-toggle="button">
-                            upload
-                        </button></li>
                     </ul>
-
                     <br/>
                     <div class="tab-content" style="height: 100%;width: 70%;float: right;">
                         <div id="fuhome" class="tab-pane fade in active" style="padding: 3% 2%;">
@@ -109,19 +104,18 @@
                         </div>
                     </div>
                 </div>
-                <div id="menu1" class="tab-pane fade" >
-                    <ul class="nav nav-pills nav-stackedl">
-                        <li class="active" style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-1</a></li>
-                        <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-2</a></li>
-                        <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-3</a></li>
-                        <li style="text-align: center;width: 100%;"><a data-toggle="tab">PPT-4</a></li>
-
-                        <li style="text-align: center;width: 100%;"><button type="button" class="btn btn-primary li_box_b2" data-toggle="button">
-                            upload
-                        </button></li>
-
+                <div id="menu1" class="tab-pane fade">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li ng-repeat="i in materials" style="text-align: center;width: 100%;">
+                            <a href="{{'http://123.207.6.234:8080/TL/' + i.path}}">{{i.name}}</a>
+                        </li>
+                        <li style="text-align: center;width: 100%;">
+                            <input id="fileToUpload" type ="file"/>
+                            <button ng-click="doUploadFile()" type="button" class="btn btn-primary li_box_b2">
+                            Upload
+                            </button>
+                        </li>
                     </ul>
-
                 </div>
                 <div id="menu3" class="tab-pane fade" style="height: 100%;width: 100%;">
                     <div id="coursePlan"
@@ -135,9 +129,6 @@
                         <li class="active" style="text-align: center;"><a data-toggle="tab" href="#fu2home">Video-1</a>
                         </li>
                         <li style="text-align: center;"><a data-toggle="tab" href="#fu2menu1">Video-2</a></li>
-                        <li style="text-align: center;width: 100%;"><button type="button" class="btn btn-primary li_box_b2" data-toggle="button">
-                            upload
-                        </button></li>
                     </ul>
                     <br/>
                     <div class="tab-content" style="height: 100%;width: 70%;float: right;text-align: center;">

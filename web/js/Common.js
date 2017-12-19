@@ -1,5 +1,5 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
-var serverUrl = "http://123.207.6.234:8080/TL";
+var serverUrl = "http://123.207.6.234:8080/TL"; //123.207.6.234
 var postCfg = {
     headers: {"Content-Type": "application/x-www-form-urlencoded;charset=utf-8"},
     transformRequest: function (data) {
@@ -21,9 +21,10 @@ function load_course_list(ret) {
                 "\t\t\t\t\t</div>\n" +
                 "\t\t\t\t\t<div class=\"li_box2\">\n" +
                 "\t\t\t\t\t\t<div class=\"input-group\" style=\"float: right;width: 30%;\">\n" +
-                "\t\t\t\t\t\t    <input type=\"text\" style=\"float: right;text-align: center;\" class=\"form-control input-mini\" value=\"Score:" + c.avgScore + "\" readonly=\"readonly\">" +
+                "\t\t\t\t\t\t    <input type=\"text\" style=\"float: right;text-align: center;\" class=\"form-control input-mini\" value=\"Evaluation\" readonly=\"readonly\">" +
                 "<span ng-click=\"detail_btn_click(" + c.courseID + ")\" class=\"detail_btn input-group-addon btn btn-primary\">Details</span>\n" +
                 "\t\t\t\t\t\t</div>\n" +
+                "<h4>" + c.courseName + "</h4>" +
                 "\t\t\t\t\t\t<p contenteditable=\"true\" class=\"box_div_p\">"
                 + c.courseInfo
                 + "</p>\n" +
@@ -58,12 +59,6 @@ function load_personal_info($http) {
     var acc = window.localStorage['account'];
     $http.get(serverUrl + "/account/" + acc, {params: {account: acc, userToken: window.localStorage['userToken']}})
         .success(function (ret) {
-            // ret.status = true;
-            // ret.perInfo = {
-            //     name: "String",
-            //     info: "String",
-            //     contact: "String"
-            // }
             if (ret.status) {
                 angular.element(document.querySelector("#name")).text(ret.perInfo.name);
                 angular.element(document.querySelector("#tel")).text(ret.perInfo.contact);
@@ -72,3 +67,4 @@ function load_personal_info($http) {
                 alert(ret.info);
         })
 }
+
