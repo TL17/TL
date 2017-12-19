@@ -4,7 +4,7 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
     };
 
     $scope.load_info = function () {
-        if (window.localStorage['type'] == 'TEACHER') {
+        if (window.localStorage['type'] === 'teacher') {
             $("#change_info_btn").show();
             $("#add_course_btn").show();
         }else{

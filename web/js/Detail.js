@@ -58,9 +58,15 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                                 count++;
                             });
                             count--;
-                            var avg = (total / count).toFixed(1);
+                            var avg;
+                            if (count == 0) {
+                                avg = 0;
+                            } else {
+                                avg = (total / count).toFixed(1);
+                            }
+
                             angular.element(document.querySelector("#model_comment_avg_score")).attr("value", avg);
-                        }
+                        };
 
                         $scope.cancel = function () {
                             $modalInstance.dismiss('cancel');
