@@ -16,7 +16,6 @@ function load_course_list(ret) {
             // alert(c.courseInfo+c.coursePlan);
             ele.append("<li>\n" +
                 "\t\t\t\t\t<div class=\"li_box1\">\n" +
-                "\t\t\t\t\t\t <input type=\"checkbox\" class=\"li_box_che\" checked=\"" + c.selected + "\">\n" +
                 "\t\t\t\t\t\t <p class=\"li_box_p\"></p>\n" +
                 "\t\t\t\t\t</div>\n" +
                 "\t\t\t\t\t<div class=\"li_box2\">\n" +
