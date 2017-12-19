@@ -68,6 +68,24 @@
 			            <span class="input-group-addon">RePassword</span>
 			            <input ng-model="sign_up_repwd" type="password" class="form-control" placeholder="Confirm password again">
 			        </div> <br />
+					<div>
+						<label>
+						<input type="radio"
+							   ng-model="type_val"
+							   name="type_group"
+							   ng-value=false
+						/>
+							Teacher
+						</label>
+						<label>
+						<input type="radio"
+							   ng-model="type_val"
+							   name="type_group"
+							   ng-value=true
+						/>
+							Student
+						</label>
+					</div> <br />
 			        <input
 							ng-click="sign_up(sign_up_id, sign_up_acc, sign_up_pwd, sign_up_repwd)"
 							style="float: right;" class="btn btn-primary" type="button" value="Sign up">

@@ -3,12 +3,19 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
     TODO:
     check school ID and password format
      */
-    $scope.sign_up = function(id,acc,pwd,repwd) {
+    $scope.type_val = true;
+
+    $scope.sign_up = function(id,acc,pwd,repwd, tyoe) {
         if (pwd != repwd)
             alert("Re-entered password should be the same as Password! @.@");
         // alert(id+" "+acc+" "+pwd);
         else {
-            $http.post(serverUrl+"/sign_up",{schoolID: id, account:acc, password: pwd},postCfg)
+            var ty = "";
+            if (!$scope.type_val)
+                ty = "teacher";
+            else
+                ty = "student";
+            $http.post(serverUrl+"/sign_up",{schoolID: id, account:acc, password: pwd, type: ty},postCfg)
                 .success(function(ret){
                     if (ret.status)
                         alert("Sign up succeed~ ^_^");
@@ -30,7 +37,7 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
                     window.localStorage['userToken'] = ret.userToken;
                     window.localStorage['type'] = ret.type;
                     window.localStorage['account'] = acc;
-                    if (ret.type === 'TEACHER')
+                    if (ret.type === 'teacher')
                         window.location.href = "Teacher.html";
                     else
                         window.location.href = "Student.html";
