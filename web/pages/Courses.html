@@ -35,6 +35,10 @@
 
 			</ul>
 		</div>
+
+		<div ng-repeat="c in courses">
+			<span class="detail_btn input-group-addon btn btn-primary" ng-click="detail_btn_click(c.courseID);">{{c.courseName}}</span>
+		</div>
 	</div>
 </div>
 <script src="../js/Common.js"></script>
