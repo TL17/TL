@@ -47,11 +47,11 @@
         </div>
     </nav>
     <div class="box">
-        <!--涓婂崐閮ㄥ垎-->
+        <!--上半部分-->
         <div class="header">
-            <!--鍥剧墖-->
+            <!--图片-->
             <img src="../images/demo.jpg" height="140px" width="140px" class="img-rounded" style="margin-left:30px ;">
-            <!--淇℃伅-->
+            <!--信息-->
             <div ng-init="load_info()" class="box_p" id="sinfo">
                 <label for="name">Name</label>
                 <div class="input-group" style="width: 100%;">
@@ -73,7 +73,7 @@
                 <button style="float: right;" class="btn btn-primary" data-toggle="modal" data-target="#infoModal">
                     change
                 </button>
-                <!--change鎸夐挳鑱斿姩鐨勫脊鍑烘-->
+                <!--change按钮联动的弹出框-->
                 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog">
@@ -119,20 +119,9 @@
 
             </div>
         </div>
-        <!--涓嬪崐閮ㄥ垎-->
-        <div class="content" id="selected_list" ng-init="init_selected_list()">
-            <ul>
-<li ng-repeat="c in courses">
-<p class="pcourse"></p>
-<div class="nei">
-  <h4>{{c.courseName}}</h4>
-  <p>{{c.courseInfo}}</p>
-</div>
-<div class="nei_bottom">
-<p class="per100"></p>
-<button ng-click="show_evaluate_modal($event)" data-id="33" class="evaluate_btn btn btn-primary ng-scope">evalute</button>
-</div>
-</li>
+        <!--下半部分-->
+        <div class="content" id="selected_list">
+            <ul ng-init="init_selected_list()">
 
             </ul>
             <p class="addcourse" ng-click="addCourse()">+</p>
