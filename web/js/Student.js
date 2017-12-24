@@ -1,22 +1,20 @@
 app.controller("student_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$compile', function ($scope, $rootScope, $http, $modal, $compile) {
     var cid = "";
-$scope.courses = [];
 
     $scope.init_selected_list = function () {
         $http.get(serverUrl + "/course/manage", {params: {userToken: window.localStorage['userToken'], account:window.localStorage['account']}})
             .success(function (ret) {
-            //    var ele = angular.element(document.querySelector("#selected_list > ul"));
-          //      ele.empty();
+                var ele = angular.element(document.querySelector("#selected_list > ul"));
+                ele.empty();
 
                 if (ret.status) {
-$scope.courses = ret.courses;
-                   // angular.forEach(ret.courses, function (c) {
-         // ele.append("<li><p class=\"pcourse\">" + c.courseName
-         //                   + "</p><div class=\"nei\">" + c.courseInfo
-         //                   + "</div><div class=\"nei_bottom\"><p class=\"per100\">"
-//                            + "</p><button ng-click=\"show_evaluate_modal($event)\" data-id=\""
-//                            + c.courseID + "\"class=\"evaluate_btn btn btn-primary\">evalute</button></div></li>");
-//                    });
+                    angular.forEach(ret.courses, function (c) {
+                        ele.append("<li><p class=\"pcourse\"></p><div class=\"nei\"><h4>" + c.courseName
+                            + "</h4><p>" + c.courseInfo
+                            + "</p></div><div class=\"nei_bottom\"><p class=\"per100\">"
+                            + "</p><button ng-click=\"show_evaluate_modal($event)\" data-id=\""
+                            + c.courseID + "\"class=\"evaluate_btn btn btn-primary\">evalute</button></div></li>");
+                    });
                 } else
                     alert(ret.info);
 
@@ -47,7 +45,8 @@ $scope.courses = ret.courses;
                             templateUrl: 'evaluateModal.html',
                             controller: evaluate_modal_ctrl
                         });
-                        modalInstance.opened.then(function () {//妯℃€佺獥鍙ｆ墦寮€涔嬪悗鎵ц鐨勫嚱鏁?
+                        modalInstance.opened.then(function () {//模态窗口打开之后执行的函数
+
                         });
                     };
 
