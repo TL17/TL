@@ -9,9 +9,9 @@ app.controller("student_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
 
                 if (ret.status) {
                     angular.forEach(ret.courses, function (c) {
-                        ele.append("<li><p class=\"pcourse\">" + c.courseName
-                            + "</p><div class=\"nei\">" + c.courseInfo
-                            + "</div><div class=\"nei_bottom\"><p class=\"per100\">" + c.percent //
+                        ele.append("<li><p class=\"pcourse\"></p><div class=\"nei\"><h4>" + c.courseName
+                            + "</h4><p>" + c.courseInfo
+                            + "</p></div><div class=\"nei_bottom\"><p class=\"per100\">"
                             + "</p><button ng-click=\"show_evaluate_modal($event)\" data-id=\""
                             + c.courseID + "\"class=\"evaluate_btn btn btn-primary\">evalute</button></div></li>");
                     });

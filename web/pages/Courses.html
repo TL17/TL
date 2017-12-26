@@ -30,11 +30,29 @@
 			</div>
 		</div>
 		<div style="clear: both;"></div>
-		<div class="content" id="coursesList">
-			<ul ng-init="init_courses_list()">
-
-			</ul>
+		<div class="content">
+<ul>
+<li ng-repeat="c in courses">
+  <div class="li_box1">
+    <p class="li_box_p"></p>
+  </div>
+  <div class="li_box2">
+    <div class="input-group" style="float: right;width: 30%;">
+      <div class="input-group" style="float: right;width: 30%;"> 
+	  <!--input type="text" style="float: right;text-align: center;" class="form-control input-mini" value="Evaluation"-->
+        <span ng-click="detail_btn_click(c.courseID);" class="detail_btn input-group-addon btn btn-primary">Details</span>
+      </div>
+    </div>
+    <h4>{{c.courseName}}</h4>						
+    <p class="box_div_p" contenteditable="true">{{c.courseInfo}}</p>
+  </div>
+</li>
+</ul>
 		</div>
+
+		<!--div ng-repeat="c in courses">
+			<span class="detail_btn input-group-addon btn btn-primary" ng-click="detail_btn_click(c.courseID);">{{c.courseName}}</span>
+		</div-->
 	</div>
 </div>
 <script src="../js/Common.js"></script>
