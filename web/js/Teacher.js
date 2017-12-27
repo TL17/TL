@@ -1,7 +1,7 @@
 app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$compile', function ($scope, $rootScope, $http, $modal, $compile) {
     $scope.courses = [];
 
-    $http.get(serverUrl+"/course/manage", {params: {userToken:window.localStorage['userToken'], account:window.localStorage['account']}})
+    $http.get(serverUrl+"/course/manage", {params: {userToken:window.localStorage['userToken'], account:window.localStorage['teacherID']}})
         .success(function(ret) {
             if (ret.status)
                 $scope.courses = ret.courses;
@@ -10,7 +10,7 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
         });
 
     $scope.submit_info = function (name, contact) {
-        set_personal_info($http, name, contact);
+        set_personal_info($http, name, contact, true);
     };
 
     $scope.load_info = function () {
@@ -22,7 +22,7 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
             $("#add_course_btn").hide();
         }
 
-        load_personal_info($http);
+        load_personal_info($http, true);
     };
 
     $scope.submit_course = function(){

@@ -162,7 +162,8 @@ return：
  "course":{"coursePlan":"课程大纲1",
            "courseName":"课程名称1",
            "courseInfo":"课程介绍1",
-           "courseID":1
+           "courseID":1,
+           "teacherID":"123"
            }
 }
 ```

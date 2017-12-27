@@ -55,12 +55,12 @@ app.controller("student_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
     };
 
     $scope.load_info = function () {
-        load_personal_info($http);
+        load_personal_info($http, false);
     };
 
 
     $scope.submit_info = function (name, contact) {
-        set_personal_info($http, name, contact);
+        set_personal_info($http, name, contact, false);
     };
 
     $scope.addCourse = function() {

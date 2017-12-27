@@ -34,12 +34,16 @@ function load_course_list(ret) {
         alert(ret.info);
 };
 
-function set_personal_info($http, name, contact) {
-    $http.post(serverUrl + "/account/" + window.localStorage['account'],
+function set_personal_info($http, name, contact, isTeacher) {
+    var acc = window.localStorage['account'];
+    if (isTeacher) {
+        acc = window.localStorage['teacherID'];
+    }
+    $http.post(serverUrl + "/account/" + acc,
         {
             userToken: window.localStorage['userToken'], name: name, contact: contact,
             info: angular.element(document.querySelector("#modify_info")).text(),
-            account: window.localStorage['account']
+            account: acc
         },
         postCfg)
         .success(function (ret) {
@@ -54,8 +58,11 @@ function set_personal_info($http, name, contact) {
         });
 }
 
-function load_personal_info($http) {
+function load_personal_info($http, isTeacher) {
     var acc = window.localStorage['account'];
+    if (isTeacher) {
+        acc = window.localStorage['teacherID'];
+    }
     $http.get(serverUrl + "/account/" + acc, {params: {account: acc, userToken: window.localStorage['userToken']}})
         .success(function (ret) {
             if (ret.status) {

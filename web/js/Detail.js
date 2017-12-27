@@ -25,7 +25,8 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
                     angular.element(document.querySelector("#coursePlan")).text(ret.course.coursePlan);
                     angular.element(document.querySelector("#courseName")).text(ret.course.courseName);
                     angular.element(document.querySelector("#is_selected")).attr("checked", ret.course.selected);
-                    angular.element(document.querySelector("#teacber_info_btn")).data("id", ret.course.teacherID);
+                    window.localStorage['teacherID'] = ret.course.teacherID;
+                    //angular.element(document.querySelector("#teacber_info_btn")).data("id", ret.course.teacherID);
                 } else
                     alert(ret.info);
             });
@@ -144,9 +145,9 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     //上传的onclick函数
     $scope.doUploadFile = function() {
         var files = document.getElementById('fileToUpload').files;
-        var account = 1;
-        var userToken = 1;
-        var courseID = 1;
+        // var account = 1;
+        // var userToken = 1;
+        // var courseID = 1;
         var file = files[0];
 
         if (files === undefined || files.length <= 0) {
@@ -155,18 +156,19 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
         }
 
         $http.post(serverUrl+"/upload_material",{
-            account: account,
-            userToken: userToken,
-            courseID: courseID,
-            file: file}, uploadFilePostCfg)
+            account: window.localStorage['account'],
+            userToken: token,
+            courseID: cid,
+            file: file
+        }, uploadFilePostCfg)
             .success(funcSucc)
             .error(funcFail);
 
         function funcSucc(ret) {
             $http.get(serverUrl+"/material",{params:{
-                account: account,
-                userToken: userToken,
-                courseID: courseID}})
+                account: window.localStorage['account'],
+                userToken: token,
+                courseID: cid}})
                 .success(function(ret){
                     if (ret.status) {
                         $scope.materials = ret.materials;
@@ -216,7 +218,7 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     };
 
     $scope.show_teacher_message = function () {
-        window.localStorage['teacherID'] = angular.element(document.querySelector("#teacber_info_btn")).data("id");
+        //window.localStorage['teacherID'] = angular.element(document.querySelector("#teacber_info_btn")).data("id");
         window.location.href = "Teacher.html";
     }
 }]);

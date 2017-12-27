@@ -69,11 +69,11 @@ public class CourseDetail extends javax.servlet.http.HttpServlet {
                     course.setCourseName(rs.getString("name"));
                     course.setCourseInfo(rs.getString("info"));
                     course.setCoursePlan(rs.getString("plan"));
+                    course.setTeacherID(rs.getString("teacherid"));
                     break;//should return only 1 result.Just making sure
                 }
                 rs.close();
                 jsonRet.put("course", course);
-
             } catch (SQLException e){
                 status.setStatus(false);
                 status.setInfo("课程获取失败");

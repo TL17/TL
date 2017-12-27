@@ -13,6 +13,7 @@ public class Course {
     private String courseName;
     private String courseInfo;
     private String coursePlan;
+    private String teacherID;
 
     public int getCourseID() {
         return courseID;
@@ -44,5 +45,13 @@ public class Course {
 
     public void setCoursePlan(String coursePlan) {
         this.coursePlan = coursePlan;
+    }
+
+    public String getTeacherID() {
+        return teacherID;
+    }
+
+    public void setTeacherID(String teacherID) {
+        this.teacherID = teacherID;
     }
 }

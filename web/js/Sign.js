@@ -37,10 +37,13 @@ app.controller('sign_ctrl', ['$scope', '$rootScope', '$http', function($scope, $
                     window.localStorage['userToken'] = ret.userToken;
                     window.localStorage['type'] = ret.type;
                     window.localStorage['account'] = acc;
-                    if (ret.type === 'teacher')
+                    if (ret.type === 'teacher') {
+                        window.localStorage['teacherID'] = acc;
                         window.location.href = "Teacher.html";
-                    else
+                    } else {
+                        window.localStorage['teacherID'] = "";
                         window.location.href = "Student.html";
+                    }
                     window.event.returnValue = false;
                 } else
                     alert(ret.info);
