@@ -1,9 +1,19 @@
 app.controller("courses_ctrl", ['$scope', '$rootScope', '$http', '$compile', function($scope, $rootScope, $http, $compile) {
     $scope.courses = [];
+    if (window.localStorage['keyword'+ window.localStorage['account']] != "") {
+        $scope.search_keyword = window.localStorage['keyword'+ window.localStorage['account']];
+        $http.get(serverUrl+"/course/search",{params:{keyword: window.localStorage['keyword'+ window.localStorage['account']]}})
+            .success(function(ret) {
+                window.localStorage['detailID'] = "";
+                $scope.courses = ret.courses;
+            });
+    }
+
     $scope.search = function(keyword) {
         $http.get(serverUrl+"/course/search",{params:{keyword: keyword}})
             .success(function(ret) {
                 window.localStorage['detailID'] = "";
+                window.localStorage['keyword'+ window.localStorage['account']] = keyword;
                 $scope.courses = ret.courses;
                // load_course_list(ret);
                 //angular.forEach(angular.element(document.querySelector(".detail_btn")), //function(item){
@@ -12,11 +22,11 @@ app.controller("courses_ctrl", ['$scope', '$rootScope', '$http', '$compile', fun
             });
     };
 
-              $scope.detail_btn_click = function(detail_id) {
-                        window.localStorage['detailID'] = detail_id;
-                        window.location.href = "Course.html";
-                        window.event.returnValue=false;
-              };
+    $scope.detail_btn_click = function(detail_id) {
+        window.localStorage['detailID'] = detail_id;
+        window.location.href = "Course.html";
+        window.event.returnValue=false;
+    };
 
 
     $scope.init_courses_list = function() {

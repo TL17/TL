@@ -80,8 +80,8 @@
         </div>
     </div>
     <div class="content">
-        <div id="c_b_b" ng-init="load_courses()">
-
+        <div id="c_b_b">
+            <p ng-repeat="c in courses" ng-click="detail_btn_click(c.courseID);" class="c_d_p">{{c.courseName}}</p>
         </div>
         <p id="add_course_btn" class="c_p" data-toggle="modal" data-target="#courseModal">+</p>
         <div class="modal fade" id="courseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

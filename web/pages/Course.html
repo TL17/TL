@@ -51,11 +51,16 @@
         <div class="header">
             <div class="li_box1">
                 <!--<input id="is_selected" type="checkbox" class="li_box_che">-->
-                <p class="li_box_p"></p>
+                <p class="li_box_p">
+                    <img width="74px" height="74px" src="../images/demo.jpg">
+                </p>
                 <button id="teacber_info_btn" ng-click="show_teacher_message()" type="button" class="btn btn-primary li_box_b1"
                         data-toggle="button">Teacher
                 </button>
-                <button ng-click="select_course()" type="button" class="btn btn-primary li_box_b2" data-toggle="button">
+                <button ng-if="isStudent && !isSelected" ng-click="select_course()" type="button" class="btn btn-primary li_box_b2" data-toggle="button">
+                    Learn
+                </button>
+                <button ng-if="!(isStudent && !isSelected)" disabled="disabled" type="button" class="btn btn-primary li_box_b2" data-toggle="button">
                     Learn
                 </button>
             </div>
@@ -115,7 +120,7 @@
                         <li ng-repeat="i in materials" style="text-align: center;width: 100%;">
                             <a href="{{'http://123.207.6.234:8080/TL/' + i.path}}">{{i.name}}</a>
                         </li>
-                        <li style="text-align: center;width: 100%;">
+                        <li style="text-align: center;width: 100%;" ng-if="!isStudent">
                             <input style="color: black;float: left;padding-left: 37%;padding-right: 10%;padding-top: 2%;" id="fileToUpload" type ="file"/>
                             <button ng-click="doUploadFile()" type="button" class="btn btn-primary ">
                             Upload

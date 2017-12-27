@@ -1,8 +1,23 @@
 app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', function ($scope, $rootScope, $http, $modal) {
     var cid = window.localStorage['detailID'];
     var token = window.localStorage['userToken'];
+    $scope.isStudent = (window.localStorage['type']!='teacher');
+    $scope.isSelected = false;
 
     $scope.init_course_detail = function () {
+        $http.get(serverUrl + "/course/manage", {
+            params: {
+                userToken: window.localStorage['userToken'],
+                account: window.localStorage['account']
+            }
+        })
+            .success(function (ret) {
+                angular.forEach(ret.courses, function(c) {
+                    if (c.courseID == cid) {
+                        $scope.isSelected = true;
+                    }
+                });
+            });
         $http.get(serverUrl + "/course/detail/" + cid, {params: {courseID: cid}})
             .success(function (ret) {
                 if (ret.status) {

@@ -1,4 +1,14 @@
 app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$compile', function ($scope, $rootScope, $http, $modal, $compile) {
+    $scope.courses = [];
+
+    $http.get(serverUrl+"/course/manage", {params: {userToken:window.localStorage['userToken'], account:window.localStorage['account']}})
+        .success(function(ret) {
+            if (ret.status)
+                $scope.courses = ret.courses;
+            else
+                alert(ret.info);
+        });
+
     $scope.submit_info = function (name, contact) {
         set_personal_info($http, name, contact);
     };
@@ -37,17 +47,17 @@ app.controller("teacher_ctrl", ['$scope', '$rootScope', '$http', '$modal', '$com
         }
     };
 
-    $scope.load_courses = function() {
-        $http.post(serverUrl+"/course/manage", {userToken:window.localStorage['userToken'], account:window.localStorage['account']}, postCfg)
-            .success(function(ret) {
-                if (ret.status)
-                    addCourse(ret.courses.courseName, ret.courses.courseName);
-                else
-                    alert(ret.info);
-            });
-    }
+    $scope.detail_btn_click = function(detail_id) {
+        window.localStorage['detailID'] = detail_id;
+        window.location.href = "Course.html";
+        window.event.returnValue=false;
+    };
+
+    // $scope.load_courses = function() {
+    //
+    // }
 }]);
 
 function addCourse(text, id){
-    $(".content #c_b_b").append("<p class=\"c_d_p\" data-id=\""+id+"\">"+text+"</p>");
+    $(".content #c_b_b").append("");
 }
