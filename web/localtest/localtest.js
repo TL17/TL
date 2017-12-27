@@ -2,7 +2,7 @@ var app = angular.module('localtest', []);
 app.controller('localtest_ctrl', function($scope, $http) {
 
     //初始化变量
-    var serverUrl = "http://localhost:8080/TL";
+    var serverUrl = "http://123.207.6.234/TL";
     var postCfg = {
         headers: { "Content-Type": "application/x-www-form-urlencoded;charset=utf-8" },
         transformRequest: function (data) {
