@@ -22,7 +22,7 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
             .success(function (ret) {
                 if (ret.status) {
                     angular.element(document.querySelector("#courseInfo")).text(ret.course.courseInfo);
-                    angular.element(document.querySelector("#coursePlan")).text(ret.course.coursePlan);
+                    document.querySelector("#coursePlan").innerHTML = ret.course.coursePlan;
                     angular.element(document.querySelector("#courseName")).text(ret.course.courseName);
                     angular.element(document.querySelector("#is_selected")).attr("checked", ret.course.selected);
                     window.localStorage['teacherID'] = ret.course.teacherID;

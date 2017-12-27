@@ -122,9 +122,9 @@
         <!--下半部分-->
         <div class="content" id="selected_list">
             <ul>
-                <li ng-repeat="c in courses" ng-click="detail_btn_click(c.courseID);">
+                <li ng-repeat="c in courses">
                 <p class="pcourse"></p>
-                <div class="nei">
+                <div class="nei" ng-click="detail_btn_click(c.courseID);">
                     <h4>{{c.courseName}}</h4>
                     <p> {{c.courseInfo}}</p>
                 </div>
