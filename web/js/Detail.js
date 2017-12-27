@@ -18,11 +18,9 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
 
     $scope.select_course = function () {
         $http.get(serverUrl + "/course/select/" + cid, {
-            params: {
-                courseID: cid,
-                userToken: token,
-                account: window.localStorage['account']
-            }
+            courseID: cid,
+            userToken: token,
+            account: window.localStorage['account']
         })
             .success(function (ret) {
                 ret.status = true;
