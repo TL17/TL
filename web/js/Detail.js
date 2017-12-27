@@ -17,11 +17,12 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     };
 
     $scope.select_course = function () {
-        $http.get(serverUrl + "/course/select/" + cid, {
-            courseID: cid,
-            userToken: token,
-            account: window.localStorage['account']
-        })
+        $http.post(serverUrl + "/course/select/" + cid, {
+                courseID: cid,
+                userToken: token,
+                account: window.localStorage['account']
+
+        }, postCfg)
             .success(function (ret) {
                 ret.status = true;
                 if (ret.status) {
@@ -89,11 +90,11 @@ app.controller("detail_ctrl", ['$scope', '$rootScope', '$http', '$modal', functi
     };
 
     $scope.load_material_list = function () {
-        window.localStorage['courseID'] = 1;
+        //window.localStorage['courseID'] = 1;
             $http.get(serverUrl+"/material",{params:{
                 userToken: window.localStorage['userToken'],
                 account: window.localStorage['account'],
-                courseID: window.localStorage['courseID']
+                courseID: window.localStorage['detailID']
             }})
                 .success(function(ret){
                             if (ret.status) {
