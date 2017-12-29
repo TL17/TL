@@ -4,7 +4,6 @@ import entity.service.Person;
 import entity.service.Status;
 import net.sf.json.JSONObject;
 import util.db.DBConnect;
-
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;

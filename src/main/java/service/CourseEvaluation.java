@@ -1,6 +1,6 @@
 package service;
 
-import entity.service.Course;
+
 import entity.service.Evaluation;
 import entity.service.Status;
 import net.sf.json.JSONObject;
@@ -20,7 +20,7 @@ import java.util.List;
 public class CourseEvaluation extends javax.servlet.http.HttpServlet {
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-//        doPost(request,response);
+
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
         DBConnect dbConnect = new DBConnect();

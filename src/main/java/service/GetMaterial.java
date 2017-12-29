@@ -1,15 +1,13 @@
 package service;
 
-import com.sun.org.apache.regexp.internal.RE;
+
 import entity.service.Material;
 import entity.service.Status;
 import net.sf.json.JSONObject;
 import util.db.DBConnect;
-
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

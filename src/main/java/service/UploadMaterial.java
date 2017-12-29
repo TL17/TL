@@ -25,7 +25,7 @@ public class UploadMaterial extends javax.servlet.http.HttpServlet {
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        //doGet(request,response);
+
         request.setCharacterEncoding("utf-8");
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setContentType("text/html;charset=utf-8");
